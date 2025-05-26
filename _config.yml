@@ -1,0 +1,24 @@
+
+title: Ghost Trace
+description: Red Team CEO & Security Expert
+url: "https://ghosttrace-offsec.github.io"
+baseurl: ""
+
+theme: minima
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+author:
+  name: "SungHoon Kim"
+  email: "yourmail@ghosttrace.kr"
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
