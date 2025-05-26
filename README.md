@@ -1,14 +1,10 @@
-# Ghost Trace - Red Team CEO Homepage
+# Ghost Trace - Final Homepage
 
-Official homepage of **SungHoon Kim**, Red Team operator and Web3 security researcher.
+Polished version of the Ghost Trace website for SungHoon Kim.
 
-## Features
+Includes:
 - Dark mode
-- Banner image
-- Meta tags for SEO/SNS
-- Favicon
-
-## Deploy via GitHub Pages
-1. Upload all files to your GitHub repo: `ghosttrace-offsec.github.io`
-2. Go to `Settings > Pages` → Source: `main` + folder: `/ (root)`
-3. Visit: https://ghosttrace-offsec.github.io
+- Custom font
+- Korean font support
+- Banner and favicon
+- SEO meta support
