@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Blog - Ghost Trace Cybersecurity</title>
+    <meta name="description" content="Latest cybersecurity insights, vulnerability research, and security best practices from Ghost Trace">
+    <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #0080ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Reuse navigation styles from main page */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        /* Blog Header */
+        .blog-header {
+            margin-top: 80px;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+            text-align: center;
+        }
+
+        .blog-header h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 1rem;
+        }
+
+        .blog-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+        }
+
+        /* Search Bar */
+        .search-section {
+            padding: 2rem 0;
+            background: var(--darker-bg);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 30px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 2.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            padding: 2rem 0;
+            background: var(--dark-bg);
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            transform: scale(1.05);
+        }
+
+        /* Blog Grid */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .blog-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 128, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.3rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            padding: 0.2rem 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            padding: 4rem 0;
+            background: var(--darker-bg);
+            text-align: center;
+        }
+
+        .newsletter-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        /* Footer - Reuse from main page */
+        footer {
+            background: var(--dark-bg);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .filter-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Loading Animation */
+        .blog-skeleton {
+            animation: skeleton-loading 1.5s infinite;
+        }
+
+        @keyframes skeleton-loading {
+            0% { opacity: 0.7; }
+            50% { opacity: 0.4; }
+            100% { opacity: 0.7; }
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
+                GHOST TRACE
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#tools">Tools</a></li>
+                <li><a href="blog.html" style="color: var(--primary-color);">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <header class="blog-header">
+        <h1>Security Insights Blog</h1>
+        <p>Latest cybersecurity research, vulnerabilities, and best practices</p>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
+            <button class="search-btn" onclick="searchPosts()">🔍</button>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="category-filter">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterPosts('all')">All Posts</button>
+            <button class="filter-btn" onclick="filterPosts('vulnerability')">Vulnerabilities</button>
+            <button class="filter-btn" onclick="filterPosts('web3')">Web3 Security</button>
+            <button class="filter-btn" onclick="filterPosts('redteam')">Red Team</button>
+            <button class="filter-btn" onclick="filterPosts('malware')">Malware Analysis</button>
+            <button class="filter-btn" onclick="filterPosts('tutorial')">Tutorials</button>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <main class="blog-container">
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blog Post 1 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    🔥
+                    <span class="blog-category">Vulnerability</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 26, 2025</span>
+                    </div>
+                    <h2 class="blog-title">Critical RCE in Popular CMS: CVE-2025-1337 Analysis</h2>
+                    <p class="blog-excerpt">Deep dive into the latest remote code execution vulnerability affecting millions of websites. Our research team discovered this zero-day during routine security assessment...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#CVE</span>
+                        <span class="blog-tag">#RCE</span>
+                        <span class="blog-tag">#ZeroDay</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    🛡️
+                    <span class="blog-category">Web3 Security</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 24, 2025</span>
+                    </div>
+                    <h2 class="blog-title">Smart Contract Security: Top 10 Vulnerabilities in 2025</h2>
+                    <p class="blog-excerpt">Comprehensive guide to the most common smart contract vulnerabilities we've encountered in our Web3 security audits this year...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#Solidity</span>
+                        <span class="blog-tag">#DeFi</span>
+                        <span class="blog-tag">#Audit</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 3 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    🎯
+                    <span class="blog-category">Red Team</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 22, 2025</span>
+                    </div>
+                    <h2 class="blog-title">Advanced Persistence Techniques: Beyond Living off the Land</h2>
+                    <p class="blog-excerpt">Exploring cutting-edge persistence mechanisms that go beyond traditional LOLBins. Learn how modern red teams maintain access...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#RedTeam</span>
+                        <span class="blog-tag">#APT</span>
+                        <span class="blog-tag">#Persistence</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 4 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    🦠
+                    <span class="blog-category">Malware Analysis</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 20, 2025</span>
+                    </div>
+                    <h2 class="blog-title">Dissecting GhostLoader: New Malware Campaign Analysis</h2>
+                    <p class="blog-excerpt">Technical analysis of the sophisticated GhostLoader malware family, including unpacking techniques and C2 infrastructure...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#Malware</span>
+                        <span class="blog-tag">#ReverseEngineering</span>
+                        <span class="blog-tag">#ThreatIntel</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 5 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    💻
+                    <span class="blog-category">Tutorial</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 18, 2025</span>
+                    </div>
+                    <h2 class="blog-title">Building Your Own Security Lab: Complete Guide 2025</h2>
+                    <p class="blog-excerpt">Step-by-step guide to setting up a professional security testing lab environment. From hardware selection to tool configuration...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#Tutorial</span>
+                        <span class="blog-tag">#Lab</span>
+                        <span class="blog-tag">#Setup</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Post 6 -->
+            <article class="blog-post" onclick="window.location.href='#'">
+                <div class="blog-image">
+                    🔓
+                    <span class="blog-category">Vulnerability</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <span>👤</span>
+                            <span>HackKim</span>
+                        </div>
+                        <span>May 16, 2025</span>
+                    </div>
+                    <h2 class="blog-title">OAuth 2.0 Implementation Flaws: Common Pitfalls</h2>
+                    <p class="blog-excerpt">Analyzing the most common OAuth 2.0 implementation vulnerabilities we've discovered during security assessments...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">#OAuth</span>
+                        <span class="blog-tag">#WebSecurity</span>
+                        <span class="blog-tag">#Authentication</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <a href="#" class="page-btn">←</a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn">4</a>
+            <a href="#" class="page-btn">→</a>
+        </div>
+    </main>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-container">
+            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Stay Updated on Security Threats</h2>
+            <p style="color: var(--text-gray);">Get weekly security insights and vulnerability alerts delivered to your inbox</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/hackkim" target="_blank">💻</a>
+            <a href="mailto:yejihoon07@email.com">📧</a>
+            <a href="#">💼</a>
+            <a href="#">🐦</a>
+        </div>
+        <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team</p>
+    </footer>
+
+    <script>
+        // Category Filter
+        function filterPosts(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // In a real application, this would filter the posts
+            console.log(`Filtering by: ${category}`);
+            
+            // Animation effect
+            const posts = document.querySelectorAll('.blog-post');
+            posts.forEach(post => {
+                post.style.opacity = '0';
+                setTimeout(() => {
+                    post.style.opacity = '1';
+                }, 100);
+            });
+        }
+
+        // Search Function
+        function searchPosts() {
+            const searchTerm = document.getElementById('searchInput').value;
+            console.log(`Searching for: ${searchTerm}`);
+            
+            // In a real application, this would perform actual search
+            // For demo, we'll just highlight the search
+            const posts = document.querySelectorAll('.blog-post');
+            posts.forEach(post => {
+                post.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    post.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all blog posts
+        document.querySelectorAll('.blog-post').forEach(post => {
+            post.style.opacity = '0';
+            post.style.transform = 'translateY(20px)';
+            post.style.transition = 'all 0.6s ease';
+            observer.observe(post);
+        });
+
+        // Add loading skeleton effect
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.blog-skeleton').forEach(skeleton => {
+                skeleton.classList.remove('blog-skeleton');
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing! You will receive security updates soon.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
