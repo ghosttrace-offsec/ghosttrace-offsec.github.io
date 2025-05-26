@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Security Blog - Ghost Trace Cybersecurity</title>
-    <meta name="description" content="Latest cybersecurity insights, vulnerability research, and security best practices from Ghost Trace">
+    <title>Ghost Trace Cybersecurity - Advanced Red Team Services</title>
+    <meta name="description" content="Ghost Trace - 대한민국 최고의 레드팀 보안 서비스, 모의해킹, 보안컨설팅, Web3 보안 전문">
+    <meta name="keywords" content="penetration testing, 모의해킹, 보안컨설팅, Web3 보안, red team, cybersecurity">
+    <meta property="og:title" content="Ghost Trace Cybersecurity">
+    <meta property="og:description" content="Advanced Red Team Security Services">
+    <meta property="og:image" content="https://hackkim.github.io/ghost-trace-logo-white.png">
     <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
     
     <style>
@@ -22,6 +26,8 @@
             --text-light: #ffffff;
             --text-gray: #a0a0a0;
             --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+            --error-color: #ff3838;
+            --success-color: #00ff88;
         }
 
         body {
@@ -29,9 +35,10 @@
             background-color: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Reuse navigation styles from main page */
+        /* Navbar */
         nav {
             position: fixed;
             top: 0;
@@ -73,6 +80,7 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
@@ -87,139 +95,496 @@
             text-shadow: var(--accent-glow);
         }
 
-        /* Blog Header */
-        .blog-header {
-            margin-top: 80px;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
-            text-align: center;
-        }
-
-        .blog-header h1 {
-            font-size: 3rem;
-            color: var(--primary-color);
-            text-shadow: var(--accent-glow);
-            margin-bottom: 1rem;
-        }
-
-        .blog-header p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-        }
-
-        /* Search Bar */
-        .search-section {
-            padding: 2rem 0;
-            background: var(--darker-bg);
-        }
-
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem 3rem 1rem 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 30px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .search-btn {
+        .nav-links a::after {
+            content: '';
             position: absolute;
-            right: 2.5rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--primary-color);
-            cursor: pointer;
-            font-size: 1.5rem;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
         }
 
-        /* Category Filter */
-        .category-filter {
-            padding: 2rem 0;
-            background: var(--dark-bg);
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        .filter-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .filter-btn {
-            padding: 0.5rem 1.5rem;
+        .language-selector {
             background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
-            color: var(--text-light);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: var(--primary-color);
-            color: var(--dark-bg);
+        .language-selector:hover {
+            background: rgba(0, 255, 255, 0.2);
             transform: scale(1.05);
         }
 
-        /* Blog Grid */
-        .blog-container {
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: 0.3s;
+        }
+
+        /* Hero Section with Matrix Effect */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .cyber-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 50px rgba(0, 255, 255, 0.9));
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: var(--accent-glow);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Terminal Section */
+        .terminal-section {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.red { background: #ff5f56; }
+        .terminal-btn.yellow { background: #ffbd2e; }
+        .terminal-btn.green { background: #27c93f; }
+
+        .terminal-content {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            min-height: 200px;
+        }
+
+        .terminal-line {
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+        }
+
+        /* Real-time Threat Dashboard */
+        .threat-dashboard {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .threat-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threat-level {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .threat-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        .threat-high { background: var(--error-color); }
+        .threat-medium { background: #ffaa00; }
+        .threat-low { background: var(--success-color); }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .threat-stats {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Security Tools */
+        .tools-section {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .tool-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        .tool-button {
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tool-button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
+
+        .tool-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            font-family: monospace;
+            min-height: 50px;
+        }
+
+        /* Contact Form */
+        .contact {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Blog Preview */
+        .blog-preview {
+            padding: 5rem 0;
+            background: var(--dark-bg);
         }
 
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .blog-post {
+        .blog-card {
             background: rgba(0, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 10px;
             overflow: hidden;
             transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
         }
 
-        .blog-post::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            animation: scan 3s linear infinite;
-        }
-
-        .blog-post:hover {
+        .blog-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
         }
 
         .blog-image {
@@ -229,19 +594,6 @@
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-category {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.3rem 1rem;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--primary-color);
-            border-radius: 20px;
-            font-size: 0.8rem;
             color: var(--primary-color);
         }
 
@@ -249,25 +601,15 @@
             padding: 1.5rem;
         }
 
-        .blog-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
+        .blog-date {
             color: var(--text-gray);
             font-size: 0.9rem;
-        }
-
-        .blog-author {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
         .blog-title {
-            font-size: 1.3rem;
             color: var(--primary-color);
             margin-bottom: 1rem;
-            line-height: 1.4;
         }
 
         .blog-excerpt {
@@ -276,91 +618,18 @@
             margin-bottom: 1rem;
         }
 
-        .blog-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .blog-tag {
-            padding: 0.2rem 0.8rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 15px;
-            font-size: 0.8rem;
+        .read-more {
             color: var(--secondary-color);
-        }
-
-        /* Pagination */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .page-btn {
-            padding: 0.5rem 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-decoration: none;
-        }
-
-        .page-btn:hover,
-        .page-btn.active {
-            background: var(--primary-color);
-            color: var(--dark-bg);
-        }
-
-        /* Newsletter */
-        .newsletter-section {
-            padding: 4rem 0;
-            background: var(--darker-bg);
-            text-align: center;
-        }
-
-        .newsletter-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 1rem;
-            background: rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            color: var(--text-light);
-        }
-
-        .newsletter-btn {
-            padding: 1rem 2rem;
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            border: none;
-            border-radius: 5px;
             font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
-        .newsletter-btn:hover {
-            background: var(--secondary-color);
-            transform: scale(1.05);
+        .read-more:hover {
+            color: var(--primary-color);
         }
 
-        /* Footer - Reuse from main page */
+        /* Footer */
         footer {
             background: var(--dark-bg);
             padding: 3rem 0 2rem;
@@ -368,11 +637,44 @@
             border-top: 1px solid rgba(0, 255, 255, 0.2);
         }
 
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
         }
 
         .social-links a {
@@ -386,339 +688,861 @@
             transform: translateY(-3px);
         }
 
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 10s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .blog-header h1 {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .blog-grid {
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-logo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .dashboard-grid,
+            .footer-grid {
                 grid-template-columns: 1fr;
             }
 
-            .newsletter-form {
-                flex-direction: column;
+            .about-content {
+                grid-template-columns: 1fr;
             }
 
-            .filter-container {
-                justify-content: flex-start;
-                overflow-x: auto;
-                flex-wrap: nowrap;
-                -webkit-overflow-scrolling: touch;
+            .certification-image {
+                margin-top: 2rem;
             }
         }
 
         /* Loading Animation */
-        .blog-skeleton {
-            animation: skeleton-loading 1.5s infinite;
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        @keyframes skeleton-loading {
-            0% { opacity: 0.7; }
-            50% { opacity: 0.4; }
-            100% { opacity: 0.7; }
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Typing Animation */
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid var(--primary-color);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        /* Security Scanner */
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scan 2s linear infinite;
         }
 
         @keyframes scan {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: var(--accent-glow); }
+            97% { text-shadow: -2px 0 var(--error-color), 2px 0 var(--primary-color); }
         }
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="#" class="logo">
                 <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
                 GHOST TRACE
             </a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#tools">Tools</a></li>
-                <li><a href="blog.html" style="color: var(--primary-color);">Blog</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <select class="language-selector" id="langSelector">
+                        <option value="ko">🇰🇷 한국어</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                    </select>
+                </li>
             </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- Blog Header -->
-    <header class="blog-header">
-        <h1>Security Insights Blog</h1>
-        <p>Latest cybersecurity research, vulnerabilities, and best practices</p>
-    </header>
-
-    <!-- Search Section -->
-    <section class="search-section">
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
-            <button class="search-btn" onclick="searchPosts()">🔍</button>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <canvas id="matrix-canvas"></canvas>
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="ghost-trace-logo-white.png" alt="Ghost Trace Cybersecurity Logo">
+            </div>
+            <h1 class="glitch">GHOST TRACE</h1>
+            <p class="typing">Advanced Red Team Cybersecurity Services</p>
+            <a href="#contact" class="cta-button">Start Security Assessment</a>
         </div>
     </section>
 
-    <!-- Category Filter -->
-    <section class="category-filter">
-        <div class="filter-container">
-            <button class="filter-btn active" onclick="filterPosts('all')">All Posts</button>
-            <button class="filter-btn" onclick="filterPosts('vulnerability')">Vulnerabilities</button>
-            <button class="filter-btn" onclick="filterPosts('web3')">Web3 Security</button>
-            <button class="filter-btn" onclick="filterPosts('redteam')">Red Team</button>
-            <button class="filter-btn" onclick="filterPosts('malware')">Malware Analysis</button>
-            <button class="filter-btn" onclick="filterPosts('tutorial')">Tutorials</button>
+    <!-- Terminal Section -->
+    <section class="terminal-section">
+        <div class="container">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-btn red"></div>
+                    <div class="terminal-btn yellow"></div>
+                    <div class="terminal-btn green"></div>
+                </div>
+                <div class="terminal-content" id="terminal">
+                    <div class="terminal-line">$ Initializing Ghost Trace Security Scanner...</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Blog Posts -->
-    <main class="blog-container">
-        <div class="blog-grid" id="blogGrid">
-            <!-- Blog Post 1 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    🔥
-                    <span class="blog-category">Vulnerability</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 26, 2025</span>
+    <!-- Real-time Threat Dashboard -->
+    <section class="threat-dashboard">
+        <div class="container">
+            <h2 class="section-title">Real-time Threat Intelligence</h2>
+            <div class="dashboard-grid">
+                <div class="threat-card">
+                    <div class="scanner-line"></div>
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-high"></div>
+                        <span>Critical Threats</span>
                     </div>
-                    <h2 class="blog-title">Critical RCE in Popular CMS: CVE-2025-1337 Analysis</h2>
-                    <p class="blog-excerpt">Deep dive into the latest remote code execution vulnerability affecting millions of websites. Our research team discovered this zero-day during routine security assessment...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#CVE</span>
-                        <span class="blog-tag">#RCE</span>
-                        <span class="blog-tag">#ZeroDay</span>
-                    </div>
+                    <div class="threat-stats" id="criticalThreats">0</div>
+                    <p>Active APT campaigns detected</p>
                 </div>
-            </article>
-
-            <!-- Blog Post 2 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    🛡️
-                    <span class="blog-category">Web3 Security</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 24, 2025</span>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-medium"></div>
+                        <span>Vulnerabilities Scanned</span>
                     </div>
-                    <h2 class="blog-title">Smart Contract Security: Top 10 Vulnerabilities in 2025</h2>
-                    <p class="blog-excerpt">Comprehensive guide to the most common smart contract vulnerabilities we've encountered in our Web3 security audits this year...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#Solidity</span>
-                        <span class="blog-tag">#DeFi</span>
-                        <span class="blog-tag">#Audit</span>
-                    </div>
+                    <div class="threat-stats" id="vulnScanned">0</div>
+                    <p>Systems analyzed today</p>
                 </div>
-            </article>
-
-            <!-- Blog Post 3 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    🎯
-                    <span class="blog-category">Red Team</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 22, 2025</span>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-low"></div>
+                        <span>Patches Applied</span>
                     </div>
-                    <h2 class="blog-title">Advanced Persistence Techniques: Beyond Living off the Land</h2>
-                    <p class="blog-excerpt">Exploring cutting-edge persistence mechanisms that go beyond traditional LOLBins. Learn how modern red teams maintain access...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#RedTeam</span>
-                        <span class="blog-tag">#APT</span>
-                        <span class="blog-tag">#Persistence</span>
-                    </div>
+                    <div class="threat-stats" id="patchesApplied">0</div>
+                    <p>Security updates this month</p>
                 </div>
-            </article>
-
-            <!-- Blog Post 4 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    🦠
-                    <span class="blog-category">Malware Analysis</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 20, 2025</span>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-high"></div>
+                        <span>Zero-Days Found</span>
                     </div>
-                    <h2 class="blog-title">Dissecting GhostLoader: New Malware Campaign Analysis</h2>
-                    <p class="blog-excerpt">Technical analysis of the sophisticated GhostLoader malware family, including unpacking techniques and C2 infrastructure...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#Malware</span>
-                        <span class="blog-tag">#ReverseEngineering</span>
-                        <span class="blog-tag">#ThreatIntel</span>
-                    </div>
+                    <div class="threat-stats" id="zeroDays">0</div>
+                    <p>Responsibly disclosed</p>
                 </div>
-            </article>
-
-            <!-- Blog Post 5 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    💻
-                    <span class="blog-category">Tutorial</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 18, 2025</span>
-                    </div>
-                    <h2 class="blog-title">Building Your Own Security Lab: Complete Guide 2025</h2>
-                    <p class="blog-excerpt">Step-by-step guide to setting up a professional security testing lab environment. From hardware selection to tool configuration...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#Tutorial</span>
-                        <span class="blog-tag">#Lab</span>
-                        <span class="blog-tag">#Setup</span>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Blog Post 6 -->
-            <article class="blog-post" onclick="window.location.href='#'">
-                <div class="blog-image">
-                    🔓
-                    <span class="blog-category">Vulnerability</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <div class="blog-author">
-                            <span>👤</span>
-                            <span>HackKim</span>
-                        </div>
-                        <span>May 16, 2025</span>
-                    </div>
-                    <h2 class="blog-title">OAuth 2.0 Implementation Flaws: Common Pitfalls</h2>
-                    <p class="blog-excerpt">Analyzing the most common OAuth 2.0 implementation vulnerabilities we've discovered during security assessments...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">#OAuth</span>
-                        <span class="blog-tag">#WebSecurity</span>
-                        <span class="blog-tag">#Authentication</span>
-                    </div>
-                </div>
-            </article>
+            </div>
         </div>
+    </section>
 
-        <!-- Pagination -->
-        <div class="pagination">
-            <a href="#" class="page-btn">←</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">4</a>
-            <a href="#" class="page-btn">→</a>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="openServiceModal('redteam')">
+                    <span class="service-icon">🎯</span>
+                    <h3>Red Team Operations</h3>
+                    <p>Advanced penetration testing and security assessments simulating real-world attacks to identify vulnerabilities.</p>
+                    <div class="service-price">Starting from ₩5,000,000</div>
+                </div>
+                <div class="service-card" onclick="openServiceModal('web3')">
+                    <span class="service-icon">🔐</span>
+                    <h3>Web3 Security Audits</h3>
+                    <p>Comprehensive smart contract auditing and blockchain security reviews for DeFi and Web3 projects.</p>
+                    <div class="service-price">Starting from ₩3,000,000</div>
+                </div>
+                <div class="service-card" onclick="openServiceModal('vuln')">
+                    <span class="service-icon">🛡️</span>
+                    <h3>Vulnerability Research</h3>
+                    <p>Zero-day discovery, exploit development, and responsible disclosure to enhance security posture.</p>
+                    <div class="service-price">Custom pricing</div>
+                </div>
+                <div class="service-card" onclick="openServiceModal('consulting')">
+                    <span class="service-icon">💡</span>
+                    <h3>Security Consulting</h3>
+                    <p>Strategic cybersecurity guidance and implementation for enterprise-level security architecture.</p>
+                    <div class="service-price">₩500,000/hour</div>
+                </div>
+                <div class="service-card" onclick="openServiceModal('pentest')">
+                    <span class="service-icon">🔍</span>
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive security evaluations of networks, applications, and infrastructure.</p>
+                    <div class="service-price">Starting from ₩2,000,000</div>
+                </div>
+                <div class="service-card" onclick="openServiceModal('training')">
+                    <span class="service-icon">📊</span>
+                    <h3>Security Training</h3>
+                    <p>Customized security awareness training and advanced technical workshops for teams.</p>
+                    <div class="service-price">₩1,000,000/day</div>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="newsletter-container">
-            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Stay Updated on Security Threats</h2>
-            <p style="color: var(--text-gray);">Get weekly security insights and vulnerability alerts delivered to your inbox</p>
-            <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-                <button type="submit" class="newsletter-btn">Subscribe</button>
+    <!-- Security Tools Section -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <h2 class="section-title">Online Security Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3>🔒 Password Strength Checker</h3>
+                    <p>Test the strength of your passwords</p>
+                    <input type="password" class="tool-input" id="passwordInput" placeholder="Enter password to test">
+                    <button class="tool-button" onclick="checkPassword()">Check Strength</button>
+                    <div class="tool-result" id="passwordResult"></div>
+                </div>
+                <div class="tool-card">
+                    <h3>🔐 Hash Generator</h3>
+                    <p>Generate secure hashes for your text</p>
+                    <input type="text" class="tool-input" id="hashInput" placeholder="Enter text to hash">
+                    <button class="tool-button" onclick="generateHash()">Generate SHA-256</button>
+                    <div class="tool-result" id="hashResult"></div>
+                </div>
+                <div class="tool-card">
+                    <h3>🌐 Port Scanner</h3>
+                    <p>Check open ports on a domain</p>
+                    <input type="text" class="tool-input" id="portInput" placeholder="Enter domain (demo only)">
+                    <button class="tool-button" onclick="scanPorts()">Scan Ports</button>
+                    <div class="tool-result" id="portResult"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section class="blog-preview" id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Security Insights</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">🔥</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 26, 2025</div>
+                        <h3 class="blog-title">Critical Zero-Day in Popular CMS Discovered</h3>
+                        <p class="blog-excerpt">Our research team has discovered a critical remote code execution vulnerability affecting millions of websites...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">🛡️</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 24, 2025</div>
+                        <h3 class="blog-title">Web3 Security Best Practices for 2025</h3>
+                        <p class="blog-excerpt">As DeFi protocols continue to evolve, here are the essential security measures every smart contract developer should implement...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 22, 2025</div>
+                        <h3 class="blog-title">Red Team vs Blue Team: Modern Approaches</h3>
+                        <p class="blog-excerpt">Understanding the evolving dynamics between offensive and defensive security teams in today's threat landscape...</p>
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Start Your Security Assessment</h2>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Required</label>
+                    <select id="service" name="service" style="width: 100%; padding: 0.8rem; background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 5px; color: var(--text-light);">
+                        <option value="redteam">Red Team Assessment</option>
+                        <option value="pentest">Penetration Testing</option>
+                        <option value="web3">Web3 Security Audit</option>
+                        <option value="consulting">Security Consulting</option>
+                        <option value="training">Security Training</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" required placeholder="Describe your security needs..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Security Request</button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/hackkim" target="_blank">💻</a>
-            <a href="mailto:yejihoon07@email.com">📧</a>
-            <a href="#">💼</a>
-            <a href="#">🐦</a>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Red Team Operations</a></li>
+                        <li><a href="#services">Penetration Testing</a></li>
+                        <li><a href="#services">Web3 Security</a></li>
+                        <li><a href="#services">Security Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#blog">Security Blog</a></li>
+                        <li><a href="#tools">Online Tools</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Whitepapers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Ghost Trace</a></li>
+                        <li><a href="#">Certifications</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📧 yejihoon07@email.com</li>
+                        <li>💻 GitHub: hackkim</li>
+                        <li>📍 Seoul, South Korea</li>
+                        <li>🔐 24/7 Security Hotline</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/hackkim" target="_blank" title="GitHub">💻</a>
+                <a href="mailto:yejihoon07@email.com" title="Email">📧</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Twitter">🐦</a>
+            </div>
+            <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team | Advanced Security Services</p>
         </div>
-        <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
-        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team</p>
     </footer>
 
+    <!-- Service Modal -->
+    <div id="serviceModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; overflow-y: auto;">
+        <div style="max-width: 800px; margin: 5% auto; background: var(--darker-bg); border: 1px solid var(--primary-color); border-radius: 10px; padding: 2rem; position: relative;">
+            <span onclick="closeServiceModal()" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; color: var(--primary-color); cursor: pointer;">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
     <script>
-        // Category Filter
-        function filterPosts(category) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // In a real application, this would filter the posts
-            console.log(`Filtering by: ${category}`);
-            
-            // Animation effect
-            const posts = document.querySelectorAll('.blog-post');
-            posts.forEach(post => {
-                post.style.opacity = '0';
-                setTimeout(() => {
-                    post.style.opacity = '1';
-                }, 100);
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    navLinks.classList.remove('active');
+                }
             });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(5, 5, 5, 0.98)';
+            } else {
+                nav.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
         }
 
-        // Search Function
-        function searchPosts() {
-            const searchTerm = document.getElementById('searchInput').value;
-            console.log(`Searching for: ${searchTerm}`);
-            
-            // In a real application, this would perform actual search
-            // For demo, we'll just highlight the search
-            const posts = document.querySelectorAll('.blog-post');
-            posts.forEach(post => {
-                post.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    post.style.transform = 'scale(1)';
-                }, 200);
-            });
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ffff';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
         }
 
-        // Intersection Observer for animations
+        setInterval(drawMatrix, 35);
+
+        // Terminal Animation
+        const terminalLines = [
+            "$ Initializing Ghost Trace Security Scanner...",
+            "$ Loading vulnerability database... [OK]",
+            "$ Connecting to threat intelligence feeds... [OK]",
+            "$ Starting real-time monitoring... [OK]",
+            "$ System ready. Welcome to Ghost Trace.",
+            "$ Type 'help' for available commands."
+        ];
+
+        let lineIndex = 0;
+        const terminal = document.getElementById('terminal');
+
+        function addTerminalLine() {
+            if (lineIndex < terminalLines.length) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = terminalLines[lineIndex];
+                line.style.animationDelay = `${lineIndex * 0.5}s`;
+                terminal.appendChild(line);
+                lineIndex++;
+                setTimeout(addTerminalLine, 500);
+            }
+        }
+
+        setTimeout(addTerminalLine, 1000);
+
+        // Animated Counters
+        function animateCounter(id, target, duration = 2000) {
+            const element = document.getElementById(id);
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+
+        // Start counters when in view
         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('criticalThreats', 23);
+                    animateCounter('vulnScanned', 1847);
+                    animateCounter('patchesApplied', 342);
+                    animateCounter('zeroDays', 7);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const dashboard = document.querySelector('.threat-dashboard');
+        if (dashboard) observer.observe(dashboard);
+
+        // Particles Effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Password Strength Checker
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const result = document.getElementById('passwordResult');
+            
+            if (!password) {
+                result.textContent = 'Please enter a password';
+                return;
+            }
+
+            let strength = 0;
+            const checks = [
+                password.length >= 8,
+                password.length >= 12,
+                /[a-z]/.test(password),
+                /[A-Z]/.test(password),
+                /[0-9]/.test(password),
+                /[^A-Za-z0-9]/.test(password)
+            ];
+
+            strength = checks.filter(Boolean).length;
+
+            const strengthLevels = [
+                'Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'
+            ];
+
+            const colors = ['#ff3838', '#ff6b6b', '#ffa500', '#4ecdc4', '#00ff88', '#00ff88'];
+
+            result.innerHTML = `
+                <div style="color: ${colors[strength - 1]}">
+                    Strength: ${strengthLevels[strength - 1] || 'Very Weak'}
+                </div>
+                <div style="margin-top: 10px;">
+                    <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: ${colors[strength - 1] || '#ff3838'}; width: ${(strength / 6) * 100}%; height: 100%; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Hash Generator
+        async function generateHash() {
+            const input = document.getElementById('hashInput').value;
+            const result = document.getElementById('hashResult');
+            
+            if (!input) {
+                result.textContent = 'Please enter text to hash';
+                return;
+            }
+
+            // Simple hash simulation (in real app, use crypto library)
+            const encoder = new TextEncoder();
+            const data = encoder.encode(input);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            
+            result.innerHTML = `
+                <div style="word-break: break-all; font-size: 0.9rem;">
+                    <strong>SHA-256:</strong><br>
+                    ${hashHex}
+                </div>
+            `;
+        }
+
+        // Port Scanner (Demo)
+        function scanPorts() {
+            const domain = document.getElementById('portInput').value;
+            const result = document.getElementById('portResult');
+            
+            if (!domain) {
+                result.textContent = 'Please enter a domain';
+                return;
+            }
+
+            result.innerHTML = '<div style="color: var(--primary-color)">Scanning...</div>';
+            
+            setTimeout(() => {
+                result.innerHTML = `
+                    <div style="font-size: 0.9rem;">
+                        <strong>Demo Results for ${domain}:</strong><br>
+                        Port 22 (SSH): <span style="color: #00ff88">Open</span><br>
+                        Port 80 (HTTP): <span style="color: #00ff88">Open</span><br>
+                        Port 443 (HTTPS): <span style="color: #00ff88">Open</span><br>
+                        Port 3389 (RDP): <span style="color: #ff3838">Closed</span><br>
+                        <br>
+                        <em style="color: var(--text-gray)">Note: This is a demo. Real scanning requires backend services.</em>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // Service Modal
+        const serviceDetails = {
+            redteam: {
+                title: 'Red Team Operations',
+                content: `
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Red Team Operations</h2>
+                    <p>Our Red Team services simulate real-world cyber attacks to test your organization's detection and response capabilities.</p>
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">What's Included:</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Full-scope adversarial simulation</li>
+                        <li>✓ Physical security assessment</li>
+                        <li>✓ Social engineering campaigns</li>
+                        <li>✓ Zero-day exploit development</li>
+                        <li>✓ Custom malware creation</li>
+                        <li>✓ Detailed report with remediation steps</li>
+                    </ul>
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Pricing:</h3>
+                    <p>Starting from ₩5,000,000 (duration: 2-4 weeks)</p>
+                    <button class="cta-button" style="margin-top: 1rem;" onclick="document.getElementById('service').value='redteam'; document.getElementById('contact').scrollIntoView({behavior: 'smooth'}); closeServiceModal();">Request Quote</button>
+                `
+            },
+            web3: {
+                title: 'Web3 Security Audits',
+                content: `
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Web3 Security Audits</h2>
+                    <p>Comprehensive security audits for smart contracts, DeFi protocols, and blockchain applications.</p>
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Audit Coverage:</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>✓ Smart contract code review</li>
+                        <li>✓ Reentrancy attack analysis</li>
+                        <li>✓ Gas optimization</li>
+                        <li>✓ Access control verification</li>
+                        <li>✓ Economic model security</li>
+                        <li>✓ Formal verification</li>
+                    </ul>
+                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Supported Platforms:</h3>
+                    <p>Ethereum, Binance Smart Chain, Polygon, Solana, and more</p>
+                    <button class="cta-button" style="margin-top: 1rem;" onclick="document.getElementById('service').value='web3'; document.getElementById('contact').scrollIntoView({behavior: 'smooth'}); closeServiceModal();">Get Audit Quote</button>
+                `
+            }
+        };
+
+        function openServiceModal(service) {
+            const modal = document.getElementById('serviceModal');
+            const content = document.getElementById('modalContent');
+            
+            if (serviceDetails[service]) {
+                content.innerHTML = serviceDetails[service].content;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Language Switcher
+        const langSelector = document.getElementById('langSelector');
+        langSelector.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            // In a real app, this would switch the language
+            console.log(`Switching to ${lang}`);
+            // You could use i18n library here
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            // Note: Formspree will handle the actual submission
+            // You need to replace YOUR_FORM_ID with your actual Formspree form ID
+        });
+
+        // Easter Egg - Konami Code
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateHackerMode();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateHackerMode() {
+            document.body.style.animation = 'glitch 0.5s infinite';
+            setTimeout(() => {
+                document.body.style.animation = '';
+                alert('Ghost Mode Activated! 👻');
+            }, 2000);
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, { threshold: 0.1 });
+        }, observerOptions);
 
-        // Observe all blog posts
-        document.querySelectorAll('.blog-post').forEach(post => {
-            post.style.opacity = '0';
-            post.style.transform = 'translateY(20px)';
-            post.style.transition = 'all 0.6s ease';
-            observer.observe(post);
+        // Observe all animatable elements
+        document.querySelectorAll('.service-card, .tool-card, .blog-card, .threat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            animationObserver.observe(el);
         });
 
-        // Add loading skeleton effect
-        window.addEventListener('load', () => {
-            document.querySelectorAll('.blog-skeleton').forEach(skeleton => {
-                skeleton.classList.remove('blog-skeleton');
-            });
-        });
-
-        // Newsletter form
-        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for subscribing! You will receive security updates soon.');
-            e.target.reset();
-        });
+        // Dynamic Copyright Year
+        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Ghost Trace Cybersecurity. All rights reserved.`;
     </script>
 </body>
-</html>
+</h
