@@ -1,4 +1,264 @@
-border: 1px solid rgba(0, 255, 255, 0.3);
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
+    <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
+    <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #0080ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+            --success-color: #00ff88;
+            --error-color: #ff3838;
+            --warning-color: #ffaa00;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Tools Container */
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .tool-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-title::before {
+            content: '>';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tool-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-online {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .status-beta {
+            background: rgba(255, 170, 0, 0.2);
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
+        }
+
+        .tool-description {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .tool-interface {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 3px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tool-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .tool-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
             color: var(--text-light);
             margin-bottom: 1rem;
             font-family: 'Courier New', monospace;
@@ -74,29 +334,6 @@ border: 1px solid rgba(0, 255, 255, 0.3);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
-        }
-
-        .port-list {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            padding: 1rem;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .port-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-        }
-
-        .port-open {
-            color: var(--success-color);
-        }
-
-        .port-closed {
-            color: var(--error-color);
         }
 
         /* Progress Bar */
@@ -249,110 +486,6 @@ border: 1px solid rgba(0, 255, 255, 0.3);
                                 <input type="checkbox" id="serviceDetection" checked> Service Detection
                             </label>
                             <select class="tool-select" id="scanSpeed">
-                                <option value="slow">Slow (Accurate)</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Fast (Aggressive)</option>
-                            </select>
-                        </div>
-                        <div class="network-scanner">
-                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
-                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
-                        </div>
-                        <div class="progress-container" id="scanProgress" style="display: none;">
-                            <div class="progress-bar" id="scanProgressBar"></div>
-                            <span class="progress-text" id="scanProgressText">0%</span>
-                        </div>
-                        <div class="tool-output" id="portScanOutput">
-$ Ready to scan...
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DNS Lookup Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">DNS Reconnaissance</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Advanced DNS enumeration and subdomain discovery tool.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="reversDns" checked> Reverse DNS
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="dnsSec"> DNSSEC Check
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
-                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
-                        <div class="tool-output" id="dnsOutput">
-$ DNS reconnaissance ready...
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cryptography Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
-            
-            <div class="tools-grid">
-                <!-- Hash Analyzer -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Hash Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Multi-algorithm hash generator and hash type identifier.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
-                        <div class="tool-options">
-                            <select class="tool-select" id="hashAlgorithm">
-                                <option value="auto">Auto Detect</option>
-                                <option value="md5">MD5</option>
-                                <option value="sha1">SHA-1</option>
-                                <option value="sha256">SHA-256</option>
-                                <option value="sha512">SHA-512</option>
-                                <option value="bcrypt">BCrypt</option>
-                            </select>
-                            <label class="tool-option">
-                                <input type="checkbox" id="compareHash"> Compare Mode
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
-                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
-                        <div class="tool-output" id="hashOutput">
-$ Hash analyzer ready...
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Encryption/Decryption Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Cipher Suite</span>
-                        <span class="tool-status status-beta">BETA</span>
-                    </div>
-                    <p class="tool-description">
-                        Advanced encryption and decryption with multiple cipher support.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
-                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
-                        <div class="tool-options">
-                            <select class="tool-select" id="cipherAlgorithm">
-                                <option value="aes256">AES-256</option>
-                                <option value="aes128">AES-128</option>
                                 <option value="3des">3DES</option>
                                 <option value="base64">Base64</option>
                                 <option value="rot13">ROT13</option>
@@ -762,264 +895,266 @@ $ Hex editor ready...
             output.textContent = `$ Analyzing file: ${file.name}\n\n`;
             
             output.textContent += `File Information:\n`;
-            output<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
-    <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
-    <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            output.textContent += `  Name: ${file.name}\n`;
+            output.textContent += `  Size: ${(file.size / 1024).toFixed(2)} KB\n`;
+            output.textContent += `  Type: ${file.type || 'Unknown'}\n`;
+            output.textContent += `  Last Modified: ${new Date(file.lastModified).toLocaleString()}\n\n`;
+            
+            // Simulate hash calculation
+            setTimeout(() => {
+                output.textContent += `Hash Values:\n`;
+                output.textContent += `  MD5:    ${generateSimpleHash(file.name, 32)}\n`;
+                output.textContent += `  SHA-1:  ${generateSimpleHash(file.name, 40)}\n`;
+                output.textContent += `  SHA-256: ${generateSimpleHash(file.name, 64)}\n\n`;
+                
+                if (document.getElementById('virusTotal').checked) {
+                    output.textContent += `VirusTotal Check:\n`;
+                    output.textContent += `  Status: Clean (0/68 detections)\n`;
+                    output.textContent += `  Note: This is a simulation\n\n`;
+                }
+                
+                output.textContent += `$ File analysis complete`;
+            }, 1000);
         }
 
-        :root {
-            --primary-color: #00ffff;
-            --secondary-color: #0080ff;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --text-light: #ffffff;
-            --text-gray: #a0a0a0;
-            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
-            --success-color: #00ff88;
-            --error-color: #ff3838;
-            --warning-color: #ffaa00;
+        // Hex Editor
+        function formatHex() {
+            const input = document.getElementById('hexInput').value;
+            const output = document.getElementById('hexOutput');
+            const showAscii = document.getElementById('hexAscii').checked;
+            const showOffset = document.getElementById('hexOffset').checked;
+            const width = parseInt(document.getElementById('hexWidth').value);
+            
+            if (!input) {
+                output.textContent = '$ Error: Please enter hex data';
+                return;
+            }
+            
+            // Clean input
+            const cleanHex = input.replace(/[^0-9A-Fa-f]/g, '');
+            
+            output.textContent = '';
+            if (showOffset) {
+                output.textContent += 'Offset    Hex Data' + (showAscii ? '                             ASCII' : '') + '\n';
+                output.textContent += '--------  ' + '-'.repeat(width * 3) + (showAscii ? '  ' + '-'.repeat(width) : '') + '\n';
+            }
+            
+            for (let i = 0; i < cleanHex.length; i += width * 2) {
+                const chunk = cleanHex.substr(i, width * 2);
+                let hexPart = '';
+                let asciiPart = '';
+                
+                for (let j = 0; j < chunk.length; j += 2) {
+                    const byte = chunk.substr(j, 2);
+                    hexPart += byte + ' ';
+                    
+                    if (showAscii) {
+                        const charCode = parseInt(byte, 16);
+                        asciiPart += (charCode >= 32 && charCode <= 126) ? String.fromCharCode(charCode) : '.';
+                    }
+                }
+                
+                // Pad hex part
+                hexPart = hexPart.padEnd(width * 3);
+                
+                let line = '';
+                if (showOffset) {
+                    line += (i / 2).toString(16).padStart(8, '0') + '  ';
+                }
+                line += hexPart;
+                if (showAscii) {
+                    line += ' ' + asciiPart;
+                }
+                
+                output.textContent += line + '\n';
+            }
         }
 
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            line-height: 1.6;
+        function convertHex() {
+            const input = document.getElementById('hexInput').value;
+            const output = document.getElementById('hexOutput');
+            
+            try {
+                // Convert hex to text
+                const cleanHex = input.replace(/[^0-9A-Fa-f]/g, '');
+                let text = '';
+                for (let i = 0; i < cleanHex.length; i += 2) {
+                    text += String.fromCharCode(parseInt(cleanHex.substr(i, 2), 16));
+                }
+                
+                output.textContent = `$ Hex to Text Conversion:\n\n${text}\n\n`;
+                output.textContent += `$ Conversion complete`;
+            } catch (error) {
+                output.textContent = `$ Error: Invalid hex data`;
+            }
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        // Add visual feedback for all buttons
+        document.querySelectorAll('.tool-button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // Terminal typing effect for outputs
+        function typeOutput(element, text, speed = 20) {
+            element.textContent = '';
+            let i = 0;
+            const typing = setInterval(() => {
+                element.textContent += text[i];
+                i++;
+                if (i >= text.length) {
+                    clearInterval(typing);
+                }
+            }, speed);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        // Initialize tool outputs with typing effect
+        window.addEventListener('load', () => {
+            const outputs = document.querySelectorAll('.tool-output');
+            outputs.forEach(output => {
+                const originalText = output.textContent;
+                typeOutput(output, originalText);
+            });
+        });
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-decoration: none;
-            text-shadow: var(--accent-glow);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+Enter to execute current tool
+            if (e.ctrlKey && e.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement && activeElement.classList.contains('tool-input')) {
+                    const toolCard = activeElement.closest('.tool-card');
+                    if (toolCard) {
+                        const primaryButton = toolCard.querySelector('.tool-button:not(.secondary)');
+                        if (primaryButton) {
+                            primaryButton.click();
+                        }
+                    }
+                }
+            }
+            
+            // Escape to clear current output
+            if (e.key === 'Escape') {
+                const activeElement = document.activeElement;
+                if (activeElement && activeElement.classList.contains('tool-input')) {
+                    const toolCard = activeElement.closest('.tool-card');
+                    if (toolCard) {
+                        const output = toolCard.querySelector('.tool-output');
+                        if (output) {
+                            output.textContent = '$ Ready...';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>slow">Slow (Accurate)</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Fast (Aggressive)</option>
+                            </select>
+                        </div>
+                        <div class="network-scanner">
+                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
+                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
+                        </div>
+                        <div class="progress-container" id="scanProgress" style="display: none;">
+                            <div class="progress-bar" id="scanProgressBar"></div>
+                            <span class="progress-text" id="scanProgressText">0%</span>
+                        </div>
+                        <div class="tool-output" id="portScanOutput">
+$ Ready to scan...
+                        </div>
+                    </div>
+                </div>
 
-        .logo img {
-            height: 40px;
-            width: auto;
-            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
-        }
+                <!-- DNS Lookup Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">DNS Reconnaissance</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced DNS enumeration and subdomain discovery tool.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="reversDns" checked> Reverse DNS
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="dnsSec"> DNSSEC Check
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
+                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
+                        <div class="tool-output" id="dnsOutput">
+$ DNS reconnaissance ready...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+        <!-- Cryptography Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
+            
+            <div class="tools-grid">
+                <!-- Hash Analyzer -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Hash Analyzer</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Multi-algorithm hash generator and hash type identifier.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
+                        <div class="tool-options">
+                            <select class="tool-select" id="hashAlgorithm">
+                                <option value="auto">Auto Detect</option>
+                                <option value="md5">MD5</option>
+                                <option value="sha1">SHA-1</option>
+                                <option value="sha256">SHA-256</option>
+                                <option value="sha512">SHA-512</option>
+                                <option value="bcrypt">BCrypt</option>
+                            </select>
+                            <label class="tool-option">
+                                <input type="checkbox" id="compareHash"> Compare Mode
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
+                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
+                        <div class="tool-output" id="hashOutput">
+$ Hash analyzer ready...
+                        </div>
+                    </div>
+                </div>
 
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-            text-shadow: var(--accent-glow);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            margin-top: 80px;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .terminal-effect {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-        }
-
-        .hero-section h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            text-shadow: var(--accent-glow);
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .hero-section p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Tools Container */
-        .tools-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .tool-category {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .category-title::before {
-            content: '>';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .tool-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            animation: scan 3s linear infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .tool-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .tool-name {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .tool-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-online {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--success-color);
-            border: 1px solid var(--success-color);
-        }
-
-        .status-beta {
-            background: rgba(255, 170, 0, 0.2);
-            color: var(--warning-color);
-            border: 1px solid var(--warning-color);
-        }
-
-        .tool-description {
-            color: var(--text-gray);
-            margin-bottom: 1.5rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .tool-interface {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 3px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tool-input {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .tool-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .tool-textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 0.8rem;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255,
+                <!-- Encryption/Decryption Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Cipher Suite</span>
+                        <span class="tool-status status-beta">BETA</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced encryption and decryption with multiple cipher support.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
+                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
+                        <div class="tool-options">
+                            <select class="tool-select" id="cipherAlgorithm">
+                                <option value="aes256">AES-256</option>
+                                <option value="aes128">AES-128</option>
+                                <option value="
