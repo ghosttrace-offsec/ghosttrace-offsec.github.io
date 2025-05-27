@@ -90,18 +90,18 @@
           text-shadow: var(--accent-glow);
       }
 
-      /* Hero Section (블로그와 같은 레이아웃/스타일) */
+      /* Hero Section (Blog와 같은 레이아웃/스타일) */
       .hero-section {
           margin-top: 80px; /* 메뉴바 높이 보정 */
-          padding: 5rem 2rem;
+          padding: 4rem 2rem;
           text-align: center;
-          background-color: #0c0c0c; /* 혹은 blog 페이지 배경과 동일한 색상/그라디언트 */
+          background-color: #0c0c0c; /* Blog 페이지와 유사한 백그라운드 */
           position: relative;
       }
       .hero-section h1 {
           font-size: 2.5rem;
           color: var(--primary-color);
-          text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+          text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff; /* 네온 글로우 효과 */
           margin-bottom: 1rem;
       }
       .hero-section p {
@@ -109,11 +109,6 @@
           color: var(--text-gray);
           font-family: 'Arial', sans-serif;
       }
-      /* 원하는 경우, blog처럼 더 강한 네온 효과를 주려면 아래 추가:
-         .hero-section h1 {
-             text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff; 
-         }
-      */
 
       /* Tools Container */
       .tools-container {
@@ -122,11 +117,10 @@
           padding: 3rem 2rem;
       }
 
-      /* (이하, 각종 카드/버튼/출력 등 기존 Tools 스타일) */
-
       .tool-category {
           margin-bottom: 3rem;
       }
+
       .category-title {
           font-size: 1.8rem;
           color: var(--primary-color);
@@ -135,19 +129,23 @@
           align-items: center;
           gap: 1rem;
       }
+
       .category-title::before {
           content: '>';
           animation: blink 1s infinite;
       }
+
       @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
       }
+
       .tools-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
           gap: 2rem;
       }
+
       .tool-card {
           background: rgba(0, 0, 0, 0.8);
           border: 1px solid rgba(0, 255, 255, 0.3);
@@ -156,38 +154,63 @@
           position: relative;
           overflow: hidden;
       }
+
+      /* 카드 상단에 스캔 라인 효과 (선택사항)
+      .tool-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+          animation: scan 3s linear infinite;
+      }
+
+      @keyframes scan {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+      }
+      */
+
       .tool-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 1.5rem;
       }
+
       .tool-name {
           font-size: 1.3rem;
           color: var(--primary-color);
           font-weight: bold;
       }
+
       .tool-status {
           padding: 0.3rem 0.8rem;
           border-radius: 3px;
           font-size: 0.8rem;
           font-weight: bold;
       }
+
       .status-online {
           background: rgba(0, 255, 136, 0.2);
           color: var(--success-color);
           border: 1px solid var(--success-color);
       }
+
       .status-beta {
           background: rgba(255, 170, 0, 0.2);
           color: var(--warning-color);
           border: 1px solid var(--warning-color);
       }
+
       .tool-description {
           color: var(--text-gray);
           margin-bottom: 1.5rem;
           font-family: 'Arial', sans-serif;
       }
+
       .tool-interface {
           background: rgba(0, 0, 0, 0.5);
           border: 1px solid rgba(0, 255, 255, 0.2);
@@ -195,7 +218,8 @@
           padding: 1.5rem;
           margin-bottom: 1rem;
       }
-      .tool-input, .tool-textarea, .tool-select {
+
+      .tool-input {
           width: 100%;
           padding: 0.8rem;
           background: rgba(0, 255, 255, 0.05);
@@ -204,10 +228,30 @@
           margin-bottom: 1rem;
           font-family: 'Courier New', monospace;
       }
+
       .tool-textarea {
+          width: 100%;
           min-height: 120px;
+          padding: 0.8rem;
+          background: rgba(0, 255, 255, 0.05);
+          border: 1px solid rgba(0, 255, 255, 0.3);
+          color: var(--text-light);
+          margin-bottom: 1rem;
+          font-family: 'Courier New', monospace;
           resize: vertical;
       }
+
+      .tool-select {
+          width: 100%;
+          padding: 0.8rem;
+          background: rgba(0, 255, 255, 0.05);
+          border: 1px solid rgba(0, 255, 255, 0.3);
+          color: var(--text-light);
+          margin-bottom: 1rem;
+          font-family: 'Courier New', monospace;
+          cursor: pointer;
+      }
+
       .tool-button {
           padding: 0.8rem 1.5rem;
           background: var(--primary-color);
@@ -218,15 +262,18 @@
           transition: all 0.3s ease;
           margin-right: 1rem;
       }
+
       .tool-button:hover {
           background: var(--secondary-color);
           transform: scale(1.05);
       }
+
       .tool-button.secondary {
           background: transparent;
           border: 1px solid var(--primary-color);
           color: var(--primary-color);
       }
+
       .tool-output {
           background: #000;
           border: 1px solid rgba(0, 255, 255, 0.3);
@@ -239,12 +286,14 @@
           word-break: break-all;
           color: var(--success-color);
       }
+
       .tool-options {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
           margin-bottom: 1rem;
       }
+
       .tool-option {
           display: flex;
           align-items: center;
@@ -252,6 +301,7 @@
           color: var(--text-gray);
           font-family: 'Arial', sans-serif;
       }
+
       .tool-option input[type="checkbox"] {
           width: 18px;
           height: 18px;
@@ -266,17 +316,20 @@
           border-top: 1px solid rgba(0, 255, 255, 0.2);
           margin-top: 4rem;
       }
+
       .social-links {
           display: flex;
           justify-content: center;
           gap: 2rem;
           margin-bottom: 2rem;
       }
+
       .social-links a {
           color: var(--text-light);
           font-size: 1.5rem;
           transition: all 0.3s ease;
       }
+
       .social-links a:hover {
           color: var(--primary-color);
           transform: translateY(-3px);
@@ -287,9 +340,20 @@
           .tools-grid {
               grid-template-columns: 1fr;
           }
+
           .tool-options {
               flex-direction: column;
           }
+      }
+
+      /* Glitch effect (선택적으로) */
+      .glitch {
+          animation: glitch 2s infinite;
+      }
+
+      @keyframes glitch {
+          0%, 100% { text-shadow: var(--accent-glow); }
+          97% { text-shadow: -2px 0 var(--error-color), 2px 0 var(--primary-color); }
       }
   </style>
 </head>
@@ -304,6 +368,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#services">Services</a></li>
+        <!-- 현재 페이지(Tools) 활성화 표시 -->
         <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -311,19 +376,21 @@
     </div>
   </nav>
 
-  <!-- Hero Section (Blog와 동일한 구조/스타일) -->
+  <!-- Hero Section (Blog와 동일/유사한 구조) -->
   <section class="hero-section">
-    <h1>Security Tools Arsenal</h1>
+    <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
     <p>Professional-grade security testing tools powered by Ghost Trace</p>
   </section>
 
-  <!-- 본문 Tools 내용 -->
+  <!-- Tools 메인 컨테이너 -->
   <main class="tools-container">
-    <!-- 원하는 Tools 섹션들 -->
+
+    <!-- 예시: 네트워크 툴 섹션 -->
     <section class="tool-category">
       <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
       <div class="tools-grid">
-        <!-- 예시 Tool Card -->
+
+        <!-- Advanced Port Scanner -->
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-name">Advanced Port Scanner</span>
@@ -333,48 +400,49 @@
             Comprehensive port scanning with service detection and OS fingerprinting.
           </p>
           <div class="tool-interface">
-            <!-- ... 실제 입력/버튼 등 -->
-            <input type="text" class="tool-input" placeholder="Enter target IP or domain">
-            <button class="tool-button">SCAN</button>
-            <div class="tool-output">
+            <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
+            <button class="tool-button" onclick="fakeScan()">SCAN</button>
+            <div class="tool-output" id="portScanOutput">
 $ Ready to scan...
             </div>
           </div>
         </div>
-        <!-- 필요에 따라 다른 툴 카드들 배치 -->
-      </div>
+
+      </div> <!-- .tools-grid -->
     </section>
 
-    <!-- XSS 관련 도구 카드 -->
+    <!-- 예시: 웹 보안 툴 섹션 (XSS) -->
     <section class="tool-category">
       <h2 class="category-title">WEB SECURITY TOOLS</h2>
       <div class="tools-grid">
+
+        <!-- XSS Payload Generator -->
         <div class="tool-card">
           <div class="tool-header">
             <span class="tool-name">XSS Payload Generator</span>
             <span class="tool-status status-online">ONLINE</span>
           </div>
           <p class="tool-description">
-            Generate and encode XSS payloads for security testing (manual trigger only).
+            Generate and encode XSS payloads for security testing. (Pop-up only on button click)
           </p>
           <div class="tool-interface">
-            <input type="text" class="tool-input" id="xssContext" placeholder="Injection context">
+            <input type="text" class="tool-input" id="xssContext" placeholder="Injection context (e.g. <script>)">
             <div class="tool-options">
               <label class="tool-option">
                 <input type="checkbox" id="xssEncode" checked> URL Encode
               </label>
             </div>
             <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
-            <!-- 테스트 버튼은 누르기 전까진 팝업 뜨지 않음 -->
             <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
             <div class="tool-output" id="xssOutput">
 $ XSS payload generator ready...
             </div>
           </div>
         </div>
-      </div>
+
+      </div> <!-- .tools-grid -->
     </section>
-    <!-- 기타 섹션들... -->
+
   </main>
 
   <!-- Footer -->
@@ -390,31 +458,47 @@ $ XSS payload generator ready...
   </footer>
 
   <script>
-    // (필요하다면, XSS 함수들만 그대로 두되, 자동 호출은 전부 제거)
+    // (데모용) Port Scan 시뮬레이션
+    function fakeScan() {
+      const target = document.getElementById('portScanTarget').value;
+      const output = document.getElementById('portScanOutput');
+      if (!target) {
+        output.textContent = '$ Error: Please enter a target';
+        return;
+      }
+      output.textContent = `$ Scanning ${target}...\n\nOpen ports:\n 22 (ssh)\n 80 (http)\n 443 (https)\n\nScan complete.`;
+    }
 
+    // XSS Payload Generator
     function generateXssPayload() {
       const output = document.getElementById('xssOutput');
       const encodeCheck = document.getElementById('xssEncode').checked;
-      output.textContent = `$ Generating XSS payload...\n\n`;
-      let payload = `<script>alert('XSS')</script>`;
+      const context = document.getElementById('xssContext').value || 'generic';
+      
+      output.textContent = `$ Generating XSS payload for context: ${context}\n\n`;
+      let payload = `<script>alert('XSS in ${context}')</script>`;
+
       if(encodeCheck) {
         payload = encodeURIComponent(payload);
       }
       output.textContent += `Payload: ${payload}\n\n`;
-      output.textContent += `$ Done.`;
+      output.textContent += `$ Done. (Will not pop up automatically)`;
     }
 
+    // TEST SAFE: 버튼 누를 때만 팝업창 열림
     function testPayload() {
       const output = document.getElementById('xssOutput');
-      output.textContent += `\n\n$ Safe test triggered (no auto-run on page load).`;
-      // 새 윈도우에 img onerror 예시
+      output.textContent += `\n\n$ Safe test triggered by button click.`;
+
+      // 새 윈도우/탭에 <img onerror="alert('XSS')"> 시연
       const xssExample = `
         <html>
           <head><title>XSS Test</title></head>
           <body style="background:#111; color:#0f0; font-family:monospace;">
             <h2>XSS Test Page</h2>
             <p>Sandboxed demonstration</p>
-            <img src="broken.jpg" onerror="alert('XSS');" alt="XSS Test">
+            <img src="broken.jpg" onerror="alert('XSS Test');" alt="XSS Test">
+            <p>Close this window when done.</p>
           </body>
         </html>`;
       const newWin = window.open("", "_blank", "width=500,height=300");
