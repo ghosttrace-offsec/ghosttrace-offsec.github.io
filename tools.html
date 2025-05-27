@@ -1,514 +1,1025 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ghost Trace Cybersecurity - Tools</title>
-  <meta name="description" content="Professional security tools and utilities">
-  <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
-  
-  <style>
-      :root {
-          --primary-color: #00ffff;
-          --secondary-color: #0080ff;
-          --dark-bg: #0a0a0a;
-          --darker-bg: #050505;
-          --text-light: #ffffff;
-          --text-gray: #a0a0a0;
-          --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
-          --success-color: #00ff88;
-          --error-color: #ff3838;
-          --warning-color: #ffaa00;
-      }
+border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+        }
 
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
+        .tool-button {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
 
-      body {
-          font-family: 'Courier New', monospace;
-          background-color: var(--dark-bg);
-          color: var(--text-light);
-          line-height: 1.6;
-      }
+        .tool-button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+        }
 
-      /* Navigation */
-      nav {
-          position: fixed;
-          top: 0;
-          width: 100%;
-          background: rgba(10, 10, 10, 0.95);
-          backdrop-filter: blur(10px);
-          z-index: 1000;
-          padding: 1rem 0;
-          border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-      }
+        .tool-button.secondary {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
 
-      .nav-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
+        .tool-output {
+            background: #000;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            padding: 1rem;
+            margin-top: 1rem;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: var(--success-color);
+        }
 
-      .logo {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: var(--primary-color);
-          text-decoration: none;
-          text-shadow: var(--accent-glow);
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-      }
+        .tool-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
 
-      .logo img {
-          height: 40px;
-          width: auto;
-          filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
-      }
+        .tool-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-family: 'Arial', sans-serif;
+        }
 
-      .nav-links {
-          display: flex;
-          list-style: none;
-          gap: 2rem;
-      }
+        .tool-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
 
-      .nav-links a {
-          color: var(--text-light);
-          text-decoration: none;
-          transition: all 0.3s ease;
-          font-family: 'Arial', sans-serif;
-      }
+        .tool-select {
+            padding: 0.5rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-light);
+            cursor: pointer;
+        }
 
-      .nav-links a:hover {
-          color: var(--primary-color);
-          text-shadow: var(--accent-glow);
-      }
+        /* Specific Tool Styles */
+        .network-scanner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
 
-      /* Hero Section (Blog와 같은 레이아웃/스타일) */
-      .hero-section {
-          margin-top: 80px; /* 메뉴바 높이 보정 */
-          padding: 4rem 2rem;
-          text-align: center;
-          background-color: #0c0c0c; /* Blog 페이지와 유사한 백그라운드 */
-          position: relative;
-      }
-      .hero-section h1 {
-          font-size: 2.5rem;
-          color: var(--primary-color);
-          text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff; /* 네온 글로우 효과 */
-          margin-bottom: 1rem;
-      }
-      .hero-section p {
-          font-size: 1.1rem;
-          color: var(--text-gray);
-          font-family: 'Arial', sans-serif;
-      }
+        .port-list {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
 
-      /* Tools Container */
-      .tools-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 3rem 2rem;
-      }
+        .port-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
 
-      .tool-category {
-          margin-bottom: 3rem;
-      }
+        .port-open {
+            color: var(--success-color);
+        }
 
-      .category-title {
-          font-size: 1.8rem;
-          color: var(--primary-color);
-          margin-bottom: 2rem;
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-      }
+        .port-closed {
+            color: var(--error-color);
+        }
 
-      .category-title::before {
-          content: '>';
-          animation: blink 1s infinite;
-      }
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            height: 20px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
 
-      @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-      }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
 
-      .tools-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-          gap: 2rem;
-      }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
 
-      .tool-card {
-          background: rgba(0, 0, 0, 0.8);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          border-radius: 5px;
-          padding: 2rem;
-          position: relative;
-          overflow: hidden;
-      }
+        /* Warning Banner */
+        .warning-banner {
+            background: rgba(255, 170, 0, 0.1);
+            border: 1px solid var(--warning-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--warning-color);
+        }
 
-      /* 카드 상단에 스캔 라인 효과 (선택사항)
-      .tool-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-          animation: scan 3s linear infinite;
-      }
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            margin-top: 4rem;
+        }
 
-      @keyframes scan {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-      }
-      */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
 
-      .tool-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1.5rem;
-      }
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
 
-      .tool-name {
-          font-size: 1.3rem;
-          color: var(--primary-color);
-          font-weight: bold;
-      }
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
 
-      .tool-status {
-          padding: 0.3rem 0.8rem;
-          border-radius: 3px;
-          font-size: 0.8rem;
-          font-weight: bold;
-      }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
 
-      .status-online {
-          background: rgba(0, 255, 136, 0.2);
-          color: var(--success-color);
-          border: 1px solid var(--success-color);
-      }
+            .network-scanner {
+                grid-template-columns: 1fr;
+            }
 
-      .status-beta {
-          background: rgba(255, 170, 0, 0.2);
-          color: var(--warning-color);
-          border: 1px solid var(--warning-color);
-      }
+            .tool-options {
+                flex-direction: column;
+            }
+        }
 
-      .tool-description {
-          color: var(--text-gray);
-          margin-bottom: 1.5rem;
-          font-family: 'Arial', sans-serif;
-      }
+        /* Glitch effect for headers */
+        .glitch {
+            animation: glitch 2s infinite;
+        }
 
-      .tool-interface {
-          background: rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(0, 255, 255, 0.2);
-          border-radius: 3px;
-          padding: 1.5rem;
-          margin-bottom: 1rem;
-      }
-
-      .tool-input {
-          width: 100%;
-          padding: 0.8rem;
-          background: rgba(0, 255, 255, 0.05);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          color: var(--text-light);
-          margin-bottom: 1rem;
-          font-family: 'Courier New', monospace;
-      }
-
-      .tool-textarea {
-          width: 100%;
-          min-height: 120px;
-          padding: 0.8rem;
-          background: rgba(0, 255, 255, 0.05);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          color: var(--text-light);
-          margin-bottom: 1rem;
-          font-family: 'Courier New', monospace;
-          resize: vertical;
-      }
-
-      .tool-select {
-          width: 100%;
-          padding: 0.8rem;
-          background: rgba(0, 255, 255, 0.05);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          color: var(--text-light);
-          margin-bottom: 1rem;
-          font-family: 'Courier New', monospace;
-          cursor: pointer;
-      }
-
-      .tool-button {
-          padding: 0.8rem 1.5rem;
-          background: var(--primary-color);
-          color: var(--dark-bg);
-          border: none;
-          font-weight: bold;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          margin-right: 1rem;
-      }
-
-      .tool-button:hover {
-          background: var(--secondary-color);
-          transform: scale(1.05);
-      }
-
-      .tool-button.secondary {
-          background: transparent;
-          border: 1px solid var(--primary-color);
-          color: var(--primary-color);
-      }
-
-      .tool-output {
-          background: #000;
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          padding: 1rem;
-          margin-top: 1rem;
-          min-height: 100px;
-          font-family: 'Courier New', monospace;
-          font-size: 0.9rem;
-          white-space: pre-wrap;
-          word-break: break-all;
-          color: var(--success-color);
-      }
-
-      .tool-options {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          margin-bottom: 1rem;
-      }
-
-      .tool-option {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: var(--text-gray);
-          font-family: 'Arial', sans-serif;
-      }
-
-      .tool-option input[type="checkbox"] {
-          width: 18px;
-          height: 18px;
-          accent-color: var(--primary-color);
-      }
-
-      /* Footer */
-      footer {
-          background: var(--darker-bg);
-          padding: 3rem 0 2rem;
-          text-align: center;
-          border-top: 1px solid rgba(0, 255, 255, 0.2);
-          margin-top: 4rem;
-      }
-
-      .social-links {
-          display: flex;
-          justify-content: center;
-          gap: 2rem;
-          margin-bottom: 2rem;
-      }
-
-      .social-links a {
-          color: var(--text-light);
-          font-size: 1.5rem;
-          transition: all 0.3s ease;
-      }
-
-      .social-links a:hover {
-          color: var(--primary-color);
-          transform: translateY(-3px);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-          .tools-grid {
-              grid-template-columns: 1fr;
-          }
-
-          .tool-options {
-              flex-direction: column;
-          }
-      }
-
-      /* Glitch effect (선택적으로) */
-      .glitch {
-          animation: glitch 2s infinite;
-      }
-
-      @keyframes glitch {
-          0%, 100% { text-shadow: var(--accent-glow); }
-          97% { text-shadow: -2px 0 var(--error-color), 2px 0 var(--primary-color); }
-      }
-  </style>
+        @keyframes glitch {
+            0%, 100% { text-shadow: var(--accent-glow); }
+            97% { text-shadow: -2px 0 var(--error-color), 2px 0 var(--primary-color); }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
-      <a href="index.html" class="logo">
-        <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
-        GHOST TRACE
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <!-- 현재 페이지(Tools) 활성화 표시 -->
-        <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-      </ul>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
+                GHOST TRACE
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="terminal-effect"></div>
+        <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
+        <p>Professional-grade security testing tools powered by Ghost Trace</p>
+    </section>
+
+    <!-- Warning Banner -->
+    <div class="tools-container">
+        <div class="warning-banner">
+            ⚠️ <strong>LEGAL NOTICE:</strong> These tools are for authorized security testing only. 
+            Use only on systems you own or have explicit permission to test.
+        </div>
     </div>
-  </nav>
 
-  <!-- Hero Section (Blog와 동일/유사한 구조) -->
-  <section class="hero-section">
-    <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
-    <p>Professional-grade security testing tools powered by Ghost Trace</p>
-  </section>
-
-  <!-- Tools 메인 컨테이너 -->
-  <main class="tools-container">
-
-    <!-- 예시: 네트워크 툴 섹션 -->
-    <section class="tool-category">
-      <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
-      <div class="tools-grid">
-
-        <!-- Advanced Port Scanner -->
-        <div class="tool-card">
-          <div class="tool-header">
-            <span class="tool-name">Advanced Port Scanner</span>
-            <span class="tool-status status-online">ONLINE</span>
-          </div>
-          <p class="tool-description">
-            Comprehensive port scanning with service detection and OS fingerprinting.
-          </p>
-          <div class="tool-interface">
-            <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
-            <button class="tool-button" onclick="fakeScan()">SCAN</button>
-            <div class="tool-output" id="portScanOutput">
+    <!-- Tools Section -->
+    <main class="tools-container">
+        <!-- Network Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
+            
+            <div class="tools-grid">
+                <!-- Advanced Port Scanner -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Advanced Port Scanner</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Comprehensive port scanning with service detection and OS fingerprinting.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="stealthScan"> Stealth Scan
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="serviceDetection" checked> Service Detection
+                            </label>
+                            <select class="tool-select" id="scanSpeed">
+                                <option value="slow">Slow (Accurate)</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Fast (Aggressive)</option>
+                            </select>
+                        </div>
+                        <div class="network-scanner">
+                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
+                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
+                        </div>
+                        <div class="progress-container" id="scanProgress" style="display: none;">
+                            <div class="progress-bar" id="scanProgressBar"></div>
+                            <span class="progress-text" id="scanProgressText">0%</span>
+                        </div>
+                        <div class="tool-output" id="portScanOutput">
 $ Ready to scan...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DNS Lookup Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">DNS Reconnaissance</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced DNS enumeration and subdomain discovery tool.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="reversDns" checked> Reverse DNS
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="dnsSec"> DNSSEC Check
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
+                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
+                        <div class="tool-output" id="dnsOutput">
+$ DNS reconnaissance ready...
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
+        </section>
 
-      </div> <!-- .tools-grid -->
-    </section>
+        <!-- Cryptography Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
+            
+            <div class="tools-grid">
+                <!-- Hash Analyzer -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Hash Analyzer</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Multi-algorithm hash generator and hash type identifier.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
+                        <div class="tool-options">
+                            <select class="tool-select" id="hashAlgorithm">
+                                <option value="auto">Auto Detect</option>
+                                <option value="md5">MD5</option>
+                                <option value="sha1">SHA-1</option>
+                                <option value="sha256">SHA-256</option>
+                                <option value="sha512">SHA-512</option>
+                                <option value="bcrypt">BCrypt</option>
+                            </select>
+                            <label class="tool-option">
+                                <input type="checkbox" id="compareHash"> Compare Mode
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
+                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
+                        <div class="tool-output" id="hashOutput">
+$ Hash analyzer ready...
+                        </div>
+                    </div>
+                </div>
 
-    <!-- 예시: 웹 보안 툴 섹션 (XSS) -->
-    <section class="tool-category">
-      <h2 class="category-title">WEB SECURITY TOOLS</h2>
-      <div class="tools-grid">
-
-        <!-- XSS Payload Generator -->
-        <div class="tool-card">
-          <div class="tool-header">
-            <span class="tool-name">XSS Payload Generator</span>
-            <span class="tool-status status-online">ONLINE</span>
-          </div>
-          <p class="tool-description">
-            Generate and encode XSS payloads for security testing. (Pop-up only on button click)
-          </p>
-          <div class="tool-interface">
-            <input type="text" class="tool-input" id="xssContext" placeholder="Injection context (e.g. <script>)">
-            <div class="tool-options">
-              <label class="tool-option">
-                <input type="checkbox" id="xssEncode" checked> URL Encode
-              </label>
+                <!-- Encryption/Decryption Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Cipher Suite</span>
+                        <span class="tool-status status-beta">BETA</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced encryption and decryption with multiple cipher support.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
+                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
+                        <div class="tool-options">
+                            <select class="tool-select" id="cipherAlgorithm">
+                                <option value="aes256">AES-256</option>
+                                <option value="aes128">AES-128</option>
+                                <option value="3des">3DES</option>
+                                <option value="base64">Base64</option>
+                                <option value="rot13">ROT13</option>
+                            </select>
+                            <select class="tool-select" id="cipherMode">
+                                <option value="encrypt">Encrypt</option>
+                                <option value="decrypt">Decrypt</option>
+                            </select>
+                        </div>
+                        <button class="tool-button" onclick="processCipher()">PROCESS</button>
+                        <div class="tool-output" id="cipherOutput">
+$ Cipher suite ready...
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
-            <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
-            <div class="tool-output" id="xssOutput">
+        </section>
+
+        <!-- Web Security Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">WEB APPLICATION SECURITY</h2>
+            
+            <div class="tools-grid">
+                <!-- XSS Payload Generator -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">XSS Payload Generator</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Generate and encode XSS payloads for security testing.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="xssContext" placeholder="Enter injection context (e.g., <script>, attribute, etc.)">
+                        <div class="tool-options">
+                            <select class="tool-select" id="xssType">
+                                <option value="reflected">Reflected XSS</option>
+                                <option value="stored">Stored XSS</option>
+                                <option value="dom">DOM-based XSS</option>
+                            </select>
+                            <label class="tool-option">
+                                <input type="checkbox" id="xssEncode" checked> URL Encode
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="xssObfuscate"> Obfuscate
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
+                        <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
+                        <div class="tool-output" id="xssOutput">
 $ XSS payload generator ready...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL Injection Tester -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">SQL Injection Analyzer</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Test and analyze SQL injection vulnerabilities with smart payloads.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="sqlTarget" placeholder="Enter target URL with parameter">
+                        <div class="tool-options">
+                            <select class="tool-select" id="sqlDatabase">
+                                <option value="auto">Auto Detect</option>
+                                <option value="mysql">MySQL</option>
+                                <option value="mssql">MSSQL</option>
+                                <option value="oracle">Oracle</option>
+                                <option value="postgresql">PostgreSQL</option>
+                            </select>
+                            <label class="tool-option">
+                                <input type="checkbox" id="sqlBlind"> Blind SQLi
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="sqlTime"> Time-based
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="testSqlInjection()">ANALYZE</button>
+                        <div class="tool-output" id="sqlOutput">
+$ SQL injection analyzer ready...
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+        </section>
+
+        <!-- Binary Analysis Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">BINARY ANALYSIS</h2>
+            
+            <div class="tools-grid">
+                <!-- File Hash Calculator -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">File Analysis Suite</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Calculate file hashes and perform basic malware analysis.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="file" class="tool-input" id="fileInput" style="padding: 0.5rem;">
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="virusTotal" checked> VirusTotal Check
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="peAnalysis"> PE Analysis
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="strings"> Extract Strings
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="analyzeFile()">ANALYZE FILE</button>
+                        <div class="tool-output" id="fileOutput">
+$ File analyzer ready...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hex Editor -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Online Hex Editor</span>
+                        <span class="tool-status status-beta">BETA</span>
+                    </div>
+                    <p class="tool-description">
+                        View and edit binary files in hexadecimal format.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="hexInput" placeholder="Paste hex data or load file" style="font-family: monospace; font-size: 0.9rem;"></textarea>
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="hexAscii" checked> Show ASCII
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="hexOffset" checked> Show Offset
+                            </label>
+                            <select class="tool-select" id="hexWidth">
+                                <option value="8">8 bytes</option>
+                                <option value="16" selected>16 bytes</option>
+                                <option value="32">32 bytes</option>
+                            </select>
+                        </div>
+                        <button class="tool-button" onclick="formatHex()">FORMAT</button>
+                        <button class="tool-button secondary" onclick="convertHex()">CONVERT</button>
+                        <div class="tool-output" id="hexOutput" style="font-size: 0.85rem;">
+$ Hex editor ready...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/hackkim" target="_blank">💻</a>
+            <a href="mailto:yejihoon07@email.com">📧</a>
+            <a href="#">💼</a>
+            <a href="#">🐦</a>
         </div>
+        <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
+    </footer>
 
-      </div> <!-- .tools-grid -->
-    </section>
+    <script>
+        // Port Scanner Simulation
+        function startPortScan() {
+            const target = document.getElementById('portScanTarget').value;
+            const output = document.getElementById('portScanOutput');
+            const progressBar = document.getElementById('scanProgress');
+            const progress = document.getElementById('scanProgressBar');
+            const progressText = document.getElementById('scanProgressText');
+            
+            if (!target) {
+                output.textContent = '$ Error: Please enter a target IP or domain';
+                return;
+            }
+            
+            output.textContent = `$ Initiating port scan on ${target}...\n`;
+            progressBar.style.display = 'block';
+            
+            let currentProgress = 0;
+            const scanInterval = setInterval(() => {
+                currentProgress += Math.random() * 15;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(scanInterval);
+                    
+                    output.textContent += `\n$ Scan complete!\n\n`;
+                    output.textContent += `PORT     STATE    SERVICE\n`;
+                    output.textContent += `22/tcp   open     ssh\n`;
+                    output.textContent += `80/tcp   open     http\n`;
+                    output.textContent += `443/tcp  open     https\n`;
+                    output.textContent += `3306/tcp closed   mysql\n`;
+                    output.textContent += `8080/tcp open     http-proxy\n\n`;
+                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
+                    output.textContent += `$ Scan completed in 12.34 seconds`;
+                    
+                    progressBar.style.display = 'none';
+                }
+                
+                progress.style.width = currentProgress + '%';
+                progressText.textContent = Math.floor(currentProgress) + '%';
+            }, 200);
+        }
 
-  </main>
+        // DNS Reconnaissance
+        function startDnsRecon() {
+            const target = document.getElementById('dnsTarget').value;
+            const output = document.getElementById('dnsOutput');
+            
+            if (!target) {
+                output.textContent = '$ Error: Please enter a domain name';
+                return;
+            }
+            
+            output.textContent = `$ Performing DNS reconnaissance on ${target}...\n\n`;
+            
+            setTimeout(() => {
+                output.textContent += `A Records:\n`;
+                output.textContent += `  ${target} -> 192.168.1.100\n\n`;
+                output.textContent += `MX Records:\n`;
+                output.textContent += `  10 mail.${target}\n\n`;
+                output.textContent += `NS Records:\n`;
+                output.textContent += `  ns1.${target}\n`;
+                output.textContent += `  ns2.${target}\n\n`;
+                output.textContent += `Subdomains found:\n`;
+                output.textContent += `  www.${target}\n`;
+                output.textContent += `  mail.${target}\n`;
+                output.textContent += `  admin.${target}\n`;
+                output.textContent += `  api.${target}\n`;
+                output.textContent += `  dev.${target}\n\n`;
+                output.textContent += `$ DNS reconnaissance completed`;
+            }, 1500);
+        }
 
-  <!-- Footer -->
-  <footer>
-    <div class="social-links">
-      <a href="https://github.com/hackkim" target="_blank">💻</a>
-      <a href="mailto:someone@email.com">📧</a>
-      <a href="#">💼</a>
-      <a href="#">🐦</a>
-    </div>
-    <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
-    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
-  </footer>
+        function clearDnsOutput() {
+            document.getElementById('dnsOutput').textContent = '$ DNS reconnaissance ready...';
+        }
 
-  <script>
-    // (데모용) Port Scan 시뮬레이션
-    function fakeScan() {
-      const target = document.getElementById('portScanTarget').value;
-      const output = document.getElementById('portScanOutput');
-      if (!target) {
-        output.textContent = '$ Error: Please enter a target';
-        return;
-      }
-      output.textContent = `$ Scanning ${target}...\n\nOpen ports:\n 22 (ssh)\n 80 (http)\n 443 (https)\n\nScan complete.`;
-    }
+        // Hash Analyzer
+        function analyzeHash() {
+            const input = document.getElementById('hashInput').value;
+            const output = document.getElementById('hashOutput');
+            const algorithm = document.getElementById('hashAlgorithm').value;
+            
+            if (!input) {
+                output.textContent = '$ Error: Please enter text or hash';
+                return;
+            }
+            
+            output.textContent = `$ Analyzing input...\n\n`;
+            
+            if (algorithm === 'auto') {
+                output.textContent += `Hash Type Detection:\n`;
+                if (input.length === 32) output.textContent += `  Possible MD5 hash detected\n`;
+                if (input.length === 40) output.textContent += `  Possible SHA-1 hash detected\n`;
+                if (input.length === 64) output.textContent += `  Possible SHA-256 hash detected\n`;
+                output.textContent += `\n`;
+            }
+            
+            output.textContent += `Generated Hashes:\n`;
+            output.textContent += `  MD5:     ${generateSimpleHash(input, 32)}\n`;
+            output.textContent += `  SHA-1:   ${generateSimpleHash(input, 40)}\n`;
+            output.textContent += `  SHA-256: ${generateSimpleHash(input, 64)}\n`;
+            output.textContent += `  SHA-512: ${generateSimpleHash(input, 128)}\n`;
+        }
 
-    // XSS Payload Generator
-    function generateXssPayload() {
-      const output = document.getElementById('xssOutput');
-      const encodeCheck = document.getElementById('xssEncode').checked;
-      const context = document.getElementById('xssContext').value || 'generic';
-      
-      output.textContent = `$ Generating XSS payload for context: ${context}\n\n`;
-      let payload = `<script>alert('XSS in ${context}')</script>`;
+        function generateAllHashes() {
+            analyzeHash();
+        }
 
-      if(encodeCheck) {
-        payload = encodeURIComponent(payload);
-      }
-      output.textContent += `Payload: ${payload}\n\n`;
-      output.textContent += `$ Done. (Will not pop up automatically)`;
-    }
+        function generateSimpleHash(input, length) {
+            let hash = '';
+            for (let i = 0; i < length; i++) {
+                hash += Math.floor(Math.random() * 16).toString(16);
+            }
+            return hash;
+        }
 
-    // TEST SAFE: 버튼 누를 때만 팝업창 열림
-    function testPayload() {
-      const output = document.getElementById('xssOutput');
-      output.textContent += `\n\n$ Safe test triggered by button click.`;
+        // Cipher Suite
+        function processCipher() {
+            const input = document.getElementById('cipherInput').value;
+            const key = document.getElementById('cipherKey').value;
+            const algorithm = document.getElementById('cipherAlgorithm').value;
+            const mode = document.getElementById('cipherMode').value;
+            const output = document.getElementById('cipherOutput');
+            
+            if (!input) {
+                output.textContent = '$ Error: Please enter text';
+                return;
+            }
+            
+            output.textContent = `$ Processing ${mode} with ${algorithm.toUpperCase()}...\n\n`;
+            
+            if (algorithm === 'base64') {
+                if (mode === 'encrypt') {
+                    output.textContent += `Result: ${btoa(input)}`;
+                } else {
+                    try {
+                        output.textContent += `Result: ${atob(input)}`;
+                    } catch {
+                        output.textContent += `Error: Invalid base64 input`;
+                    }
+                }
+            } else if (algorithm === 'rot13') {
+                output.textContent += `Result: ${rot13(input)}`;
+            } else {
+                output.textContent += `Result: [Simulated ${algorithm} ${mode}ed text]\n`;
+                output.textContent += `Note: Real encryption requires server-side processing`;
+            }
+        }
 
-      // 새 윈도우/탭에 <img onerror="alert('XSS')"> 시연
-      const xssExample = `
-        <html>
-          <head><title>XSS Test</title></head>
-          <body style="background:#111; color:#0f0; font-family:monospace;">
-            <h2>XSS Test Page</h2>
-            <p>Sandboxed demonstration</p>
-            <img src="broken.jpg" onerror="alert('XSS Test');" alt="XSS Test">
-            <p>Close this window when done.</p>
-          </body>
-        </html>`;
-      const newWin = window.open("", "_blank", "width=500,height=300");
-      if(newWin) {
-        newWin.document.write(xssExample);
-        newWin.document.close();
-      } else {
-        output.textContent += `\n$ Popup blocked or couldn't open.`;
-      }
-    }
-  </script>
-</body>
-</html>
+        function rot13(str) {
+            return str.replace(/[a-zA-Z]/g, char => {
+                const offset = char <= 'Z' ? 65 : 97;
+                return String.fromCharCode((char.charCodeAt(0) - offset + 13) % 26 + offset);
+            });
+        }
+
+        // XSS Payload Generator
+        function generateXssPayload() {
+            const context = document.getElementById('xssContext').value || 'general';
+            const type = document.getElementById('xssType').value;
+            const encode = document.getElementById('xssEncode').checked;
+            const output = document.getElementById('xssOutput');
+            
+            output.textContent = `$ Generating ${type} XSS payloads...\n\n`;
+            
+            const payloads = [
+                `<script>alert('XSS')</script>`,
+                `<img src=x onerror=alert('XSS')>`,
+                `<svg onload=alert('XSS')>`,
+                `';alert('XSS')//`,
+                `" onfocus=alert('XSS') autofocus="`,
+                `javascript:alert('XSS')`
+            ];
+            
+            payloads.forEach((payload, index) => {
+                const finalPayload = encode ? encodeURIComponent(payload) : payload;
+                output.textContent += `Payload ${index + 1}:\n${finalPayload}\n\n`;
+            });
+            
+            output.textContent += `$ Generated ${payloads.length} payloads`;
+        }
+
+        function testPayload() {
+            const output = document.getElementById('xssOutput');
+            output.textContent += `\n\n$ Testing payload in sandboxed environment...\n`;
+            output.textContent += `$ Safe test completed - no actual execution`;
+        }
+
+        // SQL Injection Analyzer
+        function testSqlInjection() {
+            const target = document.getElementById('sqlTarget').value;
+            const database = document.getElementById('sqlDatabase').value;
+            const output = document.getElementById('sqlOutput');
+            
+            if (!target) {
+                output.textContent = '$ Error: Please enter target URL';
+                return;
+            }
+            
+            output.textContent = `$ Testing SQL injection on ${target}...\n\n`;
+            
+            const tests = [
+                { payload: "' OR '1'='1", result: "Vulnerable to basic injection" },
+                { payload: "1' AND '1'='1", result: "Boolean-based blind possible" },
+                { payload: "1' UNION SELECT null--", result: "UNION-based injection possible" },
+                { payload: "1' AND SLEEP(5)--", result: "Time-based blind possible" }
+            ];
+            
+            let delay = 0;
+            tests.forEach(test => {
+                setTimeout(() => {
+                    output.textContent += `Testing: ${test.payload}\n`;
+                    output.textContent += `Result: ${test.result}\n\n`;
+                }, delay);
+                delay += 500;
+            });
+            
+            setTimeout(() => {
+                output.textContent += `$ SQL injection analysis complete\n`;
+                output.textContent += `$ Database type: ${database === 'auto' ? 'MySQL detected' : database}\n`;
+                output.textContent += `$ Recommendation: Use parameterized queries`;
+            }, delay);
+        }
+
+        // File Analysis
+        function analyzeFile() {
+            const fileInput = document.getElementById('fileInput');
+            const output = document.getElementById('fileOutput');
+            
+            if (!fileInput.files.length) {
+                output.textContent = '$ Error: Please select a file';
+                return;
+            }
+            
+            const file = fileInput.files[0];
+            output.textContent = `$ Analyzing file: ${file.name}\n\n`;
+            
+            output.textContent += `File Information:\n`;
+            output<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
+    <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
+    <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #0080ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+            --success-color: #00ff88;
+            --error-color: #ff3838;
+            --warning-color: #ffaa00;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Tools Container */
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .tool-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-title::before {
+            content: '>';
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-name {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tool-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-online {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .status-beta {
+            background: rgba(255, 170, 0, 0.2);
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
+        }
+
+        .tool-description {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .tool-interface {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 3px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .tool-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .tool-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255,
