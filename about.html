@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Ghost Trace - Elite Cybersecurity Professional</title>
+    <meta name="description" content="Learn about HackKim and Ghost Trace - One-person red team specializing in advanced cybersecurity">
+    <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #0080ff;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a0;
+            --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
+            --success-color: #00ff88;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            text-shadow: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7));
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="20" fill="%2300ffff" font-family="monospace" font-size="10">01001000</text><text y="40" fill="%2300ffff" font-family="monospace" font-size="10">10101010</text><text y="60" fill="%2300ffff" font-family="monospace" font-size="10">01110010</text><text y="80" fill="%2300ffff" font-family="monospace" font-size="10">11001101</text></svg>');
+            background-size: 100px 100px;
+            animation: matrix-scroll 20s linear infinite;
+        }
+
+        @keyframes matrix-scroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .profile-frame {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            background: rgba(0, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-frame::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, transparent 30%, var(--primary-color) 70%);
+            opacity: 0.1;
+            animation: radar-sweep 4s linear infinite;
+        }
+
+        @keyframes radar-sweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .profile-icon {
+            font-size: 8rem;
+            color: var(--primary-color);
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        .profile-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .about-content h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Skills Section */
+        .skills-section {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 3rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            color: var(--primary-color);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-content {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            width: calc(50% - 2rem);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -30px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -30px;
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-gray);
+        }
+
+        /* Certifications Section */
+        .certifications-section {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .cert-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .cert-name {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .contact-cta h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            margin-bottom: 1rem;
+        }
+
+        .contact-cta p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker-bg);
+            padding: 3rem 0 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-section {
+                order: 2;
+            }
+
+            .about-content {
+                order: 1;
+            }
+
+            .about-content h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-content {
+                width: calc(100% - 4rem);
+                margin-left: 4rem !important;
+            }
+
+            .timeline-content::before {
+                left: -30px !important;
+            }
+        }
+
+        /* Typing Effect */
+        .typing-text {
+            overflow: hidden;
+            border-right: 3px solid var(--primary-color);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
+                GHOST TRACE
+            </a>
+            <ul class="nav-links">
+                <li><a href="about.html" style="color: var(--primary-color);">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="matrix-bg"></div>
+        <div class="hero-content">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <div class="profile-frame">
+                        <span class="profile-icon">👨‍💻</span>
+                    </div>
+                </div>
+                <h2 class="profile-name">HackKim</h2>
+                <p class="profile-title">CEO & Principal Security Researcher</p>
+                <div class="profile-badges">
+                    <span class="badge">🏆 eJPT Certified</span>
+                    <span class="badge">🎯 Red Team Expert</span>
+                    <span class="badge">🔐 Web3 Specialist</span>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <h1 class="typing-text">Elite One-Person Red Team</h1>
+                <p>
+                    Welcome to Ghost Trace Cybersecurity. I'm HackKim, a passionate cybersecurity professional 
+                    specializing in offensive security, vulnerability research, and Web3 security audits.
+                </p>
+                <p>
+                    With years of experience in penetration testing and red team operations, I've helped 
+                    organizations across various industries strengthen their security posture and protect 
+                    their digital assets from sophisticated threats.
+                </p>
+                <p>
+                    My mission is simple: Find vulnerabilities before the bad guys do, and help you build 
+                    resilient security systems that can withstand real-world attacks.
+                </p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="cta-button">Work With Me</a>
+                    <a href="case-studies.html" class="cta-button secondary">View Success Stories</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🎯 Offensive Security</h3>
+                    <ul class="skill-list">
+                        <li>Red Team Operations</li>
+                        <li>Penetration Testing</li>
+                        <li>Social Engineering</li>
+                        <li>Physical Security Assessment</li>
+                        <li>Exploit Development</li>
+                        <li>Post-Exploitation</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🔐 Web3 & Blockchain</h3>
+                    <ul class="skill-list">
+                        <li>Smart Contract Auditing</li>
+                        <li>Solidity Security</li>
+                        <li>DeFi Protocol Analysis</li>
+                        <li>Blockchain Forensics</li>
+                        <li>Token Security</li>
+                        <li>Cross-chain Security</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>💻 Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li>Python, C/C++, JavaScript</li>
+                        <li>Reverse Engineering</li>
+                        <li>Malware Analysis</li>
+                        <li>Network Security</li>
+                        <li>Cloud Security (AWS, GCP)</li>
+                        <li>Container Security</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>🛠️ Tools & Frameworks</h3>
+                    <ul class="skill-list">
+                        <li>Metasploit Framework</li>
+                        <li>Burp Suite Pro</li>
+                        <li>Nmap & Wireshark</li>
+                        <li>IDA Pro & Ghidra</li>
+                        <li>Custom Exploit Tools</li>
+                        <li>OSINT Frameworks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">My Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025 - Present</div>
+                        <div class="timeline-title">Ghost Trace CEO</div>
+                        <div class="timeline-description">
+                            Founded Ghost Trace Cybersecurity, providing elite red team services to enterprises worldwide.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <div class="timeline-title">eJPT Certification</div>
+                        <div class="timeline-description">
+                            Achieved eLearnSecurity Junior Penetration Tester certification, validating practical penetration testing skills.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <div class="timeline-title">Web3 Security Focus</div>
+                        <div class="timeline-description">
+                            Specialized in blockchain security, conducting multiple smart contract audits for DeFi protocols.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <div class="timeline-title">Bug Bounty Success</div>
+                        <div class="timeline-description">
+                            Discovered critical vulnerabilities in major platforms, earning recognition in bug bounty programs.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <div class="timeline-title">Security Journey Begins</div>
+                        <div class="timeline-description">
+                            Started passionate journey in cybersecurity, focusing on ethical hacking and security research.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications-section">
+        <div class="container">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="certifications-grid">
+                <div class="cert-card">
+                    <span class="cert-icon">🎓</span>
+                    <div class="cert-name">eJPT</div>
+                    <div class="cert-date">eLearnSecurity Junior Penetration Tester</div>
+                </div>
+                
+                <div class="cert-card">
+                    <span class="cert-icon">🏆</span>
+                    <div class="cert-name">Bug Bounty Hunter</div>
+                    <div class="cert-date">Multiple CVEs Discovered</div>
+                </div>
+                
+                <div class="cert-card">
+                    <span class="cert-icon">🔐</span>
+                    <div class="cert-name">Web3 Security</div>
+                    <div class="cert-date">Smart Contract Auditor</div>
+                </div>
+                
+                <div class="cert-card">
+                    <span class="cert-icon">💻</span>
+                    <div class="cert-name">CTF Player</div>
+                    <div class="cert-date">Active Competitor</div>
+                </div>
+                
+                <div class="cert-card">
+                    <span class="cert-icon">🛡️</span>
+                    <div class="cert-name">Security Researcher</div>
+                    <div class="cert-date">Published Vulnerabilities</div>
+                </div>
+                
+                <div class="cert-card">
+                    <span class="cert-icon">📚</span>
+                    <div class="cert-name">Continuous Learning</div>
+                    <div class="cert-date">Always Evolving</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>Ready to Secure Your Organization?</h2>
+            <p>Let's work together to identify and eliminate security vulnerabilities</p>
+            <a href="index.html#contact" class="cta-button">Start a Conversation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/hackkim" target="_blank">💻</a>
+            <a href="mailto:yejihoon07@email.com">📧</a>
+            <a href="#">💼</a>
+            <a href="#">🐦</a>
+        </div>
+        <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team | HackKim</p>
+    </footer>
+
+    <script>
+        // Intersection Observer for timeline animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Skill category hover effect
+        document.querySelectorAll('.skill-category').forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'var(--primary-color)';
+            });
+            
+            category.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(0, 255, 255, 0.2)';
+            });
+        });
+
+        // Certification card hover effect
+        document.querySelectorAll('.cert-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.cert-icon');
+                icon.style.transform = 'scale(1.2) rotate(10deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.cert-icon');
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add transition to cert icons
+        document.querySelectorAll('.cert-icon').forEach(icon => {
+            icon.style.transition = 'transform 0.3s ease';
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Profile image animation
+        const profileFrame = document.querySelector('.profile-frame');
+        if (profileFrame) {
+            profileFrame.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            profileFrame.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+            
+            profileFrame.style.transition = 'transform 0.3s ease';
+        }
+
+        // Add glitch effect to profile name on hover
+        const profileName = document.querySelector('.profile-name');
+        if (profileName) {
+            profileName.addEventListener('mouseenter', function() {
+                this.style.animation = 'glitch 0.3s infinite';
+            });
+            
+            profileName.addEventListener('mouseleave', function() {
+                this.style.animation = 'none';
+            });
+        }
+
+        // Glitch animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes glitch {
+                0%, 100% { text-shadow: var(--accent-glow); }
+                25% { text-shadow: -2px 0 #ff0000, 2px 0 var(--primary-color); }
+                50% { text-shadow: 2px 0 #00ff00, -2px 0 var(--secondary-color); }
+                75% { text-shadow: 0 0 10px var(--primary-color); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Easter egg: Konami code
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateEasterEgg();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateEasterEgg() {
+            document.body.style.animation = 'matrix-rain 2s';
+            setTimeout(() => {
+                document.body.style.animation = '';
+                alert('Ghost Mode Activated! You found the secret! 👻🔓');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href
