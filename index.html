@@ -917,8 +917,11 @@
                     <div class="terminal-btn green"></div>
                 </div>
                 <div class="terminal-content" id="terminal">
-                    <div class="terminal-line">$ Initializing Ghost Trace Security Scanner...</div>
+                    <div class="terminal-line">$ Initializing Ghost Trace Security Scanner...                    </div>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="tools.html" class="cta-button">Explore All Security Tools →</a>
             </div>
         </div>
     </section>
@@ -970,37 +973,37 @@
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
-                <div class="service-card" onclick="openServiceModal('redteam')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">🎯</span>
                     <h3>Red Team Operations</h3>
                     <p>Advanced penetration testing and security assessments simulating real-world attacks to identify vulnerabilities.</p>
                     <div class="service-price">Starting from ₩5,000,000</div>
                 </div>
-                <div class="service-card" onclick="openServiceModal('web3')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">🔐</span>
                     <h3>Web3 Security Audits</h3>
                     <p>Comprehensive smart contract auditing and blockchain security reviews for DeFi and Web3 projects.</p>
                     <div class="service-price">Starting from ₩3,000,000</div>
                 </div>
-                <div class="service-card" onclick="openServiceModal('vuln')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">🛡️</span>
                     <h3>Vulnerability Research</h3>
                     <p>Zero-day discovery, exploit development, and responsible disclosure to enhance security posture.</p>
                     <div class="service-price">Custom pricing</div>
                 </div>
-                <div class="service-card" onclick="openServiceModal('consulting')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">💡</span>
                     <h3>Security Consulting</h3>
                     <p>Strategic cybersecurity guidance and implementation for enterprise-level security architecture.</p>
                     <div class="service-price">₩500,000/hour</div>
                 </div>
-                <div class="service-card" onclick="openServiceModal('pentest')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">🔍</span>
                     <h3>Penetration Testing</h3>
                     <p>Comprehensive security evaluations of networks, applications, and infrastructure.</p>
                     <div class="service-price">Starting from ₩2,000,000</div>
                 </div>
-                <div class="service-card" onclick="openServiceModal('training')">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
                     <span class="service-icon">📊</span>
                     <h3>Security Training</h3>
                     <p>Customized security awareness training and advanced technical workshops for teams.</p>
@@ -1167,14 +1170,6 @@
             <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team | Advanced Security Services</p>
         </div>
     </footer>
-
-    <!-- Service Modal -->
-    <div id="serviceModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; overflow-y: auto;">
-        <div style="max-width: 800px; margin: 5% auto; background: var(--darker-bg); border: 1px solid var(--primary-color); border-radius: 10px; padding: 2rem; position: relative;">
-            <span onclick="closeServiceModal()" style="position: absolute; top: 10px; right: 20px; font-size: 2rem; color: var(--primary-color); cursor: pointer;">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
 
     <script>
         // Loading Screen
@@ -1424,65 +1419,8 @@
             }, 2000);
         }
 
-        // Service Modal
-        const serviceDetails = {
-            redteam: {
-                title: 'Red Team Operations',
-                content: `
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Red Team Operations</h2>
-                    <p>Our Red Team services simulate real-world cyber attacks to test your organization's detection and response capabilities.</p>
-                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">What's Included:</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Full-scope adversarial simulation</li>
-                        <li>✓ Physical security assessment</li>
-                        <li>✓ Social engineering campaigns</li>
-                        <li>✓ Zero-day exploit development</li>
-                        <li>✓ Custom malware creation</li>
-                        <li>✓ Detailed report with remediation steps</li>
-                    </ul>
-                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Pricing:</h3>
-                    <p>Starting from ₩5,000,000 (duration: 2-4 weeks)</p>
-                    <button class="cta-button" style="margin-top: 1rem;" onclick="document.getElementById('service').value='redteam'; document.getElementById('contact').scrollIntoView({behavior: 'smooth'}); closeServiceModal();">Request Quote</button>
-                `
-            },
-            web3: {
-                title: 'Web3 Security Audits',
-                content: `
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Web3 Security Audits</h2>
-                    <p>Comprehensive security audits for smart contracts, DeFi protocols, and blockchain applications.</p>
-                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Audit Coverage:</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        <li>✓ Smart contract code review</li>
-                        <li>✓ Reentrancy attack analysis</li>
-                        <li>✓ Gas optimization</li>
-                        <li>✓ Access control verification</li>
-                        <li>✓ Economic model security</li>
-                        <li>✓ Formal verification</li>
-                    </ul>
-                    <h3 style="color: var(--primary-color); margin-top: 1.5rem;">Supported Platforms:</h3>
-                    <p>Ethereum, Binance Smart Chain, Polygon, Solana, and more</p>
-                    <button class="cta-button" style="margin-top: 1rem;" onclick="document.getElementById('service').value='web3'; document.getElementById('contact').scrollIntoView({behavior: 'smooth'}); closeServiceModal();">Get Audit Quote</button>
-                `
-            }
-        };
-
-        function openServiceModal(service) {
-            const modal = document.getElementById('serviceModal');
-            const content = document.getElementById('modalContent');
-            
-            if (serviceDetails[service]) {
-                content.innerHTML = serviceDetails[service].content;
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
+        // Service Modal (Removed - not needed anymore)
+        
         // Language Switcher
         const langSelector = document.getElementById('langSelector');
         langSelector.addEventListener('change', (e) => {
