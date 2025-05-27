@@ -3,17 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
-  <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
+  <title>Ghost Trace Cybersecurity - Tools</title>
+  <meta name="description" content="Professional security tools and utilities">
   <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
   
   <style>
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-
       :root {
           --primary-color: #00ffff;
           --secondary-color: #0080ff;
@@ -25,6 +19,12 @@
           --success-color: #00ff88;
           --error-color: #ff3838;
           --warning-color: #ffaa00;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
       }
 
       body {
@@ -90,45 +90,30 @@
           text-shadow: var(--accent-glow);
       }
 
-      /* Hero Section */
+      /* Hero Section (블로그와 같은 레이아웃/스타일) */
       .hero-section {
-          margin-top: 80px;
-          padding: 3rem 0;
-          background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
+          margin-top: 80px; /* 메뉴바 높이 보정 */
+          padding: 5rem 2rem;
           text-align: center;
+          background-color: #0c0c0c; /* 혹은 blog 페이지 배경과 동일한 색상/그라디언트 */
           position: relative;
-          overflow: hidden;
       }
-
-      .terminal-effect {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: repeating-linear-gradient(
-              0deg,
-              rgba(0, 0, 0, 0.15),
-              rgba(0, 0, 0, 0.15) 1px,
-              transparent 1px,
-              transparent 2px
-          );
-          pointer-events: none;
-      }
-
       .hero-section h1 {
           font-size: 2.5rem;
           color: var(--primary-color);
-          text-shadow: var(--accent-glow);
+          text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
           margin-bottom: 1rem;
-          font-family: 'Courier New', monospace;
       }
-
       .hero-section p {
           font-size: 1.1rem;
           color: var(--text-gray);
           font-family: 'Arial', sans-serif;
       }
+      /* 원하는 경우, blog처럼 더 강한 네온 효과를 주려면 아래 추가:
+         .hero-section h1 {
+             text-shadow: 0 0 20px #00ffff, 0 0 40px #0080ff; 
+         }
+      */
 
       /* Tools Container */
       .tools-container {
@@ -137,10 +122,11 @@
           padding: 3rem 2rem;
       }
 
+      /* (이하, 각종 카드/버튼/출력 등 기존 Tools 스타일) */
+
       .tool-category {
           margin-bottom: 3rem;
       }
-
       .category-title {
           font-size: 1.8rem;
           color: var(--primary-color);
@@ -149,23 +135,19 @@
           align-items: center;
           gap: 1rem;
       }
-
       .category-title::before {
           content: '>';
           animation: blink 1s infinite;
       }
-
       @keyframes blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
       }
-
       .tools-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
           gap: 2rem;
       }
-
       .tool-card {
           background: rgba(0, 0, 0, 0.8);
           border: 1px solid rgba(0, 255, 255, 0.3);
@@ -174,61 +156,38 @@
           position: relative;
           overflow: hidden;
       }
-
-      .tool-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-          animation: scan 3s linear infinite;
-      }
-
-      @keyframes scan {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-      }
-
       .tool-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           margin-bottom: 1.5rem;
       }
-
       .tool-name {
           font-size: 1.3rem;
           color: var(--primary-color);
           font-weight: bold;
       }
-
       .tool-status {
           padding: 0.3rem 0.8rem;
           border-radius: 3px;
           font-size: 0.8rem;
           font-weight: bold;
       }
-
       .status-online {
           background: rgba(0, 255, 136, 0.2);
           color: var(--success-color);
           border: 1px solid var(--success-color);
       }
-
       .status-beta {
           background: rgba(255, 170, 0, 0.2);
           color: var(--warning-color);
           border: 1px solid var(--warning-color);
       }
-
       .tool-description {
           color: var(--text-gray);
           margin-bottom: 1.5rem;
           font-family: 'Arial', sans-serif;
       }
-
       .tool-interface {
           background: rgba(0, 0, 0, 0.5);
           border: 1px solid rgba(0, 255, 255, 0.2);
@@ -236,8 +195,7 @@
           padding: 1.5rem;
           margin-bottom: 1rem;
       }
-
-      .tool-input {
+      .tool-input, .tool-textarea, .tool-select {
           width: 100%;
           padding: 0.8rem;
           background: rgba(0, 255, 255, 0.05);
@@ -246,31 +204,10 @@
           margin-bottom: 1rem;
           font-family: 'Courier New', monospace;
       }
-
-      .tool-input:focus {
-          outline: none;
-          border-color: var(--primary-color);
-          box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-      }
-
       .tool-textarea {
-          width: 100%;
           min-height: 120px;
-          padding: 0.8rem;
-          background: rgba(0, 255, 255, 0.05);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          color: var(--text-light);
-          margin-bottom: 1rem;
-          font-family: 'Courier New', monospace;
           resize: vertical;
       }
-
-      .tool-textarea:focus {
-          outline: none;
-          border-color: var(--primary-color);
-          box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-      }
-
       .tool-button {
           padding: 0.8rem 1.5rem;
           background: var(--primary-color);
@@ -281,18 +218,15 @@
           transition: all 0.3s ease;
           margin-right: 1rem;
       }
-
       .tool-button:hover {
           background: var(--secondary-color);
           transform: scale(1.05);
       }
-
       .tool-button.secondary {
           background: transparent;
           border: 1px solid var(--primary-color);
           color: var(--primary-color);
       }
-
       .tool-output {
           background: #000;
           border: 1px solid rgba(0, 255, 255, 0.3);
@@ -305,14 +239,12 @@
           word-break: break-all;
           color: var(--success-color);
       }
-
       .tool-options {
           display: flex;
           flex-wrap: wrap;
           gap: 1rem;
           margin-bottom: 1rem;
       }
-
       .tool-option {
           display: flex;
           align-items: center;
@@ -320,85 +252,10 @@
           color: var(--text-gray);
           font-family: 'Arial', sans-serif;
       }
-
       .tool-option input[type="checkbox"] {
           width: 18px;
           height: 18px;
           accent-color: var(--primary-color);
-      }
-
-      .tool-select {
-          padding: 0.5rem;
-          background: rgba(0, 255, 255, 0.05);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          color: var(--text-light);
-          cursor: pointer;
-      }
-
-      /* Specific Tool Styles */
-      .network-scanner {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-      }
-
-      .port-list {
-          background: rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(0, 255, 255, 0.2);
-          padding: 1rem;
-          max-height: 200px;
-          overflow-y: auto;
-      }
-
-      .port-item {
-          display: flex;
-          justify-content: space-between;
-          padding: 0.5rem;
-          border-bottom: 1px solid rgba(0, 255, 255, 0.1);
-      }
-
-      .port-open {
-          color: var(--success-color);
-      }
-
-      .port-closed {
-          color: var(--error-color);
-      }
-
-      /* Progress Bar */
-      .progress-container {
-          background: rgba(0, 0, 0, 0.5);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          height: 20px;
-          margin: 1rem 0;
-          position: relative;
-          overflow: hidden;
-      }
-
-      .progress-bar {
-          height: 100%;
-          background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-          width: 0%;
-          transition: width 0.3s ease;
-      }
-
-      .progress-text {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: 0.8rem;
-          font-weight: bold;
-      }
-
-      /* Warning Banner */
-      .warning-banner {
-          background: rgba(255, 170, 0, 0.1);
-          border: 1px solid var(--warning-color);
-          padding: 1rem;
-          margin-bottom: 2rem;
-          text-align: center;
-          color: var(--warning-color);
       }
 
       /* Footer */
@@ -409,20 +266,17 @@
           border-top: 1px solid rgba(0, 255, 255, 0.2);
           margin-top: 4rem;
       }
-
       .social-links {
           display: flex;
           justify-content: center;
           gap: 2rem;
           margin-bottom: 2rem;
       }
-
       .social-links a {
           color: var(--text-light);
           font-size: 1.5rem;
           transition: all 0.3s ease;
       }
-
       .social-links a:hover {
           color: var(--primary-color);
           transform: translateY(-3px);
@@ -433,730 +287,144 @@
           .tools-grid {
               grid-template-columns: 1fr;
           }
-
-          .network-scanner {
-              grid-template-columns: 1fr;
-          }
-
           .tool-options {
               flex-direction: column;
           }
-      }
-
-      /* Glitch effect for headers */
-      .glitch {
-          animation: glitch 2s infinite;
-      }
-
-      @keyframes glitch {
-          0%, 100% { text-shadow: var(--accent-glow); }
-          97% { text-shadow: -2px 0 var(--error-color), 2px 0 var(--primary-color); }
-      }
-
-      /* ============== 추가: 목차 스타일 ============== */
-      .table-of-contents {
-          background: rgba(0, 0, 0, 0.7);
-          border: 1px solid rgba(0, 255, 255, 0.3);
-          padding: 1.5rem;
-          margin: 2rem 0;
-          border-radius: 5px;
-      }
-      .table-of-contents h2 {
-          color: var(--primary-color);
-          font-size: 1.4rem;
-          margin-bottom: 1rem;
-      }
-      .table-of-contents ul {
-          list-style: none;
-          padding-left: 1rem;
-      }
-      .table-of-contents li {
-          margin-bottom: 0.5rem;
-      }
-      .table-of-contents a {
-          color: var(--text-light);
-          text-decoration: none;
-      }
-      .table-of-contents a:hover {
-          color: var(--primary-color);
       }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav>
-      <div class="nav-container">
-          <a href="index.html" class="logo">
-              <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
-              GHOST TRACE
-          </a>
-          <ul class="nav-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="index.html#services">Services</a></li>
-              <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
-              <li><a href="blog.html">Blog</a></li>
-              <li><a href="index.html#contact">Contact</a></li>
-          </ul>
-      </div>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
+        GHOST TRACE
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (Blog와 동일한 구조/스타일) -->
   <section class="hero-section">
-      <div class="terminal-effect"></div>
-      <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
-      <p>Professional-grade security testing tools powered by Ghost Trace</p>
+    <h1>Security Tools Arsenal</h1>
+    <p>Professional-grade security testing tools powered by Ghost Trace</p>
   </section>
 
-  <!-- 경고 배너 -->
-  <div class="tools-container">
-      <div class="warning-banner">
-          ⚠️ <strong>LEGAL NOTICE:</strong> These tools are for authorized security testing only. 
-          Use only on systems you own or have explicit permission to test.
-      </div>
-  </div>
-
-  <!-- ============== 추가: 목차(TOC) 섹션 ============== -->
-  <section class="tools-container table-of-contents">
-      <h2>목차</h2>
-      <ul>
-          <li><a href="#network-security-tools">NETWORK SECURITY TOOLS</a></li>
-          <li><a href="#cryptography-tools">CRYPTOGRAPHY TOOLS</a></li>
-          <li><a href="#web-app-security">WEB APPLICATION SECURITY</a></li>
-          <li><a href="#binary-analysis">BINARY ANALYSIS</a></li>
-      </ul>
-  </section>
-
-  <!-- Tools Section -->
+  <!-- 본문 Tools 내용 -->
   <main class="tools-container">
-      <!-- Network Tools -->
-      <section class="tool-category" id="network-security-tools">
-          <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
-          
-          <div class="tools-grid">
-              <!-- Advanced Port Scanner -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">Advanced Port Scanner</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Comprehensive port scanning with service detection and OS fingerprinting.
-                  </p>
-                  <div class="tool-interface">
-                      <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
-                      <div class="tool-options">
-                          <label class="tool-option">
-                              <input type="checkbox" id="stealthScan"> Stealth Scan
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="serviceDetection" checked> Service Detection
-                          </label>
-                          <select class="tool-select" id="scanSpeed">
-                              <option value="slow">Slow (Accurate)</option>
-                              <option value="normal" selected>Normal</option>
-                              <option value="fast">Fast (Aggressive)</option>
-                          </select>
-                      </div>
-                      <div class="network-scanner">
-                          <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
-                          <button class="tool-button" onclick="startPortScan()">START SCAN</button>
-                      </div>
-                      <div class="progress-container" id="scanProgress" style="display: none;">
-                          <div class="progress-bar" id="scanProgressBar"></div>
-                          <span class="progress-text" id="scanProgressText">0%</span>
-                      </div>
-                      <div class="tool-output" id="portScanOutput">
+    <!-- 원하는 Tools 섹션들 -->
+    <section class="tool-category">
+      <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
+      <div class="tools-grid">
+        <!-- 예시 Tool Card -->
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-name">Advanced Port Scanner</span>
+            <span class="tool-status status-online">ONLINE</span>
+          </div>
+          <p class="tool-description">
+            Comprehensive port scanning with service detection and OS fingerprinting.
+          </p>
+          <div class="tool-interface">
+            <!-- ... 실제 입력/버튼 등 -->
+            <input type="text" class="tool-input" placeholder="Enter target IP or domain">
+            <button class="tool-button">SCAN</button>
+            <div class="tool-output">
 $ Ready to scan...
-                      </div>
-                  </div>
-              </div>
-
-              <!-- DNS Lookup Tool -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">DNS Reconnaissance</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Advanced DNS enumeration and subdomain discovery tool.
-                  </p>
-                  <div class="tool-interface">
-                      <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
-                      <div class="tool-options">
-                          <label class="tool-option">
-                              <input type="checkbox" id="reversDns" checked> Reverse DNS
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="dnsSec"> DNSSEC Check
-                          </label>
-                      </div>
-                      <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
-                      <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
-                      <div class="tool-output" id="dnsOutput">
-$ DNS reconnaissance ready...
-                      </div>
-                  </div>
-              </div>
+            </div>
           </div>
-      </section>
+        </div>
+        <!-- 필요에 따라 다른 툴 카드들 배치 -->
+      </div>
+    </section>
 
-      <!-- Cryptography Tools -->
-      <section class="tool-category" id="cryptography-tools">
-          <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
-          
-          <div class="tools-grid">
-              <!-- Hash Analyzer -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">Hash Analyzer</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Multi-algorithm hash generator and hash type identifier.
-                  </p>
-                  <div class="tool-interface">
-                      <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
-                      <div class="tool-options">
-                          <select class="tool-select" id="hashAlgorithm">
-                              <option value="auto">Auto Detect</option>
-                              <option value="md5">MD5</option>
-                              <option value="sha1">SHA-1</option>
-                              <option value="sha256">SHA-256</option>
-                              <option value="sha512">SHA-512</option>
-                              <option value="bcrypt">BCrypt</option>
-                          </select>
-                          <label class="tool-option">
-                              <input type="checkbox" id="compareHash"> Compare Mode
-                          </label>
-                      </div>
-                      <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
-                      <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
-                      <div class="tool-output" id="hashOutput">
-$ Hash analyzer ready...
-                      </div>
-                  </div>
-              </div>
-
-              <!-- Encryption/Decryption Tool -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">Cipher Suite</span>
-                      <span class="tool-status status-beta">BETA</span>
-                  </div>
-                  <p class="tool-description">
-                      Advanced encryption and decryption with multiple cipher support.
-                  </p>
-                  <div class="tool-interface">
-                      <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
-                      <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
-                      <div class="tool-options">
-                          <select class="tool-select" id="cipherAlgorithm">
-                              <option value="aes256">AES-256</option>
-                              <option value="aes128">AES-128</option>
-                              <option value="3des">3DES</option>
-                              <option value="base64">Base64</option>
-                              <option value="rot13">ROT13</option>
-                          </select>
-                          <select class="tool-select" id="cipherMode">
-                              <option value="encrypt">Encrypt</option>
-                              <option value="decrypt">Decrypt</option>
-                          </select>
-                      </div>
-                      <button class="tool-button" onclick="processCipher()">PROCESS</button>
-                      <div class="tool-output" id="cipherOutput">
-$ Cipher suite ready...
-                      </div>
-                  </div>
-              </div>
+    <!-- XSS 관련 도구 카드 -->
+    <section class="tool-category">
+      <h2 class="category-title">WEB SECURITY TOOLS</h2>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-name">XSS Payload Generator</span>
+            <span class="tool-status status-online">ONLINE</span>
           </div>
-      </section>
-
-      <!-- Web Security Tools -->
-      <section class="tool-category" id="web-app-security">
-          <h2 class="category-title">WEB APPLICATION SECURITY</h2>
-          
-          <div class="tools-grid">
-              <!-- XSS Payload Generator -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">XSS Payload Generator</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Generate and encode XSS payloads for security testing.
-                  </p>
-                  <div class="tool-interface">
-                      <input type="text" class="tool-input" id="xssContext" placeholder="Enter injection context (e.g., &lt;script&gt;, attribute, etc.)">
-                      <div class="tool-options">
-                          <select class="tool-select" id="xssType">
-                              <option value="reflected">Reflected XSS</option>
-                              <option value="stored">Stored XSS</option>
-                              <option value="dom">DOM-based XSS</option>
-                          </select>
-                          <label class="tool-option">
-                              <input type="checkbox" id="xssEncode" checked> URL Encode
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="xssObfuscate"> Obfuscate
-                          </label>
-                      </div>
-                      <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
-                      <!-- TEST SAFE 버튼 클릭 시 XSS처럼 보이는 새 창 띄우기 -->
-                      <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
-                      <div class="tool-output" id="xssOutput">
+          <p class="tool-description">
+            Generate and encode XSS payloads for security testing (manual trigger only).
+          </p>
+          <div class="tool-interface">
+            <input type="text" class="tool-input" id="xssContext" placeholder="Injection context">
+            <div class="tool-options">
+              <label class="tool-option">
+                <input type="checkbox" id="xssEncode" checked> URL Encode
+              </label>
+            </div>
+            <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
+            <!-- 테스트 버튼은 누르기 전까진 팝업 뜨지 않음 -->
+            <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
+            <div class="tool-output" id="xssOutput">
 $ XSS payload generator ready...
-                      </div>
-                  </div>
-              </div>
-
-              <!-- SQL Injection Tester -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">SQL Injection Analyzer</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Test and analyze SQL injection vulnerabilities with smart payloads.
-                  </p>
-                  <div class="tool-interface">
-                      <input type="text" class="tool-input" id="sqlTarget" placeholder="Enter target URL with parameter">
-                      <div class="tool-options">
-                          <select class="tool-select" id="sqlDatabase">
-                              <option value="auto">Auto Detect</option>
-                              <option value="mysql">MySQL</option>
-                              <option value="mssql">MSSQL</option>
-                              <option value="oracle">Oracle</option>
-                              <option value="postgresql">PostgreSQL</option>
-                          </select>
-                          <label class="tool-option">
-                              <input type="checkbox" id="sqlBlind"> Blind SQLi
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="sqlTime"> Time-based
-                          </label>
-                      </div>
-                      <button class="tool-button" onclick="testSqlInjection()">ANALYZE</button>
-                      <div class="tool-output" id="sqlOutput">
-$ SQL injection analyzer ready...
-                      </div>
-                  </div>
-              </div>
+            </div>
           </div>
-      </section>
-
-      <!-- Binary Analysis Tools -->
-      <section class="tool-category" id="binary-analysis">
-          <h2 class="category-title">BINARY ANALYSIS</h2>
-          
-          <div class="tools-grid">
-              <!-- File Hash Calculator -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">File Analysis Suite</span>
-                      <span class="tool-status status-online">ONLINE</span>
-                  </div>
-                  <p class="tool-description">
-                      Calculate file hashes and perform basic malware analysis.
-                  </p>
-                  <div class="tool-interface">
-                      <input type="file" class="tool-input" id="fileInput" style="padding: 0.5rem;">
-                      <div class="tool-options">
-                          <label class="tool-option">
-                              <input type="checkbox" id="virusTotal" checked> VirusTotal Check
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="peAnalysis"> PE Analysis
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="strings"> Extract Strings
-                          </label>
-                      </div>
-                      <button class="tool-button" onclick="analyzeFile()">ANALYZE FILE</button>
-                      <div class="tool-output" id="fileOutput">
-$ File analyzer ready...
-                      </div>
-                  </div>
-              </div>
-
-              <!-- Hex Editor -->
-              <div class="tool-card">
-                  <div class="tool-header">
-                      <span class="tool-name">Online Hex Editor</span>
-                      <span class="tool-status status-beta">BETA</span>
-                  </div>
-                  <p class="tool-description">
-                      View and edit binary files in hexadecimal format.
-                  </p>
-                  <div class="tool-interface">
-                      <textarea class="tool-textarea" id="hexInput" placeholder="Paste hex data or load file" style="font-family: monospace; font-size: 0.9rem;"></textarea>
-                      <div class="tool-options">
-                          <label class="tool-option">
-                              <input type="checkbox" id="hexAscii" checked> Show ASCII
-                          </label>
-                          <label class="tool-option">
-                              <input type="checkbox" id="hexOffset" checked> Show Offset
-                          </label>
-                          <select class="tool-select" id="hexWidth">
-                              <option value="8">8 bytes</option>
-                              <option value="16" selected>16 bytes</option>
-                              <option value="32">32 bytes</option>
-                          </select>
-                      </div>
-                      <button class="tool-button" onclick="formatHex()">FORMAT</button>
-                      <button class="tool-button secondary" onclick="convertHex()">CONVERT</button>
-                      <div class="tool-output" id="hexOutput" style="font-size: 0.85rem;">
-$ Hex editor ready...
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
+        </div>
+      </div>
+    </section>
+    <!-- 기타 섹션들... -->
   </main>
 
   <!-- Footer -->
   <footer>
-      <div class="social-links">
-          <a href="https://github.com/hackkim" target="_blank">💻</a>
-          <a href="mailto:someone@email.com">📧</a>
-          <a href="#">💼</a>
-          <a href="#">🐦</a>
-      </div>
-      <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
-      <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
+    <div class="social-links">
+      <a href="https://github.com/hackkim" target="_blank">💻</a>
+      <a href="mailto:someone@email.com">📧</a>
+      <a href="#">💼</a>
+      <a href="#">🐦</a>
+    </div>
+    <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+    <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
   </footer>
 
   <script>
-      // Port Scanner Simulation
-      function startPortScan() {
-          const target = document.getElementById('portScanTarget').value;
-          const output = document.getElementById('portScanOutput');
-          const progressBar = document.getElementById('scanProgress');
-          const progress = document.getElementById('scanProgressBar');
-          const progressText = document.getElementById('scanProgressText');
-          
-          if (!target) {
-              output.textContent = '$ Error: Please enter a target IP or domain';
-              return;
-          }
-          
-          output.textContent = `$ Initiating port scan on ${target}...\n`;
-          progressBar.style.display = 'block';
-          
-          let currentProgress = 0;
-          const scanInterval = setInterval(() => {
-              currentProgress += Math.random() * 15;
-              if (currentProgress >= 100) {
-                  currentProgress = 100;
-                  clearInterval(scanInterval);
-                  
-                  output.textContent += `\n$ Scan complete!\n\n`;
-                  output.textContent += `PORT     STATE    SERVICE\n`;
-                  output.textContent += `22/tcp   open     ssh\n`;
-                  output.textContent += `80/tcp   open     http\n`;
-                  output.textContent += `443/tcp  open     https\n`;
-                  output.textContent += `3306/tcp closed   mysql\n`;
-                  output.textContent += `8080/tcp open     http-proxy\n\n`;
-                  output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
-                  output.textContent += `$ Scan completed in 12.34 seconds`;
-                  
-                  progressBar.style.display = 'none';
-              }
-              
-              progress.style.width = currentProgress + '%';
-              progressText.textContent = Math.floor(currentProgress) + '%';
-          }, 200);
+    // (필요하다면, XSS 함수들만 그대로 두되, 자동 호출은 전부 제거)
+
+    function generateXssPayload() {
+      const output = document.getElementById('xssOutput');
+      const encodeCheck = document.getElementById('xssEncode').checked;
+      output.textContent = `$ Generating XSS payload...\n\n`;
+      let payload = `<script>alert('XSS')</script>`;
+      if(encodeCheck) {
+        payload = encodeURIComponent(payload);
       }
+      output.textContent += `Payload: ${payload}\n\n`;
+      output.textContent += `$ Done.`;
+    }
 
-      // DNS Reconnaissance
-      function startDnsRecon() {
-          const target = document.getElementById('dnsTarget').value;
-          const output = document.getElementById('dnsOutput');
-          
-          if (!target) {
-              output.textContent = '$ Error: Please enter a domain name';
-              return;
-          }
-          
-          output.textContent = `$ Performing DNS reconnaissance on ${target}...\n\n`;
-          
-          setTimeout(() => {
-              output.textContent += `A Records:\n`;
-              output.textContent += `  ${target} -> 192.168.1.100\n\n`;
-              output.textContent += `MX Records:\n`;
-              output.textContent += `  10 mail.${target}\n\n`;
-              output.textContent += `NS Records:\n`;
-              output.textContent += `  ns1.${target}\n`;
-              output.textContent += `  ns2.${target}\n\n`;
-              output.textContent += `Subdomains found:\n`;
-              output.textContent += `  www.${target}\n`;
-              output.textContent += `  mail.${target}\n`;
-              output.textContent += `  admin.${target}\n`;
-              output.textContent += `  api.${target}\n`;
-              output.textContent += `  dev.${target}\n\n`;
-              output.textContent += `$ DNS reconnaissance completed`;
-          }, 1500);
+    function testPayload() {
+      const output = document.getElementById('xssOutput');
+      output.textContent += `\n\n$ Safe test triggered (no auto-run on page load).`;
+      // 새 윈도우에 img onerror 예시
+      const xssExample = `
+        <html>
+          <head><title>XSS Test</title></head>
+          <body style="background:#111; color:#0f0; font-family:monospace;">
+            <h2>XSS Test Page</h2>
+            <p>Sandboxed demonstration</p>
+            <img src="broken.jpg" onerror="alert('XSS');" alt="XSS Test">
+          </body>
+        </html>`;
+      const newWin = window.open("", "_blank", "width=500,height=300");
+      if(newWin) {
+        newWin.document.write(xssExample);
+        newWin.document.close();
+      } else {
+        output.textContent += `\n$ Popup blocked or couldn't open.`;
       }
-
-      function clearDnsOutput() {
-          document.getElementById('dnsOutput').textContent = '$ DNS reconnaissance ready...';
-      }
-
-      // Hash Analyzer
-      function analyzeHash() {
-          const input = document.getElementById('hashInput').value;
-          const output = document.getElementById('hashOutput');
-          const algorithm = document.getElementById('hashAlgorithm').value;
-          
-          if (!input) {
-              output.textContent = '$ Error: Please enter text or hash';
-              return;
-          }
-          
-          output.textContent = `$ Analyzing input...\n\n`;
-          
-          if (algorithm === 'auto') {
-              output.textContent += `Hash Type Detection:\n`;
-              if (input.length === 32) output.textContent += `  Possible MD5 hash detected\n`;
-              if (input.length === 40) output.textContent += `  Possible SHA-1 hash detected\n`;
-              if (input.length === 64) output.textContent += `  Possible SHA-256 hash detected\n`;
-              output.textContent += `\n`;
-          }
-          
-          output.textContent += `Generated Hashes:\n`;
-          output.textContent += `  MD5:     ${generateSimpleHash(input, 32)}\n`;
-          output.textContent += `  SHA-1:   ${generateSimpleHash(input, 40)}\n`;
-          output.textContent += `  SHA-256: ${generateSimpleHash(input, 64)}\n`;
-          output.textContent += `  SHA-512: ${generateSimpleHash(input, 128)}\n`;
-      }
-
-      function generateAllHashes() {
-          analyzeHash();
-      }
-
-      function generateSimpleHash(input, length) {
-          let hash = '';
-          for (let i = 0; i < length; i++) {
-              hash += Math.floor(Math.random() * 16).toString(16);
-          }
-          return hash;
-      }
-
-      // Cipher Suite
-      function processCipher() {
-          const input = document.getElementById('cipherInput').value;
-          const key = document.getElementById('cipherKey').value;
-          const algorithm = document.getElementById('cipherAlgorithm').value;
-          const mode = document.getElementById('cipherMode').value;
-          const output = document.getElementById('cipherOutput');
-          
-          if (!input) {
-              output.textContent = '$ Error: Please enter text';
-              return;
-          }
-          
-          output.textContent = `$ Processing ${mode} with ${algorithm.toUpperCase()}...\n\n`;
-          
-          if (algorithm === 'base64') {
-              if (mode === 'encrypt') {
-                  output.textContent += `Result: ${btoa(input)}`;
-              } else {
-                  try {
-                      output.textContent += `Result: ${atob(input)}`;
-                  } catch {
-                      output.textContent += `Error: Invalid base64 input`;
-                  }
-              }
-          } else if (algorithm === 'rot13') {
-              output.textContent += `Result: ${rot13(input)}`;
-          } else {
-              // 실제 서버 사이드 암호화가 아닌 시뮬레이션 메시지
-              output.textContent += `Result: [Simulated ${algorithm} ${mode}ed text]\n`;
-              output.textContent += `Note: Real encryption requires server-side processing`;
-          }
-      }
-
-      function rot13(str) {
-          return str.replace(/[a-zA-Z]/g, char => {
-              const offset = char <= 'Z' ? 65 : 97;
-              return String.fromCharCode((char.charCodeAt(0) - offset + 13) % 26 + offset);
-          });
-      }
-
-      // XSS Payload Generator
-      function generateXssPayload() {
-          const context = document.getElementById('xssContext').value || 'general';
-          const type = document.getElementById('xssType').value;
-          const encode = document.getElementById('xssEncode').checked;
-          const output = document.getElementById('xssOutput');
-          
-          output.textContent = `$ Generating ${type} XSS payloads...\n\n`;
-          
-          const payloads = [
-              `<script>alert('XSS')</script>`,
-              `<img src=x onerror=alert('XSS')>`,
-              `<svg onload=alert('XSS')>`,
-              `';alert('XSS')//`,
-              `" onfocus=alert('XSS') autofocus="`,
-              `javascript:alert('XSS')`
-          ];
-          
-          payloads.forEach((payload, index) => {
-              const finalPayload = encode ? encodeURIComponent(payload) : payload;
-              output.textContent += `Payload ${index + 1}:\n${finalPayload}\n\n`;
-          });
-          
-          output.textContent += `$ Generated ${payloads.length} payloads`;
-      }
-
-      // TEST SAFE: XSS처럼 보이는 새 창을 띄워 이미지 onerror 시 alert('XSS') 메시지 표시
-      function testPayload() {
-          const output = document.getElementById('xssOutput');
-          output.textContent += `\n\n$ Testing payload in a sandboxed environment...\n`;
-
-          // 새 창에 "img 태그 onerror" 예시를 표시 (실제로는 alert만 표시)
-          const xssExample = `
-            <html>
-              <head><title>XSS Test</title></head>
-              <body style="background-color: #222; color: #0f0; font-family: monospace;">
-                <h2>XSS Test Page</h2>
-                <p>This is a safe test page demonstrating an <code>onerror</code> event.</p>
-                <img src="broken.jpg" onerror="alert('XSS');" alt="XSS Test" style="border: 2px solid #0f0;">
-                <p>Close this window when finished.</p>
-              </body>
-            </html>
-          `;
-
-          const newWin = window.open("", "_blank", "width=500,height=300");
-          if (newWin) {
-              newWin.document.write(xssExample);
-              newWin.document.close();
-          } else {
-              output.textContent += `$ Could not open new window. Please allow pop-ups.\n`;
-          }
-
-          output.textContent += `$ Safe test completed - no actual malicious action taken.`;
-      }
-
-      // SQL Injection Analyzer
-      function testSqlInjection() {
-          const target = document.getElementById('sqlTarget').value;
-          const database = document.getElementById('sqlDatabase').value;
-          const output = document.getElementById('sqlOutput');
-          
-          if (!target) {
-              output.textContent = '$ Error: Please enter target URL';
-              return;
-          }
-          
-          output.textContent = `$ Testing SQL injection on ${target}...\n\n`;
-          
-          const tests = [
-              { payload: "' OR '1'='1", result: "Vulnerable to basic injection" },
-              { payload: "1' AND '1'='1", result: "Boolean-based blind possible" },
-              { payload: "1' UNION SELECT null--", result: "UNION-based injection possible" },
-              { payload: "1' AND SLEEP(5)--", result: "Time-based blind possible" }
-          ];
-          
-          let delay = 0;
-          tests.forEach(test => {
-              setTimeout(() => {
-                  output.textContent += `Testing: ${test.payload}\n`;
-                  output.textContent += `Result: ${test.result}\n\n`;
-              }, delay);
-              delay += 500;
-          });
-          
-          setTimeout(() => {
-              output.textContent += `$ SQL injection analysis complete\n`;
-              output.textContent += `$ Database type: ${database === 'auto' ? 'MySQL detected' : database}\n`;
-              output.textContent += `$ Recommendation: Use parameterized queries`;
-          }, delay);
-      }
-
-      // File Analysis
-      function analyzeFile() {
-          const fileInput = document.getElementById('fileInput');
-          const output = document.getElementById('fileOutput');
-          
-          if (!fileInput.files.length) {
-              output.textContent = '$ Error: Please select a file';
-              return;
-          }
-          
-          const file = fileInput.files[0];
-          output.textContent = `$ Analyzing file: ${file.name}\n\n`;
-          
-          output.textContent += `File Information:\n`;
-          output.textContent += `  Name: ${file.name}\n`;
-          output.textContent += `  Size: ${file.size} bytes\n\n`;
-          
-          // 간단한 해시 시뮬레이션
-          output.textContent += `Calculating file hash (simulated)...\n`;
-          setTimeout(() => {
-              output.textContent += `  MD5: ${generateSimpleHash(file.name, 32)}\n`;
-              output.textContent += `  SHA-1: ${generateSimpleHash(file.name, 40)}\n`;
-              output.textContent += `\n$ Analysis complete!\n`;
-
-              const virusTotal = document.getElementById('virusTotal').checked;
-              const peAnalysis = document.getElementById('peAnalysis').checked;
-              const strings = document.getElementById('strings').checked;
-
-              if (virusTotal) {
-                  output.textContent += `$ VirusTotal check: (simulated) file clean\n`;
-              }
-              if (peAnalysis) {
-                  output.textContent += `$ PE Analysis: (simulated) no suspicious sections\n`;
-              }
-              if (strings) {
-                  output.textContent += `$ Extracted strings: [Simulated strings output]\n`;
-              }
-          }, 1000);
-      }
-
-      // Hex Editor
-      function formatHex() {
-          const input = document.getElementById('hexInput').value;
-          const output = document.getElementById('hexOutput');
-          
-          if (!input) {
-              output.textContent = '$ Error: Please enter or paste some hex data';
-              return;
-          }
-          
-          // 단순 형식화 시뮬레이션
-          output.textContent = `$ Formatting hex data...\n\n`;
-          let cleaned = input.replace(/[^a-fA-F0-9]/g, '');
-          
-          const width = parseInt(document.getElementById('hexWidth').value, 10);
-          let formatted = '';
-          for (let i = 0; i < cleaned.length; i += width*2) {
-              formatted += cleaned.substr(i, width*2) + '\n';
-          }
-          
-          output.textContent += formatted;
-      }
-
-      function convertHex() {
-          const input = document.getElementById('hexInput').value;
-          const output = document.getElementById('hexOutput');
-          
-          if (!input) {
-              output.textContent = '$ Error: Please enter or paste some hex data';
-              return;
-          }
-          
-          output.textContent = `$ Converting hex to ASCII (simulated)...\n\n`;
-          // 가짜 변환 (실제로는 안전상 일부만 표시)
-          let cleaned = input.replace(/[^a-fA-F0-9]/g, '');
-          let ascii = '';
-          for (let i = 0; i < cleaned.length; i += 2) {
-              ascii += '.';
-          }
-          output.textContent += ascii + '\n';
-      }
+    }
   </script>
 </body>
 </html>
