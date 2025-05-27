@@ -509,22 +509,22 @@ $ Cipher suite ready...
             <h2 class="category-title">WEB APPLICATION SECURITY</h2>
             
             <div class="tools-grid">
-                <!-- XSS Payload Generator -->
+                <!-- Web Security Payload Generator -->
                 <div class="tool-card">
                     <div class="tool-header">
-                        <span class="tool-name">XSS Payload Generator</span>
+                        <span class="tool-name">Security Payload Generator</span>
                         <span class="tool-status status-online">ONLINE</span>
                     </div>
                     <p class="tool-description">
-                        Generate and encode XSS payloads for security testing.
+                        Generate and encode security testing payloads for web applications.
                     </p>
                     <div class="tool-interface">
                         <input type="text" class="tool-input" id="xssContext" placeholder="Enter injection context (e.g., <script>, attribute, etc.)">
                         <div class="tool-options">
                             <select class="tool-select" id="xssType">
-                                <option value="reflected">Reflected XSS</option>
-                                <option value="stored">Stored XSS</option>
-                                <option value="dom">DOM-based XSS</option>
+                                <option value="reflected">Reflected Type</option>
+                                <option value="stored">Stored Type</option>
+                                <option value="dom">DOM-based Type</option>
                             </select>
                             <label class="tool-option">
                                 <input type="checkbox" id="xssEncode" checked> URL Encode
@@ -536,7 +536,7 @@ $ Cipher suite ready...
                         <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
                         <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
                         <div class="tool-output" id="xssOutput">
-$ XSS payload generator ready...
+$ Payload generator ready...
                         </div>
                     </div>
                 </div>
@@ -813,22 +813,22 @@ $ Hex editor ready...
             });
         }
 
-        // XSS Payload Generator
+        // Web Security Payload Generator
         function generateXssPayload() {
             const context = document.getElementById('xssContext').value || 'general';
             const type = document.getElementById('xssType').value;
             const encode = document.getElementById('xssEncode').checked;
             const output = document.getElementById('xssOutput');
             
-            output.textContent = `$ Generating ${type} XSS payloads...\n\n`;
+            output.textContent = `$ Generating ${type} security payloads...\n\n`;
             
             const payloads = [
-                `<script>alert('XSS')</script>`,
-                `<img src=x onerror=alert('XSS')>`,
-                `<svg onload=alert('XSS')>`,
-                `';alert('XSS')//`,
-                `" onfocus=alert('XSS') autofocus="`,
-                `javascript:alert('XSS')`
+                `<script>alert('Test')</script>`,
+                `<img src=x onerror=alert('Test')>`,
+                `<svg onload=alert('Test')>`,
+                `';alert('Test')//`,
+                `" onfocus=alert('Test') autofocus="`,
+                `javascript:alert('Test')`
             ];
             
             payloads.forEach((payload, index) => {
