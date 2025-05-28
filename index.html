@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
-    <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
+    <title>Ghost Trace Cybersecurity - Advanced Red Team Services</title>
+    <meta name="description" content="Ghost Trace - 대한민국 최고의 레드팀 보안 서비스, 모의해킹, 보안컨설팅, Web3 보안 전문">
+    <meta name="keywords" content="penetration testing, 모의해킹, 보안컨설팅, Web3 보안, red team, cybersecurity">
+    <meta property="og:title" content="Ghost Trace Cybersecurity">
+    <meta property="og:description" content="Advanced Red Team Security Services">
+    <meta property="og:image" content="https://hackkim.github.io/ghost-trace-logo-white.png">
     <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
     
     <style>
@@ -22,19 +26,19 @@
             --text-light: #ffffff;
             --text-gray: #a0a0a0;
             --accent-glow: 0 0 20px rgba(0, 255, 255, 0.5);
-            --success-color: #00ff88;
             --error-color: #ff3838;
-            --warning-color: #ffaa00;
+            --success-color: #00ff88;
         }
 
         body {
-            font-family: 'Courier New', monospace;
+            font-family: 'Arial', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Navbar */
         nav {
             position: fixed;
             top: 0;
@@ -76,13 +80,14 @@
             display: flex;
             list-style: none;
             gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-family: 'Arial', sans-serif;
+            position: relative;
         }
 
         .nav-links a:hover {
@@ -90,190 +95,394 @@
             text-shadow: var(--accent-glow);
         }
 
-        /* Hero Section */
-        .hero-section {
-            margin-top: 80px;
-            padding: 3rem 0;
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
         }
 
-        .terminal-effect {
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .language-selector {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .language-selector:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-color);
+            transition: 0.3s;
+        }
+
+        /* Hero Section with Matrix Effect */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        #matrix-canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
+            opacity: 0.1;
         }
 
-        .hero-section h1 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            text-shadow: var(--accent-glow);
+        .cyber-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 20s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            width: 350px;
+            height: 350px;
+            margin: 0 auto 2rem;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.5));
+            }
+            50% {
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 50px rgba(0, 255, 255, 0.9));
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
+            text-shadow: var(--accent-glow);
         }
 
-        .hero-section p {
-            font-size: 1.1rem;
+        .hero p {
+            font-size: 1.2rem;
             color: var(--text-gray);
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Tools Container */
-        .tools-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .tool-category {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
             margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
 
-        .category-title::before {
-            content: '>';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .tool-card {
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            padding: 2rem;
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .tool-card::before {
+        .cta-button::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-            animation: scan 3s linear infinite;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        @keyframes scan {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
-        .tool-header {
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Terminal Section */
+        .terminal-section {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #000;
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .terminal-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .tool-name {
-            font-size: 1.3rem;
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-btn.red { background: #ff5f56; }
+        .terminal-btn.yellow { background: #ffbd2e; }
+        .terminal-btn.green { background: #27c93f; }
+
+        .terminal-content {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            min-height: 200px;
+        }
+
+        .terminal-line {
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+        }
+
+        /* Real-time Threat Dashboard */
+        .threat-dashboard {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .threat-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threat-level {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .threat-indicator {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        .threat-high { background: var(--error-color); }
+        .threat-medium { background: #ffaa00; }
+        .threat-low { background: var(--success-color); }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .threat-stats {
+            font-size: 2rem;
             color: var(--primary-color);
             font-weight: bold;
         }
 
-        .tool-status {
-            padding: 0.3rem 0.8rem;
-            border-radius: 3px;
-            font-size: 0.8rem;
-            font-weight: bold;
+        /* Security Tools */
+        .tools-section {
+            padding: 5rem 0;
+            background: var(--dark-bg);
         }
 
-        .status-online {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--success-color);
-            border: 1px solid var(--success-color);
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .status-beta {
-            background: rgba(255, 170, 0, 0.2);
-            color: var(--warning-color);
-            border: 1px solid var(--warning-color);
-        }
-
-        .tool-description {
-            color: var(--text-gray);
-            margin-bottom: 1.5rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .tool-interface {
-            background: rgba(0, 0, 0, 0.5);
+        .tool-card {
+            background: rgba(0, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 255, 0.2);
-            border-radius: 3px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
         }
 
         .tool-input {
             width: 100%;
             padding: 0.8rem;
-            background: rgba(0, 255, 255, 0.05);
+            margin: 1rem 0;
+            background: rgba(0, 255, 255, 0.1);
             border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
             color: var(--text-light);
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .tool-input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-        }
-
-        .tool-textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 0.8rem;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: var(--text-light);
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-            resize: vertical;
+            font-family: monospace;
         }
 
         .tool-button {
-            padding: 0.8rem 1.5rem;
+            padding: 0.8rem 2rem;
             background: var(--primary-color);
             color: var(--dark-bg);
             border: none;
-            font-weight: bold;
+            border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
             transition: all 0.3s ease;
-            margin-right: 1rem;
         }
 
         .tool-button:hover {
@@ -281,111 +490,191 @@
             transform: scale(1.05);
         }
 
-        .tool-button.secondary {
-            background: transparent;
-            border: 1px solid var(--primary-color);
+        .tool-result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            font-family: monospace;
+            min-height: 50px;
+        }
+
+        /* Contact Form */
+        .contact {
+            padding: 5rem 0;
+            background: var(--darker-bg);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
             color: var(--primary-color);
         }
 
-        .tool-output {
-            background: #000;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 255, 255, 0.1);
             border: 1px solid rgba(0, 255, 255, 0.3);
-            padding: 1rem;
-            margin-top: 1rem;
-            min-height: 100px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            white-space: pre-wrap;
-            word-break: break-all;
-            color: var(--success-color);
+            border-radius: 5px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
         }
 
-        .tool-options {
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Blog Preview */
+        .blog-preview {
+            padding: 5rem 0;
+            background: var(--dark-bg);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 128, 255, 0.2));
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-color);
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-title {
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
 
-        .tool-option {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .blog-excerpt {
             color: var(--text-gray);
-            font-family: 'Arial', sans-serif;
+            line-height: 1.8;
+            margin-bottom: 1rem;
         }
 
-        .tool-option input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary-color);
-        }
-
-        .tool-select {
-            padding: 0.5rem;
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            color: var(--text-light);
-            cursor: pointer;
-        }
-
-        /* Specific Tool Styles */
-        .network-scanner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            height: 20px;
-            margin: 1rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 0.8rem;
+        .read-more {
+            color: var(--secondary-color);
+            text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s ease;
         }
 
-        /* Warning Banner */
-        .warning-banner {
-            background: rgba(255, 170, 0, 0.1);
-            border: 1px solid var(--warning-color);
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--warning-color);
+        .read-more:hover {
+            color: var(--primary-color);
         }
 
         /* Footer */
         footer {
-            background: var(--darker-bg);
+            background: var(--dark-bg);
             padding: 3rem 0 2rem;
             text-align: center;
             border-top: 1px solid rgba(0, 255, 255, 0.2);
-            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
         }
 
         .social-links a {
@@ -399,23 +688,162 @@
             transform: translateY(-3px);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
 
-            .network-scanner {
-                grid-template-columns: 1fr;
-            }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 10s infinite;
+        }
 
-            .tool-options {
-                flex-direction: column;
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
             }
         }
 
-        /* Glitch effect for headers */
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: var(--dark-bg);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-logo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .dashboard-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .certification-image {
+                margin-top: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Typing Animation */
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid var(--primary-color);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        /* Security Scanner */
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: scan 2s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Glitch Effect */
         .glitch {
+            position: relative;
             animation: glitch 2s infinite;
         }
 
@@ -426,735 +854,674 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="#" class="logo">
                 <img src="ghost-trace-logo-white.png" alt="Ghost Trace Logo">
                 GHOST TRACE
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="security-resources.html">Resources</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="case-studies.html">Case Studies</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li>
+                    <select class="language-selector" id="langSelector">
+                        <option value="ko">🇰🇷 한국어</option>
+                        <option value="en">🇺🇸 English</option>
+                        <option value="ja">🇯🇵 日本語</option>
+                    </select>
+                </li>
             </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="terminal-effect"></div>
-        <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
-        <p>Professional-grade security testing tools powered by Ghost Trace</p>
+    <section class="hero" id="home">
+        <canvas id="matrix-canvas"></canvas>
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="ghost-trace-logo-white.png" alt="Ghost Trace Cybersecurity Logo">
+            </div>
+            <h1 class="glitch">GHOST TRACE</h1>
+            <p class="typing">Advanced Red Team Cybersecurity Services</p>
+            <a href="#contact" class="cta-button">Start Security Assessment</a>
+        </div>
     </section>
 
-    <!-- Warning Banner -->
-    <div class="tools-container">
-        <div class="warning-banner">
-            ⚠️ <strong>LEGAL NOTICE:</strong> These tools are for authorized security testing only. 
-            Use only on systems you own or have explicit permission to test.
+    <!-- Terminal Section -->
+    <section class="terminal-section">
+        <div class="container">
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-btn red"></div>
+                    <div class="terminal-btn yellow"></div>
+                    <div class="terminal-btn green"></div>
+                </div>
+                <div class="terminal-content" id="terminal">
+                    <div class="terminal-line">$ Initializing Ghost Trace Security Scanner...                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="security-resources.html" class="cta-button">Explore All Security Resources →</a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Tools Section -->
-    <main class="tools-container">
-        <!-- Network Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
-            
-            <div class="tools-grid">
-                <!-- Advanced Port Scanner -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Advanced Port Scanner</span>
-                        <span class="tool-status status-online">ONLINE</span>
+    <!-- Real-time Threat Dashboard -->
+    <section class="threat-dashboard">
+        <div class="container">
+            <h2 class="section-title">Real-time Threat Intelligence</h2>
+            <div class="dashboard-grid">
+                <div class="threat-card">
+                    <div class="scanner-line"></div>
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-high"></div>
+                        <span>Critical Threats</span>
                     </div>
-                    <p class="tool-description">
-                        Comprehensive port scanning with service detection and OS fingerprinting.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="stealthScan"> Stealth Scan
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="serviceDetection" checked> Service Detection
-                            </label>
-                            <select class="tool-select" id="scanSpeed">
-                                <option value="slow">Slow (Accurate)</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Fast (Aggressive)</option>
-                            </select>
-                        </div>
-                        <div class="network-scanner">
-                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
-                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
-                        </div>
-                        <div class="progress-container" id="scanProgress" style="display: none;">
-                            <div class="progress-bar" id="scanProgressBar"></div>
-                            <span class="progress-text" id="scanProgressText">0%</span>
-                        </div>
-                        <div class="tool-output" id="portScanOutput">
-$ Ready to scan...
-                        </div>
-                    </div>
+                    <div class="threat-stats" id="criticalThreats">0</div>
+                    <p>Active APT campaigns detected</p>
                 </div>
-
-                <!-- DNS Lookup Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">DNS Reconnaissance</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-medium"></div>
+                        <span>Vulnerabilities Scanned</span>
                     </div>
-                    <p class="tool-description">
-                        Advanced DNS enumeration and subdomain discovery tool.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="reversDns" checked> Reverse DNS
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="dnsSec"> DNSSEC Check
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
-                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
-                        <div class="tool-output" id="dnsOutput">
-$ DNS reconnaissance ready...
-                        </div>
+                    <div class="threat-stats" id="vulnScanned">0</div>
+                    <p>Systems analyzed today</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-low"></div>
+                        <span>Patches Applied</span>
                     </div>
+                    <div class="threat-stats" id="patchesApplied">0</div>
+                    <p>Security updates this month</p>
+                </div>
+                <div class="threat-card">
+                    <div class="threat-level">
+                        <div class="threat-indicator threat-high"></div>
+                        <span>Zero-Days Found</span>
+                    </div>
+                    <div class="threat-stats" id="zeroDays">0</div>
+                    <p>Responsibly disclosed</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Cryptography Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
-            
-            <div class="tools-grid">
-                <!-- Hash Analyzer -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Hash Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Multi-algorithm hash generator and hash type identifier.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
-                        <div class="tool-options">
-                            <select class="tool-select" id="hashAlgorithm">
-                                <option value="auto">Auto Detect</option>
-                                <option value="md5">MD5</option>
-                                <option value="sha1">SHA-1</option>
-                                <option value="sha256">SHA-256</option>
-                                <option value="sha512">SHA-512</option>
-                                <option value="bcrypt">BCrypt</option>
-                            </select>
-                            <label class="tool-option">
-                                <input type="checkbox" id="compareHash"> Compare Mode
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
-                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
-                        <div class="tool-output" id="hashOutput">
-$ Hash analyzer ready...
-                        </div>
-                    </div>
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">🎯</span>
+                    <h3>Red Team Operations</h3>
+                    <p>Advanced penetration testing and security assessments simulating real-world attacks to identify vulnerabilities.</p>
+                    <div class="service-price">Starting from ₩5,000,000</div>
                 </div>
-
-                <!-- Encryption/Decryption Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Cipher Suite</span>
-                        <span class="tool-status status-beta">BETA</span>
-                    </div>
-                    <p class="tool-description">
-                        Advanced encryption and decryption with multiple cipher support.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
-                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
-                        <div class="tool-options">
-                            <select class="tool-select" id="cipherAlgorithm">
-                                <option value="aes256">AES-256</option>
-                                <option value="aes128">AES-128</option>
-                                <option value="3des">3DES</option>
-                                <option value="base64">Base64</option>
-                                <option value="rot13">ROT13</option>
-                            </select>
-                            <select class="tool-select" id="cipherMode">
-                                <option value="encrypt">Encrypt</option>
-                                <option value="decrypt">Decrypt</option>
-                            </select>
-                        </div>
-                        <button class="tool-button" onclick="processCipher()">PROCESS</button>
-                        <div class="tool-output" id="cipherOutput">
-$ Cipher suite ready...
-                        </div>
-                    </div>
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">🔐</span>
+                    <h3>Web3 Security Audits</h3>
+                    <p>Comprehensive smart contract auditing and blockchain security reviews for DeFi and Web3 projects.</p>
+                    <div class="service-price">Starting from ₩3,000,000</div>
+                </div>
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">🛡️</span>
+                    <h3>Vulnerability Research</h3>
+                    <p>Zero-day discovery, exploit development, and responsible disclosure to enhance security posture.</p>
+                    <div class="service-price">Custom pricing</div>
+                </div>
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">💡</span>
+                    <h3>Security Consulting</h3>
+                    <p>Strategic cybersecurity guidance and implementation for enterprise-level security architecture.</p>
+                    <div class="service-price">₩500,000/hour</div>
+                </div>
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">🔍</span>
+                    <h3>Penetration Testing</h3>
+                    <p>Comprehensive security evaluations of networks, applications, and infrastructure.</p>
+                    <div class="service-price">Starting from ₩2,000,000</div>
+                </div>
+                <div class="service-card" onclick="location.href='#contact';" style="cursor: pointer;">
+                    <span class="service-icon">📊</span>
+                    <h3>Security Training</h3>
+                    <p>Customized security awareness training and advanced technical workshops for teams.</p>
+                    <div class="service-price">₩1,000,000/day</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Web Security Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">WEB APPLICATION SECURITY</h2>
-            
+    <!-- Security Tools Section -->
+    <section class="tools-section" id="tools">
+        <div class="container">
+            <h2 class="section-title">Online Security Tools</h2>
             <div class="tools-grid">
-                <!-- Security Payload Generator -->
                 <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Security Payload Generator</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Generate and encode security testing payloads for web applications.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="secContext" placeholder="Enter injection context">
-                        <div class="tool-options">
-                            <select class="tool-select" id="secType">
-                                <option value="reflected">Reflected Type</option>
-                                <option value="stored">Stored Type</option>
-                                <option value="dom">DOM-based Type</option>
-                            </select>
-                            <label class="tool-option">
-                                <input type="checkbox" id="secEncode" checked> URL Encode
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="secObfuscate"> Obfuscate
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="generateSecurityPayload()">GENERATE</button>
-                        <button class="tool-button secondary" onclick="testSecurityPayload()">TEST SAFE</button>
-                        <div class="tool-output" id="secOutput">
-$ Payload generator ready...
-                        </div>
-                    </div>
+                    <h3>🔒 Password Strength Checker</h3>
+                    <p>Test the strength of your passwords</p>
+                    <input type="password" class="tool-input" id="passwordInput" placeholder="Enter password to test">
+                    <button class="tool-button" onclick="checkPassword()">Check Strength</button>
+                    <div class="tool-result" id="passwordResult"></div>
                 </div>
-
-                <!-- SQL Injection Tester -->
                 <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">SQL Injection Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Test and analyze SQL injection vulnerabilities with smart payloads.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="sqlTarget" placeholder="Enter target URL with parameter">
-                        <div class="tool-options">
-                            <select class="tool-select" id="sqlDatabase">
-                                <option value="auto">Auto Detect</option>
-                                <option value="mysql">MySQL</option>
-                                <option value="mssql">MSSQL</option>
-                                <option value="oracle">Oracle</option>
-                                <option value="postgresql">PostgreSQL</option>
-                            </select>
-                            <label class="tool-option">
-                                <input type="checkbox" id="sqlBlind"> Blind SQLi
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="sqlTime"> Time-based
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="testSqlInjection()">ANALYZE</button>
-                        <div class="tool-output" id="sqlOutput">
-$ SQL injection analyzer ready...
-                        </div>
-                    </div>
+                    <h3>🔐 Hash Generator</h3>
+                    <p>Generate secure hashes for your text</p>
+                    <input type="text" class="tool-input" id="hashInput" placeholder="Enter text to hash">
+                    <button class="tool-button" onclick="generateHash()">Generate SHA-256</button>
+                    <div class="tool-result" id="hashResult"></div>
+                </div>
+                <div class="tool-card">
+                    <h3>🌐 Port Scanner</h3>
+                    <p>Check open ports on a domain</p>
+                    <input type="text" class="tool-input" id="portInput" placeholder="Enter domain (demo only)">
+                    <button class="tool-button" onclick="scanPorts()">Scan Ports</button>
+                    <div class="tool-result" id="portResult"></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Binary Analysis Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">BINARY ANALYSIS</h2>
-            
-            <div class="tools-grid">
-                <!-- File Hash Calculator -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">File Analysis Suite</span>
-                        <span class="tool-status status-online">ONLINE</span>
+    <!-- Blog Preview Section -->
+    <section class="blog-preview" id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Security Insights</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">🔥</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 26, 2025</div>
+                        <h3 class="blog-title">Critical Zero-Day in Popular CMS Discovered</h3>
+                        <p class="blog-excerpt">Our research team has discovered a critical remote code execution vulnerability affecting millions of websites...</p>
+                        <a href="#" class="read-more">Read More →</a>
                     </div>
-                    <p class="tool-description">
-                        Calculate file hashes and perform basic malware analysis.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="file" class="tool-input" id="fileInput" style="padding: 0.5rem;">
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="virusTotal" checked> VirusTotal Check
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="peAnalysis"> PE Analysis
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="strings"> Extract Strings
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="analyzeFile()">ANALYZE FILE</button>
-                        <div class="tool-output" id="fileOutput">
-$ File analyzer ready...
-                        </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">🛡️</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 24, 2025</div>
+                        <h3 class="blog-title">Web3 Security Best Practices for 2025</h3>
+                        <p class="blog-excerpt">As DeFi protocols continue to evolve, here are the essential security measures every smart contract developer should implement...</p>
+                        <a href="#" class="read-more">Read More →</a>
                     </div>
-                </div>
-
-                <!-- Hex Editor -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Online Hex Editor</span>
-                        <span class="tool-status status-beta">BETA</span>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <div class="blog-date">May 22, 2025</div>
+                        <h3 class="blog-title">Red Team vs Blue Team: Modern Approaches</h3>
+                        <p class="blog-excerpt">Understanding the evolving dynamics between offensive and defensive security teams in today's threat landscape...</p>
+                        <a href="#" class="read-more">Read More →</a>
                     </div>
-                    <p class="tool-description">
-                        View and edit binary files in hexadecimal format.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hexInput" placeholder="Paste hex data or load file" style="font-family: monospace; font-size: 0.9rem;"></textarea>
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="hexAscii" checked> Show ASCII
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="hexOffset" checked> Show Offset
-                            </label>
-                            <select class="tool-select" id="hexWidth">
-                                <option value="8">8 bytes</option>
-                                <option value="16" selected>16 bytes</option>
-                                <option value="32">32 bytes</option>
-                            </select>
-                        </div>
-                        <button class="tool-button" onclick="formatHex()">FORMAT</button>
-                        <button class="tool-button secondary" onclick="convertHex()">CONVERT</button>
-                        <div class="tool-output" id="hexOutput" style="font-size: 0.85rem;">
-$ Hex editor ready...
-                        </div>
-                    </div>
-                </div>
+                </article>
             </div>
-        </section>
-    </main>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="blog.html" class="cta-button">View All Posts →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Start Your Security Assessment</h2>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Required</label>
+                    <select id="service" name="service" style="width: 100%; padding: 0.8rem; background: rgba(0, 255, 255, 0.1); border: 1px solid rgba(0, 255, 255, 0.3); border-radius: 5px; color: var(--text-light);">
+                        <option value="redteam">Red Team Assessment</option>
+                        <option value="pentest">Penetration Testing</option>
+                        <option value="web3">Web3 Security Audit</option>
+                        <option value="consulting">Security Consulting</option>
+                        <option value="training">Security Training</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" name="message" required placeholder="Describe your security needs..."></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Security Request</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
-        <div class="social-links">
-            <a href="https://github.com/hackkim" target="_blank">💻</a>
-            <a href="mailto:yejihoon07@email.com">📧</a>
-            <a href="#">💼</a>
-            <a href="#">🐦</a>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Red Team Operations</a></li>
+                        <li><a href="#services">Penetration Testing</a></li>
+                        <li><a href="#services">Web3 Security</a></li>
+                        <li><a href="#services">Security Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="blog.html">Security Blog</a></li>
+                        <li><a href="security-resources.html">Online Resources</a></li>
+                        <li><a href="case-studies.html">Case Studies</a></li>
+                        <li><a href="#">Whitepapers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Ghost Trace</a></li>
+                        <li><a href="about.html#certifications">Certifications</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📧 yejihoon07@email.com</li>
+                        <li>💻 GitHub: hackkim</li>
+                        <li>📍 Seoul, South Korea</li>
+                        <li>🔐 24/7 Security Hotline</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/hackkim" target="_blank" title="GitHub">💻</a>
+                <a href="mailto:yejihoon07@email.com" title="Email">📧</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="Twitter">🐦</a>
+            </div>
+            <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
+            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Elite One-Person Red Team | Advanced Security Services</p>
         </div>
-        <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
-        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
     </footer>
 
     <script>
-        // Port Scanner Simulation
-        function startPortScan() {
-            const target = document.getElementById('portScanTarget').value;
-            const output = document.getElementById('portScanOutput');
-            const progressBar = document.getElementById('scanProgress');
-            const progress = document.getElementById('scanProgressBar');
-            const progressText = document.getElementById('scanProgressText');
-            
-            if (!target) {
-                output.textContent = '$ Error: Please enter a target IP or domain';
-                return;
-            }
-            
-            output.textContent = `$ Performing DNS reconnaissance on ${target}...\n\n`;
-            
-            setTimeout(() => {
-                output.textContent += `A Records:\n`;
-                output.textContent += `  ${target} -> 192.168.1.100\n\n`;
-                output.textContent += `MX Records:\n`;
-                output.textContent += `  10 mail.${target}\n\n`;
-                output.textContent += `NS Records:\n`;
-                output.textContent += `  ns1.${target}\n`;
-                output.textContent += `  ns2.${target}\n\n`;
-                output.textContent += `Subdomains found:\n`;
-                output.textContent += `  www.${target}\n`;
-                output.textContent += `  mail.${target}\n`;
-                output.textContent += `  admin.${target}\n`;
-                output.textContent += `  api.${target}\n`;
-                output.textContent += `  dev.${target}\n\n`;
-                output.textContent += `$ DNS reconnaissance completed`;
-            }, 1500);
-        }
-
-        function clearDnsOutput() {
-            document.getElementById('dnsOutput').textContent = '$ DNS reconnaissance ready...';
-        }
-
-        // Hash Analyzer
-        function analyzeHash() {
-            const input = document.getElementById('hashInput').value;
-            const output = document.getElementById('hashOutput');
-            const algorithm = document.getElementById('hashAlgorithm').value;
-            
-            if (!input) {
-                output.textContent = '$ Error: Please enter text or hash';
-                return;
-            }
-            
-            output.textContent = `$ Analyzing input...\n\n`;
-            
-            if (algorithm === 'auto') {
-                output.textContent += `Hash Type Detection:\n`;
-                if (input.length === 32) output.textContent += `  Possible MD5 hash detected\n`;
-                if (input.length === 40) output.textContent += `  Possible SHA-1 hash detected\n`;
-                if (input.length === 64) output.textContent += `  Possible SHA-256 hash detected\n`;
-                output.textContent += `\n`;
-            }
-            
-            output.textContent += `Generated Hashes:\n`;
-            output.textContent += `  MD5:     ${generateSimpleHash(input, 32)}\n`;
-            output.textContent += `  SHA-1:   ${generateSimpleHash(input, 40)}\n`;
-            output.textContent += `  SHA-256: ${generateSimpleHash(input, 64)}\n`;
-            output.textContent += `  SHA-512: ${generateSimpleHash(input, 128)}\n`;
-        }
-
-        function generateAllHashes() {
-            analyzeHash();
-        }
-
-        function generateSimpleHash(input, length) {
-            let hash = '';
-            for (let i = 0; i < length; i++) {
-                hash += Math.floor(Math.random() * 16).toString(16);
-            }
-            return hash;
-        }
-
-        // Cipher Suite
-        function processCipher() {
-            const input = document.getElementById('cipherInput').value;
-            const key = document.getElementById('cipherKey').value;
-            const algorithm = document.getElementById('cipherAlgorithm').value;
-            const mode = document.getElementById('cipherMode').value;
-            const output = document.getElementById('cipherOutput');
-            
-            if (!input) {
-                output.textContent = '$ Error: Please enter text';
-                return;
-            }
-            
-            output.textContent = `$ Processing ${mode} with ${algorithm.toUpperCase()}...\n\n`;
-            
-            if (algorithm === 'base64') {
-                if (mode === 'encrypt') {
-                    output.textContent += `Result: ${btoa(input)}`;
-                } else {
-                    try {
-                        output.textContent += `Result: ${atob(input)}`;
-                    } catch {
-                        output.textContent += `Error: Invalid base64 input`;
-                    }
-                }
-            } else if (algorithm === 'rot13') {
-                output.textContent += `Result: ${rot13(input)}`;
-            } else {
-                output.textContent += `Result: [Simulated ${algorithm} ${mode}ed text]\n`;
-                output.textContent += `Note: Real encryption requires server-side processing`;
-            }
-        }
-
-        function rot13(str) {
-            return str.replace(/[a-zA-Z]/g, char => {
-                const offset = char <= 'Z' ? 65 : 97;
-                return String.fromCharCode((char.charCodeAt(0) - offset + 13) % 26 + offset);
-            });
-        }
-
-        // Security Payload Generator (renamed from XSS)
-        function generateSecurityPayload() {
-            const context = document.getElementById('secContext').value || 'general';
-            const type = document.getElementById('secType').value;
-            const encode = document.getElementById('secEncode').checked;
-            const output = document.getElementById('secOutput');
-            
-            output.textContent = `$ Generating ${type} security payloads...\n\n`;
-            
-            const payloads = [
-                `<script>alert('Test')</script>`,
-                `<img src=x onerror=alert('Test')>`,
-                `<svg onload=alert('Test')>`,
-                `';alert('Test')//`,
-                `" onfocus=alert('Test') autofocus="`,
-                `javascript:alert('Test')`
-            ];
-            
-            payloads.forEach((payload, index) => {
-                const finalPayload = encode ? encodeURIComponent(payload) : payload;
-                output.textContent += `Payload ${index + 1}:\n${finalPayload}\n\n`;
-            });
-            
-            output.textContent += `$ Generated ${payloads.length} payloads`;
-        }
-
-        function testSecurityPayload() {
-            const output = document.getElementById('secOutput');
-            output.textContent += `\n\n$ Testing payload in sandboxed environment...\n`;
-            output.textContent += `$ Safe test completed - no actual execution`;
-        }
-
-        // SQL Injection Analyzer
-        function testSqlInjection() {
-            const target = document.getElementById('sqlTarget').value;
-            const database = document.getElementById('sqlDatabase').value;
-            const output = document.getElementById('sqlOutput');
-            
-            if (!target) {
-                output.textContent = '$ Error: Please enter target URL';
-                return;
-            }
-            
-            output.textContent = `$ Testing SQL injection on ${target}...\n\n`;
-            
-            const tests = [
-                { payload: "' OR '1'='1", result: "Vulnerable to basic injection" },
-                { payload: "1' AND '1'='1", result: "Boolean-based blind possible" },
-                { payload: "1' UNION SELECT null--", result: "UNION-based injection possible" },
-                { payload: "1' AND SLEEP(5)--", result: "Time-based blind possible" }
-            ];
-            
-            let delay = 0;
-            tests.forEach(test => {
-                setTimeout(() => {
-                    output.textContent += `Testing: ${test.payload}\n`;
-                    output.textContent += `Result: ${test.result}\n\n`;
-                }, delay);
-                delay += 500;
-            });
-            
-            setTimeout(() => {
-                output.textContent += `$ SQL injection analysis complete\n`;
-                output.textContent += `$ Database type: ${database === 'auto' ? 'MySQL detected' : database}\n`;
-                output.textContent += `$ Recommendation: Use parameterized queries`;
-            }, delay);
-        }
-
-        // File Analysis
-        function analyzeFile() {
-            const fileInput = document.getElementById('fileInput');
-            const output = document.getElementById('fileOutput');
-            
-            if (!fileInput.files.length) {
-                output.textContent = '$ Error: Please select a file';
-                return;
-            }
-            
-            const file = fileInput.files[0];
-            output.textContent = `$ Analyzing file: ${file.name}\n\n`;
-            
-            output.textContent += `File Information:\n`;
-            output.textContent += `  Name: ${file.name}\n`;
-            output.textContent += `  Size: ${(file.size / 1024).toFixed(2)} KB\n`;
-            output.textContent += `  Type: ${file.type || 'Unknown'}\n`;
-            output.textContent += `  Last Modified: ${new Date(file.lastModified).toLocaleString()}\n\n`;
-            
-            // Simulate hash calculation
-            setTimeout(() => {
-                output.textContent += `Hash Values:\n`;
-                output.textContent += `  MD5:    ${generateSimpleHash(file.name, 32)}\n`;
-                output.textContent += `  SHA-1:  ${generateSimpleHash(file.name, 40)}\n`;
-                output.textContent += `  SHA-256: ${generateSimpleHash(file.name, 64)}\n\n`;
-                
-                if (document.getElementById('virusTotal').checked) {
-                    output.textContent += `VirusTotal Check:\n`;
-                    output.textContent += `  Status: Clean (0/68 detections)\n`;
-                    output.textContent += `  Note: This is a simulation\n\n`;
-                }
-                
-                output.textContent += `$ File analysis complete`;
-            }, 1000);
-        }
-
-        // Hex Editor
-        function formatHex() {
-            const input = document.getElementById('hexInput').value;
-            const output = document.getElementById('hexOutput');
-            const showAscii = document.getElementById('hexAscii').checked;
-            const showOffset = document.getElementById('hexOffset').checked;
-            const width = parseInt(document.getElementById('hexWidth').value);
-            
-            if (!input) {
-                output.textContent = '$ Error: Please enter hex data';
-                return;
-            }
-            
-            // Clean input
-            const cleanHex = input.replace(/[^0-9A-Fa-f]/g, '');
-            
-            output.textContent = '';
-            if (showOffset) {
-                output.textContent += 'Offset    Hex Data' + (showAscii ? '                             ASCII' : '') + '\n';
-                output.textContent += '--------  ' + '-'.repeat(width * 3) + (showAscii ? '  ' + '-'.repeat(width) : '') + '\n';
-            }
-            
-            for (let i = 0; i < cleanHex.length; i += width * 2) {
-                const chunk = cleanHex.substr(i, width * 2);
-                let hexPart = '';
-                let asciiPart = '';
-                
-                for (let j = 0; j < chunk.length; j += 2) {
-                    const byte = chunk.substr(j, 2);
-                    hexPart += byte + ' ';
-                    
-                    if (showAscii) {
-                        const charCode = parseInt(byte, 16);
-                        asciiPart += (charCode >= 32 && charCode <= 126) ? String.fromCharCode(charCode) : '.';
-                    }
-                }
-                
-                // Pad hex part
-                hexPart = hexPart.padEnd(width * 3);
-                
-                let line = '';
-                if (showOffset) {
-                    line += (i / 2).toString(16).padStart(8, '0') + '  ';
-                }
-                line += hexPart;
-                if (showAscii) {
-                    line += ' ' + asciiPart;
-                }
-                
-                output.textContent += line + '\n';
-            }
-        }
-
-        function convertHex() {
-            const input = document.getElementById('hexInput').value;
-            const output = document.getElementById('hexOutput');
-            
-            try {
-                // Convert hex to text
-                const cleanHex = input.replace(/[^0-9A-Fa-f]/g, '');
-                let text = '';
-                for (let i = 0; i < cleanHex.length; i += 2) {
-                    text += String.fromCharCode(parseInt(cleanHex.substr(i, 2), 16));
-                }
-                
-                output.textContent = `$ Hex to Text Conversion:\n\n${text}\n\n`;
-                output.textContent += `$ Conversion complete`;
-            } catch (error) {
-                output.textContent = `$ Error: Invalid hex data`;
-            }
-        }
-
-        // Add visual feedback for all buttons
-        document.querySelectorAll('.tool-button').forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 100);
-            });
-        });
-
-        // Terminal typing effect for outputs
-        function typeOutput(element, text, speed = 20) {
-            element.textContent = '';
-            let i = 0;
-            const typing = setInterval(() => {
-                element.textContent += text[i];
-                i++;
-                if (i >= text.length) {
-                    clearInterval(typing);
-                }
-            }, speed);
-        }
-
-        // Initialize tool outputs with typing effect
+        // Loading Screen
         window.addEventListener('load', () => {
-            const outputs = document.querySelectorAll('.tool-output');
-            outputs.forEach(output => {
-                const originalText = output.textContent;
-                typeOutput(output, originalText);
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if (loader) {
+                    loader.classList.add('hidden');
+                }
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        if (mobileMenu && navLinks) {
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    if (navLinks) {
+                        navLinks.classList.remove('active');
+                    }
+                }
             });
         });
 
-        // Add keyboard shortcuts
-        document.addEventListener('keydown', (e) => {
-            // Ctrl+Enter to execute current tool
-            if (e.ctrlKey && e.key === 'Enter') {
-                const activeElement = document.activeElement;
-                if (activeElement && activeElement.classList.contains('tool-input')) {
-                    const toolCard = activeElement.closest('.tool-card');
-                    if (toolCard) {
-                        const primaryButton = toolCard.querySelector('.tool-button:not(.secondary)');
-                        if (primaryButton) {
-                            primaryButton.click();
-                        }
-                    }
-                }
-            }
-            
-            // Escape to clear current output
-            if (e.key === 'Escape') {
-                const activeElement = document.activeElement;
-                if (activeElement && activeElement.classList.contains('tool-input')) {
-                    const toolCard = activeElement.closest('.tool-card');
-                    if (toolCard) {
-                        const output = toolCard.querySelector('.tool-output');
-                        if (output) {
-                            output.textContent = '$ Ready...';
-                        }
-                    }
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav) {
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(5, 5, 5, 0.98)';
+                } else {
+                    nav.style.background = 'rgba(10, 10, 10, 0.95)';
                 }
             }
         });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+            const matrixArray = matrix.split("");
+
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+
+            const drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = 1;
+            }
+
+            function drawMatrix() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#00ffff';
+                ctx.font = fontSize + 'px monospace';
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            setInterval(drawMatrix, 35);
+
+            // Window resize handler for canvas
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Terminal Animation
+        const terminalLines = [
+            "$ Initializing Ghost Trace Security Scanner...",
+            "$ Loading vulnerability database... [OK]",
+            "$ Connecting to threat intelligence feeds... [OK]",
+            "$ Starting real-time monitoring... [OK]",
+            "$ System ready. Welcome to Ghost Trace.",
+            "$ Type 'help' for available commands."
+        ];
+
+        let lineIndex = 0;
+        const terminal = document.getElementById('terminal');
+
+        function addTerminalLine() {
+            if (terminal && lineIndex < terminalLines.length) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = terminalLines[lineIndex];
+                line.style.animationDelay = `${lineIndex * 0.5}s`;
+                terminal.appendChild(line);
+                lineIndex++;
+                setTimeout(addTerminalLine, 500);
+            }
+        }
+
+        if (terminal) {
+            setTimeout(addTerminalLine, 1000);
+        }
+
+        // Animated Counters
+        function animateCounter(id, target, duration = 2000) {
+            const element = document.getElementById(id);
+            if (!element) return;
+            
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16);
+        }
+
+        // Start counters when in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter('criticalThreats', 23);
+                    animateCounter('vulnScanned', 1847);
+                    animateCounter('patchesApplied', 342);
+                    animateCounter('zeroDays', 7);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const dashboard = document.querySelector('.threat-dashboard');
+        if (dashboard) {
+            observer.observe(dashboard);
+        }
+
+        // Particles Effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+            
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        // Password Strength Checker
+        window.checkPassword = function() {
+            const password = document.getElementById('passwordInput').value;
+            const result = document.getElementById('passwordResult');
+            
+            if (!result) return;
+            
+            if (!password) {
+                result.textContent = 'Please enter a password';
+                return;
+            }
+
+            let strength = 0;
+            const checks = [
+                password.length >= 8,
+                password.length >= 12,
+                /[a-z]/.test(password),
+                /[A-Z]/.test(password),
+                /[0-9]/.test(password),
+                /[^A-Za-z0-9]/.test(password)
+            ];
+
+            strength = checks.filter(Boolean).length;
+
+            const strengthLevels = [
+                'Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'
+            ];
+
+            const colors = ['#ff3838', '#ff6b6b', '#ffa500', '#4ecdc4', '#00ff88', '#00ff88'];
+
+            result.innerHTML = `
+                <div style="color: ${colors[strength - 1]}">
+                    Strength: ${strengthLevels[strength - 1] || 'Very Weak'}
+                </div>
+                <div style="margin-top: 10px;">
+                    <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div style="background: ${colors[strength - 1] || '#ff3838'}; width: ${(strength / 6) * 100}%; height: 100%; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Hash Generator
+        window.generateHash = async function() {
+            const input = document.getElementById('hashInput').value;
+            const result = document.getElementById('hashResult');
+            
+            if (!result) return;
+            
+            if (!input) {
+                result.textContent = 'Please enter text to hash';
+                return;
+            }
+
+            try {
+                const encoder = new TextEncoder();
+                const data = encoder.encode(input);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                
+                result.innerHTML = `
+                    <div style="word-break: break-all; font-size: 0.9rem;">
+                        <strong>SHA-256:</strong><br>
+                        ${hashHex}
+                    </div>
+                `;
+            } catch (error) {
+                result.textContent = 'Error generating hash';
+            }
+        }
+
+        // Port Scanner (Demo)
+        window.scanPorts = function() {
+            const domain = document.getElementById('portInput').value;
+            const result = document.getElementById('portResult');
+            
+            if (!result) return;
+            
+            if (!domain) {
+                result.textContent = 'Please enter a domain';
+                return;
+            }
+
+            result.innerHTML = '<div style="color: var(--primary-color)">Scanning...</div>';
+            
+            setTimeout(() => {
+                result.innerHTML = `
+                    <div style="font-size: 0.9rem;">
+                        <strong>Demo Results for ${domain}:</strong><br>
+                        Port 22 (SSH): <span style="color: #00ff88">Open</span><br>
+                        Port 80 (HTTP): <span style="color: #00ff88">Open</span><br>
+                        Port 443 (HTTPS): <span style="color: #00ff88">Open</span><br>
+                        Port 3389 (RDP): <span style="color: #ff3838">Closed</span><br>
+                        <br>
+                        <em style="color: var(--text-gray)">Note: This is a demo. Real scanning requires backend services.</em>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // Language Switcher
+        const langSelector = document.getElementById('langSelector');
+        if (langSelector) {
+            langSelector.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                console.log(`Switching to ${lang}`);
+            });
+        }
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                // Formspree will handle the actual submission
+            });
+        }
+
+        // Easter Egg - Konami Code
+        let konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    activateHackerMode();
+                    konamiIndex = 0;
+                }
+            } else {
+                konamiIndex = 0;
+            }
+        });
+
+        function activateHackerMode() {
+            document.body.style.animation = 'glitch 0.5s infinite';
+            setTimeout(() => {
+                document.body.style.animation = '';
+                alert('Ghost Mode Activated! 👻');
+            }, 2000);
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.querySelectorAll('.service-card, .tool-card, .blog-card, .threat-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            animationObserver.observe(el);
+        });
+
+        // Dynamic Copyright Year
+        const footerCopyright = document.querySelector('footer p');
+        if (footerCopyright) {
+            footerCopyright.innerHTML = `&copy; ${new Date().getFullYear()} Ghost Trace Cybersecurity. All rights reserved.`;
+        }
     </script>
 </body>
-</html> Initiating port scan on ${target}...\n`;
-            progressBar.style.display = 'block';
-            
-            let currentProgress = 0;
-            const scanInterval = setInterval(() => {
-                currentProgress += Math.random() * 15;
-                if (currentProgress >= 100) {
-                    currentProgress = 100;
-                    clearInterval(scanInterval);
-                    
-                    output.textContent += `\n$ Scan complete!\n\n`;
-                    output.textContent += `PORT     STATE    SERVICE\n`;
-                    output.textContent += `22/tcp   open     ssh\n`;
-                    output.textContent += `80/tcp   open     http\n`;
-                    output.textContent += `443/tcp  open     https\n`;
-                    output.textContent += `3306/tcp closed   mysql\n`;
-                    output.textContent += `8080/tcp open     http-proxy\n\n`;
-                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
-                    output.textContent += `$ Scan completed in 12.34 seconds`;
-                    
-                    progressBar.style.display = 'none';
-                }
-                
-                progress.style.width = currentProgress + '%';
-                progressText.textContent = Math.floor(currentProgress) + '%';
-            }, 200);
-        }
-
-        // DNS Reconnaissance
-        function startDnsRecon() {
-            const target = document.getElementById('dnsTarget').value;
-            const output = document.getElementById('dnsOutput');
-            
-            if (!target) {
-                output.textContent = '$ Error: Please enter a domain name';
-                return;
-            }
-            
-            output.textContent = `$
+</html>
