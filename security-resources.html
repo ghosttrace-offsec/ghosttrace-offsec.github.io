@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Security Tools - Ghost Trace Cybersecurity</title>
-    <meta name="description" content="Professional cybersecurity tools and utilities for security testing and analysis">
+    <title>Security Resources - Ghost Trace Cybersecurity</title>
+    <meta name="description" content="Professional cybersecurity resources and utilities for authorized security testing">
     <link rel="icon" type="image/png" href="ghost-trace-logo-white.png">
     
     <style>
@@ -130,14 +130,14 @@
             font-family: 'Arial', sans-serif;
         }
 
-        /* Tools Container */
-        .tools-container {
+        /* Resources Container */
+        .resources-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 3rem 2rem;
         }
 
-        .tool-category {
+        .resource-category {
             margin-bottom: 3rem;
         }
 
@@ -160,13 +160,13 @@
             50% { opacity: 0; }
         }
 
-        .tools-grid {
+        .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 2rem;
         }
 
-        .tool-card {
+        .resource-card {
             background: rgba(0, 0, 0, 0.8);
             border: 1px solid rgba(0, 255, 255, 0.3);
             border-radius: 5px;
@@ -175,7 +175,7 @@
             overflow: hidden;
         }
 
-        .tool-card::before {
+        .resource-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -191,20 +191,20 @@
             100% { transform: translateX(100%); }
         }
 
-        .tool-header {
+        .resource-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
 
-        .tool-name {
+        .resource-name {
             font-size: 1.3rem;
             color: var(--primary-color);
             font-weight: bold;
         }
 
-        .tool-status {
+        .resource-status {
             padding: 0.3rem 0.8rem;
             border-radius: 3px;
             font-size: 0.8rem;
@@ -223,13 +223,13 @@
             border: 1px solid var(--warning-color);
         }
 
-        .tool-description {
+        .resource-description {
             color: var(--text-gray);
             margin-bottom: 1.5rem;
             font-family: 'Arial', sans-serif;
         }
 
-        .tool-interface {
+        .resource-interface {
             background: rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(0, 255, 255, 0.2);
             border-radius: 3px;
@@ -237,7 +237,7 @@
             margin-bottom: 1rem;
         }
 
-        .tool-input {
+        .resource-input {
             width: 100%;
             padding: 0.8rem;
             background: rgba(0, 255, 255, 0.05);
@@ -247,13 +247,13 @@
             font-family: 'Courier New', monospace;
         }
 
-        .tool-input:focus {
+        .resource-input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
         }
 
-        .tool-textarea {
+        .resource-textarea {
             width: 100%;
             min-height: 120px;
             padding: 0.8rem;
@@ -265,7 +265,7 @@
             resize: vertical;
         }
 
-        .tool-button {
+        .resource-button {
             padding: 0.8rem 1.5rem;
             background: var(--primary-color);
             color: var(--dark-bg);
@@ -276,18 +276,18 @@
             margin-right: 1rem;
         }
 
-        .tool-button:hover {
+        .resource-button:hover {
             background: var(--secondary-color);
             transform: scale(1.05);
         }
 
-        .tool-button.secondary {
+        .resource-button.secondary {
             background: transparent;
             border: 1px solid var(--primary-color);
             color: var(--primary-color);
         }
 
-        .tool-output {
+        .resource-output {
             background: #000;
             border: 1px solid rgba(0, 255, 255, 0.3);
             padding: 1rem;
@@ -300,14 +300,14 @@
             color: var(--success-color);
         }
 
-        .tool-options {
+        .resource-options {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin-bottom: 1rem;
         }
 
-        .tool-option {
+        .resource-option {
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -315,13 +315,13 @@
             font-family: 'Arial', sans-serif;
         }
 
-        .tool-option input[type="checkbox"] {
+        .resource-option input[type="checkbox"] {
             width: 18px;
             height: 18px;
             accent-color: var(--primary-color);
         }
 
-        .tool-select {
+        .resource-select {
             padding: 0.5rem;
             background: rgba(0, 255, 255, 0.05);
             border: 1px solid rgba(0, 255, 255, 0.3);
@@ -329,7 +329,7 @@
             cursor: pointer;
         }
 
-        /* Specific Tool Styles */
+        /* Specific Resource Styles */
         .network-scanner {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -401,7 +401,7 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .tools-grid {
+            .resources-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -409,7 +409,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .tool-options {
+            .resource-options {
                 flex-direction: column;
             }
         }
@@ -436,7 +436,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#services">Services</a></li>
-                <li><a href="tools.html" style="color: var(--primary-color);">Tools</a></li>
+                <li><a href="security-resources.html" style="color: var(--primary-color);">Resources</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="case-studies.html">Case Studies</a></li>
                 <li><a href="about.html">About</a></li>
@@ -448,88 +448,88 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="terminal-effect"></div>
-        <h1 class="glitch">SECURITY TOOLS ARSENAL</h1>
-        <p>Professional-grade security testing tools powered by Ghost Trace</p>
+        <h1 class="glitch">SECURITY RESOURCES</h1>
+        <p>Professional-grade cybersecurity utilities powered by Ghost Trace</p>
     </section>
 
     <!-- Warning Banner -->
-    <div class="tools-container">
+    <div class="resources-container">
         <div class="warning-banner">
-            ⚠️ <strong>LEGAL NOTICE:</strong> These tools are for authorized security testing only. 
+            ⚠️ <strong>LEGAL NOTICE:</strong> These resources are for authorized security testing only. 
             Use only on systems you own or have explicit permission to test.
         </div>
     </div>
 
-    <!-- Tools Section -->
-    <main class="tools-container">
-        <!-- Network Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">NETWORK SECURITY TOOLS</h2>
+    <!-- Resources Section -->
+    <main class="resources-container">
+        <!-- Network Resources -->
+        <section class="resource-category">
+            <h2 class="category-title">NETWORK SECURITY UTILITIES</h2>
             
-            <div class="tools-grid">
+            <div class="resources-grid">
                 <!-- Advanced Port Scanner -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Advanced Port Scanner</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">Advanced Port Scanner</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Comprehensive port scanning with service detection and OS fingerprinting.
                     </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="portScanTarget" placeholder="Enter target IP or domain">
-                        <div class="tool-options">
-                            <label class="tool-option">
+                    <div class="resource-interface">
+                        <input type="text" class="resource-input" id="portScanTarget" placeholder="Enter target IP or domain">
+                        <div class="resource-options">
+                            <label class="resource-option">
                                 <input type="checkbox" id="stealthScan"> Stealth Scan
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="serviceDetection" checked> Service Detection
                             </label>
-                            <select class="tool-select" id="scanSpeed">
+                            <select class="resource-select" id="scanSpeed">
                                 <option value="slow">Slow (Accurate)</option>
                                 <option value="normal" selected>Normal</option>
                                 <option value="fast">Fast (Aggressive)</option>
                             </select>
                         </div>
                         <div class="network-scanner">
-                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
-                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
+                            <input type="text" class="resource-input" placeholder="Port range (e.g., 1-1000)">
+                            <button class="resource-button" onclick="startPortScan()">START SCAN</button>
                         </div>
                         <div class="progress-container" id="scanProgress" style="display: none;">
                             <div class="progress-bar" id="scanProgressBar"></div>
                             <span class="progress-text" id="scanProgressText">0%</span>
                         </div>
-                        <div class="tool-output" id="portScanOutput">
+                        <div class="resource-output" id="portScanOutput">
 $ Ready to scan...
                         </div>
                     </div>
                 </div>
 
-                <!-- DNS Lookup Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">DNS Reconnaissance</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <!-- DNS Lookup Utility -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">DNS Reconnaissance</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
-                        Advanced DNS enumeration and subdomain discovery tool.
+                    <p class="resource-description">
+                        Advanced DNS enumeration and subdomain discovery utility.
                     </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
-                        <div class="tool-options">
-                            <label class="tool-option">
+                    <div class="resource-interface">
+                        <input type="text" class="resource-input" id="dnsTarget" placeholder="Enter domain name">
+                        <div class="resource-options">
+                            <label class="resource-option">
                                 <input type="checkbox" id="reversDns" checked> Reverse DNS
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="dnsSec"> DNSSEC Check
                             </label>
                         </div>
-                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
-                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
-                        <div class="tool-output" id="dnsOutput">
+                        <button class="resource-button" onclick="startDnsRecon()">ENUMERATE</button>
+                        <button class="resource-button secondary" onclick="clearDnsOutput()">CLEAR</button>
+                        <div class="resource-output" id="dnsOutput">
 $ DNS reconnaissance ready...
                         </div>
                     </div>
@@ -537,24 +537,24 @@ $ DNS reconnaissance ready...
             </div>
         </section>
 
-        <!-- Cryptography Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
+        <!-- Cryptography Resources -->
+        <section class="resource-category">
+            <h2 class="category-title">CRYPTOGRAPHY UTILITIES</h2>
             
-            <div class="tools-grid">
+            <div class="resources-grid">
                 <!-- Hash Analyzer -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Hash Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">Hash Analyzer</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Multi-algorithm hash generator and hash type identifier.
                     </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
-                        <div class="tool-options">
-                            <select class="tool-select" id="hashAlgorithm">
+                    <div class="resource-interface">
+                        <textarea class="resource-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
+                        <div class="resource-options">
+                            <select class="resource-select" id="hashAlgorithm">
                                 <option value="auto">Auto Detect</option>
                                 <option value="md5">MD5</option>
                                 <option value="sha1">SHA-1</option>
@@ -562,45 +562,45 @@ $ DNS reconnaissance ready...
                                 <option value="sha512">SHA-512</option>
                                 <option value="bcrypt">BCrypt</option>
                             </select>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="compareHash"> Compare Mode
                             </label>
                         </div>
-                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
-                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
-                        <div class="tool-output" id="hashOutput">
+                        <button class="resource-button" onclick="analyzeHash()">ANALYZE</button>
+                        <button class="resource-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
+                        <div class="resource-output" id="hashOutput">
 $ Hash analyzer ready...
                         </div>
                     </div>
                 </div>
 
-                <!-- Encryption/Decryption Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Cipher Suite</span>
-                        <span class="tool-status status-beta">BETA</span>
+                <!-- Encryption/Decryption Utility -->
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">Cipher Suite</span>
+                        <span class="resource-status status-beta">BETA</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Advanced encryption and decryption with multiple cipher support.
                     </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
-                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
-                        <div class="tool-options">
-                            <select class="tool-select" id="cipherAlgorithm">
+                    <div class="resource-interface">
+                        <textarea class="resource-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
+                        <input type="password" class="resource-input" id="cipherKey" placeholder="Enter encryption key">
+                        <div class="resource-options">
+                            <select class="resource-select" id="cipherAlgorithm">
                                 <option value="aes256">AES-256</option>
                                 <option value="aes128">AES-128</option>
                                 <option value="3des">3DES</option>
                                 <option value="base64">Base64</option>
                                 <option value="rot13">ROT13</option>
                             </select>
-                            <select class="tool-select" id="cipherMode">
+                            <select class="resource-select" id="cipherMode">
                                 <option value="encrypt">Encrypt</option>
                                 <option value="decrypt">Decrypt</option>
                             </select>
                         </div>
-                        <button class="tool-button" onclick="processCipher()">PROCESS</button>
-                        <div class="tool-output" id="cipherOutput">
+                        <button class="resource-button" onclick="processCipher()">PROCESS</button>
+                        <div class="resource-output" id="cipherOutput">
 $ Cipher suite ready...
                         </div>
                     </div>
@@ -608,71 +608,71 @@ $ Cipher suite ready...
             </div>
         </section>
 
-        <!-- Web Security Tools -->
-        <section class="tool-category">
+        <!-- Web Security Resources -->
+        <section class="resource-category">
             <h2 class="category-title">WEB APPLICATION SECURITY</h2>
             
-            <div class="tools-grid">
+            <div class="resources-grid">
                 <!-- Security Payload Generator -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Security Payload Generator</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">Security Payload Generator</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Generate and encode security testing payloads for web applications.
                     </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="secContext" placeholder="Enter injection context">
-                        <div class="tool-options">
-                            <select class="tool-select" id="secType">
+                    <div class="resource-interface">
+                        <input type="text" class="resource-input" id="secContext" placeholder="Enter injection context">
+                        <div class="resource-options">
+                            <select class="resource-select" id="secType">
                                 <option value="reflected">Reflected Type</option>
                                 <option value="stored">Stored Type</option>
                                 <option value="dom">DOM-based Type</option>
                             </select>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="secEncode" checked> URL Encode
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="secObfuscate"> Obfuscate
                             </label>
                         </div>
-                        <button class="tool-button" onclick="generateSecurityPayload()">GENERATE</button>
-                        <button class="tool-button secondary" onclick="testSecurityPayload()">TEST SAFE</button>
-                        <div class="tool-output" id="secOutput">
+                        <button class="resource-button" onclick="generateSecurityPayload()">GENERATE</button>
+                        <button class="resource-button secondary" onclick="testSecurityPayload()">TEST SAFE</button>
+                        <div class="resource-output" id="secOutput">
 $ Payload generator ready...
                         </div>
                     </div>
                 </div>
 
                 <!-- SQL Injection Tester -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">SQL Injection Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">SQL Injection Analyzer</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Test and analyze SQL injection vulnerabilities with smart payloads.
                     </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="sqlTarget" placeholder="Enter target URL with parameter">
-                        <div class="tool-options">
-                            <select class="tool-select" id="sqlDatabase">
+                    <div class="resource-interface">
+                        <input type="text" class="resource-input" id="sqlTarget" placeholder="Enter target URL with parameter">
+                        <div class="resource-options">
+                            <select class="resource-select" id="sqlDatabase">
                                 <option value="auto">Auto Detect</option>
                                 <option value="mysql">MySQL</option>
                                 <option value="mssql">MSSQL</option>
                                 <option value="oracle">Oracle</option>
                                 <option value="postgresql">PostgreSQL</option>
                             </select>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="sqlBlind"> Blind SQLi
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="sqlTime"> Time-based
                             </label>
                         </div>
-                        <button class="tool-button" onclick="testSqlInjection()">ANALYZE</button>
-                        <div class="tool-output" id="sqlOutput">
+                        <button class="resource-button" onclick="testSqlInjection()">ANALYZE</button>
+                        <div class="resource-output" id="sqlOutput">
 $ SQL injection analyzer ready...
                         </div>
                     </div>
@@ -680,67 +680,67 @@ $ SQL injection analyzer ready...
             </div>
         </section>
 
-        <!-- Binary Analysis Tools -->
-        <section class="tool-category">
+        <!-- Binary Analysis Resources -->
+        <section class="resource-category">
             <h2 class="category-title">BINARY ANALYSIS</h2>
             
-            <div class="tools-grid">
+            <div class="resources-grid">
                 <!-- File Hash Calculator -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">File Analysis Suite</span>
-                        <span class="tool-status status-online">ONLINE</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">File Analysis Suite</span>
+                        <span class="resource-status status-online">ONLINE</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         Calculate file hashes and perform basic malware analysis.
                     </p>
-                    <div class="tool-interface">
-                        <input type="file" class="tool-input" id="fileInput" style="padding: 0.5rem;">
-                        <div class="tool-options">
-                            <label class="tool-option">
+                    <div class="resource-interface">
+                        <input type="file" class="resource-input" id="fileInput" style="padding: 0.5rem;">
+                        <div class="resource-options">
+                            <label class="resource-option">
                                 <input type="checkbox" id="virusTotal" checked> VirusTotal Check
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="peAnalysis"> PE Analysis
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="strings"> Extract Strings
                             </label>
                         </div>
-                        <button class="tool-button" onclick="analyzeFile()">ANALYZE FILE</button>
-                        <div class="tool-output" id="fileOutput">
+                        <button class="resource-button" onclick="analyzeFile()">ANALYZE FILE</button>
+                        <div class="resource-output" id="fileOutput">
 $ File analyzer ready...
                         </div>
                     </div>
                 </div>
 
                 <!-- Hex Editor -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Online Hex Editor</span>
-                        <span class="tool-status status-beta">BETA</span>
+                <div class="resource-card">
+                    <div class="resource-header">
+                        <span class="resource-name">Online Hex Editor</span>
+                        <span class="resource-status status-beta">BETA</span>
                     </div>
-                    <p class="tool-description">
+                    <p class="resource-description">
                         View and edit binary files in hexadecimal format.
                     </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hexInput" placeholder="Paste hex data or load file" style="font-family: monospace; font-size: 0.9rem;"></textarea>
-                        <div class="tool-options">
-                            <label class="tool-option">
+                    <div class="resource-interface">
+                        <textarea class="resource-textarea" id="hexInput" placeholder="Paste hex data or load file" style="font-family: monospace; font-size: 0.9rem;"></textarea>
+                        <div class="resource-options">
+                            <label class="resource-option">
                                 <input type="checkbox" id="hexAscii" checked> Show ASCII
                             </label>
-                            <label class="tool-option">
+                            <label class="resource-option">
                                 <input type="checkbox" id="hexOffset" checked> Show Offset
                             </label>
-                            <select class="tool-select" id="hexWidth">
+                            <select class="resource-select" id="hexWidth">
                                 <option value="8">8 bytes</option>
                                 <option value="16" selected>16 bytes</option>
                                 <option value="32">32 bytes</option>
                             </select>
                         </div>
-                        <button class="tool-button" onclick="formatHex()">FORMAT</button>
-                        <button class="tool-button secondary" onclick="convertHex()">CONVERT</button>
-                        <div class="tool-output" id="hexOutput" style="font-size: 0.85rem;">
+                        <button class="resource-button" onclick="formatHex()">FORMAT</button>
+                        <button class="resource-button secondary" onclick="convertHex()">CONVERT</button>
+                        <div class="resource-output" id="hexOutput" style="font-size: 0.85rem;">
 $ Hex editor ready...
                         </div>
                     </div>
@@ -758,7 +758,7 @@ $ Hex editor ready...
             <a href="#">🐦</a>
         </div>
         <p>&copy; 2025 Ghost Trace Cybersecurity. All rights reserved.</p>
-        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Tools by Elite Red Team</p>
+        <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 1rem;">Professional Security Resources by Elite Red Team</p>
     </footer>
 
     <script>
@@ -772,6 +772,44 @@ $ Hex editor ready...
             
             if (!target) {
                 output.textContent = '$ Error: Please enter a target IP or domain';
+                return;
+            }
+            
+            output.textContent = `$ Initiating port scan on ${target}...\n`;
+            progressBar.style.display = 'block';
+            
+            let currentProgress = 0;
+            const scanInterval = setInterval(() => {
+                currentProgress += Math.random() * 15;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(scanInterval);
+                    
+                    output.textContent += `\n$ Scan complete!\n\n`;
+                    output.textContent += `PORT     STATE    SERVICE\n`;
+                    output.textContent += `22/tcp   open     ssh\n`;
+                    output.textContent += `80/tcp   open     http\n`;
+                    output.textContent += `443/tcp  open     https\n`;
+                    output.textContent += `3306/tcp closed   mysql\n`;
+                    output.textContent += `8080/tcp open     http-proxy\n\n`;
+                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
+                    output.textContent += `$ Scan completed in 12.34 seconds`;
+                    
+                    progressBar.style.display = 'none';
+                }
+                
+                progress.style.width = currentProgress + '%';
+                progressText.textContent = Math.floor(currentProgress) + '%';
+            }, 200);
+        }
+
+        // DNS Reconnaissance
+        function startDnsRecon() {
+            const target = document.getElementById('dnsTarget').value;
+            const output = document.getElementById('dnsOutput');
+            
+            if (!target) {
+                output.textContent = '$ Error: Please enter a domain name';
                 return;
             }
             
@@ -879,7 +917,7 @@ $ Hex editor ready...
             });
         }
 
-        // Security Payload Generator (renamed from XSS)
+        // Security Payload Generator
         function generateSecurityPayload() {
             const context = document.getElementById('secContext').value || 'general';
             const type = document.getElementById('secType').value;
@@ -1056,7 +1094,7 @@ $ Hex editor ready...
         }
 
         // Add visual feedback for all buttons
-        document.querySelectorAll('.tool-button').forEach(button => {
+        document.querySelectorAll('.resource-button').forEach(button => {
             button.addEventListener('click', function() {
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
@@ -1078,9 +1116,9 @@ $ Hex editor ready...
             }, speed);
         }
 
-        // Initialize tool outputs with typing effect
+        // Initialize resource outputs with typing effect
         window.addEventListener('load', () => {
-            const outputs = document.querySelectorAll('.tool-output');
+            const outputs = document.querySelectorAll('.resource-output');
             outputs.forEach(output => {
                 const originalText = output.textContent;
                 typeOutput(output, originalText);
@@ -1089,13 +1127,13 @@ $ Hex editor ready...
 
         // Add keyboard shortcuts
         document.addEventListener('keydown', (e) => {
-            // Ctrl+Enter to execute current tool
+            // Ctrl+Enter to execute current resource
             if (e.ctrlKey && e.key === 'Enter') {
                 const activeElement = document.activeElement;
-                if (activeElement && activeElement.classList.contains('tool-input')) {
-                    const toolCard = activeElement.closest('.tool-card');
-                    if (toolCard) {
-                        const primaryButton = toolCard.querySelector('.tool-button:not(.secondary)');
+                if (activeElement && activeElement.classList.contains('resource-input')) {
+                    const resourceCard = activeElement.closest('.resource-card');
+                    if (resourceCard) {
+                        const primaryButton = resourceCard.querySelector('.resource-button:not(.secondary)');
                         if (primaryButton) {
                             primaryButton.click();
                         }
@@ -1106,10 +1144,10 @@ $ Hex editor ready...
             // Escape to clear current output
             if (e.key === 'Escape') {
                 const activeElement = document.activeElement;
-                if (activeElement && activeElement.classList.contains('tool-input')) {
-                    const toolCard = activeElement.closest('.tool-card');
-                    if (toolCard) {
-                        const output = toolCard.querySelector('.tool-output');
+                if (activeElement && activeElement.classList.contains('resource-input')) {
+                    const resourceCard = activeElement.closest('.resource-card');
+                    if (resourceCard) {
+                        const output = resourceCard.querySelector('.resource-output');
                         if (output) {
                             output.textContent = '$ Ready...';
                         }
@@ -1119,42 +1157,4 @@ $ Hex editor ready...
         });
     </script>
 </body>
-</html> Initiating port scan on ${target}...\n`;
-            progressBar.style.display = 'block';
-            
-            let currentProgress = 0;
-            const scanInterval = setInterval(() => {
-                currentProgress += Math.random() * 15;
-                if (currentProgress >= 100) {
-                    currentProgress = 100;
-                    clearInterval(scanInterval);
-                    
-                    output.textContent += `\n$ Scan complete!\n\n`;
-                    output.textContent += `PORT     STATE    SERVICE\n`;
-                    output.textContent += `22/tcp   open     ssh\n`;
-                    output.textContent += `80/tcp   open     http\n`;
-                    output.textContent += `443/tcp  open     https\n`;
-                    output.textContent += `3306/tcp closed   mysql\n`;
-                    output.textContent += `8080/tcp open     http-proxy\n\n`;
-                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
-                    output.textContent += `$ Scan completed in 12.34 seconds`;
-                    
-                    progressBar.style.display = 'none';
-                }
-                
-                progress.style.width = currentProgress + '%';
-                progressText.textContent = Math.floor(currentProgress) + '%';
-            }, 200);
-        }
-
-        // DNS Reconnaissance
-        function startDnsRecon() {
-            const target = document.getElementById('dnsTarget').value;
-            const output = document.getElementById('dnsOutput');
-            
-            if (!target) {
-                output.textContent = '$ Error: Please enter a domain name';
-                return;
-            }
-            
-            output.textContent = `$
+</html>
