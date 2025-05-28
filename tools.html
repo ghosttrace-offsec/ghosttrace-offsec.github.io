@@ -486,6 +486,110 @@
                                 <input type="checkbox" id="serviceDetection" checked> Service Detection
                             </label>
                             <select class="tool-select" id="scanSpeed">
+                                <option value="slow">Slow (Accurate)</option>
+                                <option value="normal" selected>Normal</option>
+                                <option value="fast">Fast (Aggressive)</option>
+                            </select>
+                        </div>
+                        <div class="network-scanner">
+                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
+                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
+                        </div>
+                        <div class="progress-container" id="scanProgress" style="display: none;">
+                            <div class="progress-bar" id="scanProgressBar"></div>
+                            <span class="progress-text" id="scanProgressText">0%</span>
+                        </div>
+                        <div class="tool-output" id="portScanOutput">
+$ Ready to scan...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DNS Lookup Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">DNS Reconnaissance</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced DNS enumeration and subdomain discovery tool.
+                    </p>
+                    <div class="tool-interface">
+                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
+                        <div class="tool-options">
+                            <label class="tool-option">
+                                <input type="checkbox" id="reversDns" checked> Reverse DNS
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
+                            </label>
+                            <label class="tool-option">
+                                <input type="checkbox" id="dnsSec"> DNSSEC Check
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
+                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
+                        <div class="tool-output" id="dnsOutput">
+$ DNS reconnaissance ready...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cryptography Tools -->
+        <section class="tool-category">
+            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
+            
+            <div class="tools-grid">
+                <!-- Hash Analyzer -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Hash Analyzer</span>
+                        <span class="tool-status status-online">ONLINE</span>
+                    </div>
+                    <p class="tool-description">
+                        Multi-algorithm hash generator and hash type identifier.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
+                        <div class="tool-options">
+                            <select class="tool-select" id="hashAlgorithm">
+                                <option value="auto">Auto Detect</option>
+                                <option value="md5">MD5</option>
+                                <option value="sha1">SHA-1</option>
+                                <option value="sha256">SHA-256</option>
+                                <option value="sha512">SHA-512</option>
+                                <option value="bcrypt">BCrypt</option>
+                            </select>
+                            <label class="tool-option">
+                                <input type="checkbox" id="compareHash"> Compare Mode
+                            </label>
+                        </div>
+                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
+                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
+                        <div class="tool-output" id="hashOutput">
+$ Hash analyzer ready...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Encryption/Decryption Tool -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <span class="tool-name">Cipher Suite</span>
+                        <span class="tool-status status-beta">BETA</span>
+                    </div>
+                    <p class="tool-description">
+                        Advanced encryption and decryption with multiple cipher support.
+                    </p>
+                    <div class="tool-interface">
+                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
+                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
+                        <div class="tool-options">
+                            <select class="tool-select" id="cipherAlgorithm">
+                                <option value="aes256">AES-256</option>
+                                <option value="aes128">AES-128</option>
                                 <option value="3des">3DES</option>
                                 <option value="base64">Base64</option>
                                 <option value="rot13">ROT13</option>
@@ -509,7 +613,7 @@ $ Cipher suite ready...
             <h2 class="category-title">WEB APPLICATION SECURITY</h2>
             
             <div class="tools-grid">
-                <!-- Web Security Payload Generator -->
+                <!-- Security Payload Generator -->
                 <div class="tool-card">
                     <div class="tool-header">
                         <span class="tool-name">Security Payload Generator</span>
@@ -519,23 +623,23 @@ $ Cipher suite ready...
                         Generate and encode security testing payloads for web applications.
                     </p>
                     <div class="tool-interface">
-                        <input type="text" class="tool-input" id="xssContext" placeholder="Enter injection context (e.g., <script>, attribute, etc.)">
+                        <input type="text" class="tool-input" id="secContext" placeholder="Enter injection context">
                         <div class="tool-options">
-                            <select class="tool-select" id="xssType">
+                            <select class="tool-select" id="secType">
                                 <option value="reflected">Reflected Type</option>
                                 <option value="stored">Stored Type</option>
                                 <option value="dom">DOM-based Type</option>
                             </select>
                             <label class="tool-option">
-                                <input type="checkbox" id="xssEncode" checked> URL Encode
+                                <input type="checkbox" id="secEncode" checked> URL Encode
                             </label>
                             <label class="tool-option">
-                                <input type="checkbox" id="xssObfuscate"> Obfuscate
+                                <input type="checkbox" id="secObfuscate"> Obfuscate
                             </label>
                         </div>
-                        <button class="tool-button" onclick="generateXssPayload()">GENERATE</button>
-                        <button class="tool-button secondary" onclick="testPayload()">TEST SAFE</button>
-                        <div class="tool-output" id="xssOutput">
+                        <button class="tool-button" onclick="generateSecurityPayload()">GENERATE</button>
+                        <button class="tool-button secondary" onclick="testSecurityPayload()">TEST SAFE</button>
+                        <div class="tool-output" id="secOutput">
 $ Payload generator ready...
                         </div>
                     </div>
@@ -671,44 +775,6 @@ $ Hex editor ready...
                 return;
             }
             
-            output.textContent = `$ Initiating port scan on ${target}...\n`;
-            progressBar.style.display = 'block';
-            
-            let currentProgress = 0;
-            const scanInterval = setInterval(() => {
-                currentProgress += Math.random() * 15;
-                if (currentProgress >= 100) {
-                    currentProgress = 100;
-                    clearInterval(scanInterval);
-                    
-                    output.textContent += `\n$ Scan complete!\n\n`;
-                    output.textContent += `PORT     STATE    SERVICE\n`;
-                    output.textContent += `22/tcp   open     ssh\n`;
-                    output.textContent += `80/tcp   open     http\n`;
-                    output.textContent += `443/tcp  open     https\n`;
-                    output.textContent += `3306/tcp closed   mysql\n`;
-                    output.textContent += `8080/tcp open     http-proxy\n\n`;
-                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
-                    output.textContent += `$ Scan completed in 12.34 seconds`;
-                    
-                    progressBar.style.display = 'none';
-                }
-                
-                progress.style.width = currentProgress + '%';
-                progressText.textContent = Math.floor(currentProgress) + '%';
-            }, 200);
-        }
-
-        // DNS Reconnaissance
-        function startDnsRecon() {
-            const target = document.getElementById('dnsTarget').value;
-            const output = document.getElementById('dnsOutput');
-            
-            if (!target) {
-                output.textContent = '$ Error: Please enter a domain name';
-                return;
-            }
-            
             output.textContent = `$ Performing DNS reconnaissance on ${target}...\n\n`;
             
             setTimeout(() => {
@@ -813,12 +879,12 @@ $ Hex editor ready...
             });
         }
 
-        // Web Security Payload Generator
-        function generateXssPayload() {
-            const context = document.getElementById('xssContext').value || 'general';
-            const type = document.getElementById('xssType').value;
-            const encode = document.getElementById('xssEncode').checked;
-            const output = document.getElementById('xssOutput');
+        // Security Payload Generator (renamed from XSS)
+        function generateSecurityPayload() {
+            const context = document.getElementById('secContext').value || 'general';
+            const type = document.getElementById('secType').value;
+            const encode = document.getElementById('secEncode').checked;
+            const output = document.getElementById('secOutput');
             
             output.textContent = `$ Generating ${type} security payloads...\n\n`;
             
@@ -839,8 +905,8 @@ $ Hex editor ready...
             output.textContent += `$ Generated ${payloads.length} payloads`;
         }
 
-        function testPayload() {
-            const output = document.getElementById('xssOutput');
+        function testSecurityPayload() {
+            const output = document.getElementById('secOutput');
             output.textContent += `\n\n$ Testing payload in sandboxed environment...\n`;
             output.textContent += `$ Safe test completed - no actual execution`;
         }
@@ -1053,108 +1119,42 @@ $ Hex editor ready...
         });
     </script>
 </body>
-</html>slow">Slow (Accurate)</option>
-                                <option value="normal" selected>Normal</option>
-                                <option value="fast">Fast (Aggressive)</option>
-                            </select>
-                        </div>
-                        <div class="network-scanner">
-                            <input type="text" class="tool-input" placeholder="Port range (e.g., 1-1000)">
-                            <button class="tool-button" onclick="startPortScan()">START SCAN</button>
-                        </div>
-                        <div class="progress-container" id="scanProgress" style="display: none;">
-                            <div class="progress-bar" id="scanProgressBar"></div>
-                            <span class="progress-text" id="scanProgressText">0%</span>
-                        </div>
-                        <div class="tool-output" id="portScanOutput">
-$ Ready to scan...
-                        </div>
-                    </div>
-                </div>
-
-                <!-- DNS Lookup Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">DNS Reconnaissance</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Advanced DNS enumeration and subdomain discovery tool.
-                    </p>
-                    <div class="tool-interface">
-                        <input type="text" class="tool-input" id="dnsTarget" placeholder="Enter domain name">
-                        <div class="tool-options">
-                            <label class="tool-option">
-                                <input type="checkbox" id="reversDns" checked> Reverse DNS
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="subdomainEnum" checked> Subdomain Enum
-                            </label>
-                            <label class="tool-option">
-                                <input type="checkbox" id="dnsSec"> DNSSEC Check
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="startDnsRecon()">ENUMERATE</button>
-                        <button class="tool-button secondary" onclick="clearDnsOutput()">CLEAR</button>
-                        <div class="tool-output" id="dnsOutput">
-$ DNS reconnaissance ready...
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cryptography Tools -->
-        <section class="tool-category">
-            <h2 class="category-title">CRYPTOGRAPHY TOOLS</h2>
+</html> Initiating port scan on ${target}...\n`;
+            progressBar.style.display = 'block';
             
-            <div class="tools-grid">
-                <!-- Hash Analyzer -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Hash Analyzer</span>
-                        <span class="tool-status status-online">ONLINE</span>
-                    </div>
-                    <p class="tool-description">
-                        Multi-algorithm hash generator and hash type identifier.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="hashInput" placeholder="Enter text or hash to analyze"></textarea>
-                        <div class="tool-options">
-                            <select class="tool-select" id="hashAlgorithm">
-                                <option value="auto">Auto Detect</option>
-                                <option value="md5">MD5</option>
-                                <option value="sha1">SHA-1</option>
-                                <option value="sha256">SHA-256</option>
-                                <option value="sha512">SHA-512</option>
-                                <option value="bcrypt">BCrypt</option>
-                            </select>
-                            <label class="tool-option">
-                                <input type="checkbox" id="compareHash"> Compare Mode
-                            </label>
-                        </div>
-                        <button class="tool-button" onclick="analyzeHash()">ANALYZE</button>
-                        <button class="tool-button secondary" onclick="generateAllHashes()">GENERATE ALL</button>
-                        <div class="tool-output" id="hashOutput">
-$ Hash analyzer ready...
-                        </div>
-                    </div>
-                </div>
+            let currentProgress = 0;
+            const scanInterval = setInterval(() => {
+                currentProgress += Math.random() * 15;
+                if (currentProgress >= 100) {
+                    currentProgress = 100;
+                    clearInterval(scanInterval);
+                    
+                    output.textContent += `\n$ Scan complete!\n\n`;
+                    output.textContent += `PORT     STATE    SERVICE\n`;
+                    output.textContent += `22/tcp   open     ssh\n`;
+                    output.textContent += `80/tcp   open     http\n`;
+                    output.textContent += `443/tcp  open     https\n`;
+                    output.textContent += `3306/tcp closed   mysql\n`;
+                    output.textContent += `8080/tcp open     http-proxy\n\n`;
+                    output.textContent += `$ OS Detection: Linux 5.x (95% accuracy)\n`;
+                    output.textContent += `$ Scan completed in 12.34 seconds`;
+                    
+                    progressBar.style.display = 'none';
+                }
+                
+                progress.style.width = currentProgress + '%';
+                progressText.textContent = Math.floor(currentProgress) + '%';
+            }, 200);
+        }
 
-                <!-- Encryption/Decryption Tool -->
-                <div class="tool-card">
-                    <div class="tool-header">
-                        <span class="tool-name">Cipher Suite</span>
-                        <span class="tool-status status-beta">BETA</span>
-                    </div>
-                    <p class="tool-description">
-                        Advanced encryption and decryption with multiple cipher support.
-                    </p>
-                    <div class="tool-interface">
-                        <textarea class="tool-textarea" id="cipherInput" placeholder="Enter text to encrypt/decrypt"></textarea>
-                        <input type="password" class="tool-input" id="cipherKey" placeholder="Enter encryption key">
-                        <div class="tool-options">
-                            <select class="tool-select" id="cipherAlgorithm">
-                                <option value="aes256">AES-256</option>
-                                <option value="aes128">AES-128</option>
-                                <option value="
+        // DNS Reconnaissance
+        function startDnsRecon() {
+            const target = document.getElementById('dnsTarget').value;
+            const output = document.getElementById('dnsOutput');
+            
+            if (!target) {
+                output.textContent = '$ Error: Please enter a domain name';
+                return;
+            }
+            
+            output.textContent = `$
