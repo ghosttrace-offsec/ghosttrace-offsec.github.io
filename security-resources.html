@@ -927,7 +927,7 @@ $ Hex editor ready...
             output.textContent = `$ Generating ${type} security payloads...\n\n`;
             
             const payloads = [
-                `<script>alert('Test')</script>`,
+                `<script>alert('Test')<\/script>`,
                 `<img src=x onerror=alert('Test')>`,
                 `<svg onload=alert('Test')>`,
                 `';alert('Test')//`,
